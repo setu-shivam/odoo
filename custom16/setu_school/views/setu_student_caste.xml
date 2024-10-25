@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="setu_student_caste_view_tree" model="ir.ui.view">
+            <field name="name">setu.student.caste.view.tree</field>
+            <field name="model">setu.student.caste</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="setu_student_caste">
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_student_caste_view_form" model="ir.ui.view">
+            <field name="name">setu.student.caste.view.form</field>
+            <field name="model">setu.student.caste</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="setu_student_caste">
+                    <sheet>
+                        <group>
+                        <group>
+                            <field name="name"/>
+
+                        </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_student_caste_action" model="ir.actions.act_window">
+            <field name="name">student Caste</field>
+            <field name="res_model">setu.student.caste</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="setu_student_caste_menu" name="student Caste" action="setu_student_caste_action" parent="submenu"/>-->
+
+
+    </data>
+</odoo>

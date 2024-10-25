@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="sale_extended_inherited_view_order_form" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                    <field name="rewards_use"/>
+                    <field name="reward_point_use" attrs="{'invisible':[('rewards_use','!=',True)]}"/>
+                </xpath>
+                <xpath expr="//tree//field[@name='price_unit']" position="after">
+                    <field name="extra_price"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

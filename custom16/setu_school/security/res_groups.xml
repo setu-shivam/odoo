@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="module_setu_school" model="ir.module.category">
+        <field name="name">School</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="group_setu_school_student" model="res.groups">
+        <field name="name">Student</field>
+        <field name="category_id" ref="setu_school.module_setu_school"/>
+    </record>
+
+    <record id="group_setu_school_teacher" model="res.groups">
+        <field name="name">teacher</field>
+        <field name="category_id" ref="setu_school.module_setu_school"/>
+        <field name="implied_ids" eval="[(4,ref('setu_school.group_setu_school_student'))]"/>
+    </record>
+
+    <record id="group_setu_school_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="setu_school.module_setu_school"/>
+        <field name="implied_ids" eval="[(4,ref('setu_school.group_setu_school_teacher'))]"/>
+    </record>
+
+    <record id="group_setu_school_principal" model="res.groups">
+        <field name="name">Principal</field>
+        <field name="category_id" ref="setu_school.module_setu_school"/>
+        <field name="implied_ids" eval="[(4,ref('setu_school.group_setu_school_admin'))]"/>
+    </record>
+
+
+    <record id="setu_school_admin_principal_ir_rule" model="ir.rule">
+        <field name="name">Admin/Principal rule for Student</field>
+        <field name="model_id" ref="setu_school.model_setu_student"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('setu_school.group_setu_school_principal')),(4, ref('setu_school.group_setu_school_admin'))]"/>
+    </record>
+
+</odoo>
+
+<!--    <record id="group_setu_school_student_ir_rule" model="ir.rule">-->
+<!--        <field name="name">Student Rule For Student Model</field>-->
+<!--        <field name="model_id" ref="setu_school.model_setu_student"/>-->
+<!--        <field name="domain_force">[('user_id', '=', user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('setu_school.group_setu_school_student'))]"/>-->
+<!--    </record>-->
+<!--    -->
+<!--    -->
+<!--    <record id="group_setu_school_school_ir_rule" model="ir.rule">-->
+<!--        <field name="name">Student Rule For School Model</field>-->
+<!--        <field name="model_id" ref="setu_school.model_setu_school"/>-->
+<!--        <field name="domain_force">[('id', '=', user.school_id.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('setu_school.group_setu_school_student'))]"/>-->
+<!--    </record>-->
+
+<!--    <record id="group_setu_school_school_principal_admin_ir_rule" model="ir.rule">-->
+<!--        <field name="name">Principal/Admin Rule For School Model</field>-->
+<!--        <field name="model_id" ref="setu_school.model_setu_school"/>-->
+<!--        <field name="domain_force">[(1,'=',1)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('setu_school.group_setu_school_principal')),(4, ref('setu_school.group_setu_school_admin'))]"/>-->
+<!--    </record>-->
+
+<!--    <record id="group_setu_school_principal_admin_ir_rule" model="ir.rule">-->
+<!--        <field name="name">Principal/Admin Rule For Student Model</field>-->
+<!--        <field name="model_id" ref="setu_school.model_setu_student"/>-->
+<!--        <field name="domain_force">['|',('user_id', '=', user.id),('user_id', '!=', user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('setu_school.group_setu_school_principal')),(4, ref('setu_school.group_setu_school_admin'))]"/>-->
+<!--    </record>-->
+
+
+
+
+<!--student-->
+<!--read -          student,grade,gradeline		-->
+<!--write/delete -  none-->
+
+<!--teacher-->
+<!--read    -          student mother tongue,teacher,standard,div,med,ac year/month,school-->
+<!--write   -           classroom,class,subject-->
+<!--delete  -        none-->
+
+<!--admin-->
+<!--read    -       all-->
+<!--write   -       all-->
+<!--delete  -       none-->
+
+<!--principal-->
+<!--all-->
+
+
+<!--    <record id="group_setu_school_admin_principal_ir_rule" model="ir.rule">-->
+<!--        <field name="name">Admin/Principal rule</field>-->
+<!--        <field name="model_id" ref="setu_school.model_setu_teacher"/>-->
+<!--        <field name="domain_force">[('create_uid','=',user.id)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('setu_school.group_setu_school_principal')),(4, ref('setu_school.group_setu_school_admin'))]"/>-->
+<!--    </record>-->
+<!--only visible record visible to the admin or principal created by their own -->
+
+<!--    <record id="group_setu_school_student_ir_rule" model="ir.rule">-->
+<!--        <field name="name">Student rule</field>-->
+<!--        <field name="model_id" ref="setu_school.model_setu_student"/>-->
+<!--        <field name="domain_force">[('gender', '=', 'male')]</field>-->
+<!--        <field name="groups" eval="[(4,ref('setu_school.group_setu_school_student'))]"/>-->
+<!--    </record>-->
+<!--when student is logged in only male/female rec will be display-->

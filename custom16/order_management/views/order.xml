@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="order1_view_tree" model="ir.ui.view">
+            <field name="name">order1.view.tree</field>
+            <field name="model">order1</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Order1">
+                    <field name="customer_name"/>
+                    <field name="customer_address"/>
+                    <field name="product_ids"/>
+                    <field name="price"/>
+                    <field name="quantity"/>
+                    <field name="seller_name"/>
+                    <field name="delivered"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="order1_view_form" model="ir.ui.view">
+            <field name="name">order1.view.form</field>
+            <field name="model">order1</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="customer_name"/>
+                            <field name="customer_address"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="city_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="state_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="country_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="product_ids" widget="many2many_tags" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="quantity"/>
+                            <field name="price" required='1'/>
+                            <field name="seller_name"/>
+                            <field name="delivered"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="order1_form" model="ir.actions.act_window">
+            <field name="name">order1 form</field>
+            <field name="res_model">order1</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--        <menuitem id="submenu" name="Order" />-->
+        <!--        <menuitem id="submenu" name="Order" parent="root" />-->
+        <menuitem id="order1_menu" name="Order Table" action="order1_form" parent="submenu"/>
+
+    </data>
+</odoo>

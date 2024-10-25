@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="sale_extended_inherited_product_normal_form_view" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="after">
+                    <page string="suggestion">
+                        <group>
+                            <field name="is_suggest"/>
+                            <field name="suggested_product_id" attrs="{'invisible':[('is_suggest','!=',True)]}"/>
+                        </group>
+                    </page>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

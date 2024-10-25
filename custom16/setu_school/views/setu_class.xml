@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+
+        <record id="setu_class_view_tree" model="ir.ui.view">
+            <field name="name">setu.class.view.tree</field>
+            <field name="model">setu.class</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="setu_class">
+                    <field name="name"/>
+                    <!--                    <field name="class_teacher_id"/>-->
+                                        <field name="teacher_ids"/>
+                    <!--                    <field name="student_ids"/>-->
+                    <!--                    <field name="school_ids"/>-->
+                    <!--                    <field name="subject_ids"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_class_view_form" model="ir.ui.view">
+            <field name="name">setu.class.view.form</field>
+            <field name="model">setu.class</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="setu_class">
+                    <sheet>
+                        <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="class_teacher_id" options="{'no_open':True, 'no_create': True}"/>
+                            <field name="teacher_ids" widget="many2many_tags" options="{'no_create': True}" />
+                            <field name="school_ids" widget="many2many_tags" options="{'no_create': True}" />
+                            <field name="subject_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Students">
+                                <field name="student_ids">
+                                    <tree editable="bottom">
+                                        <field name="first_name"/>
+                                        <field name="class_id"/>
+                                        <field name="dob"/>
+                                    </tree>
+                                </field>
+                            </page>
+<!-- try to add search view-->
+<!--                            <page string="new search">-->
+<!--                                <record model="ir.ui.view" id="setu_school_search_view">-->
+<!--                                    <field name="name">setu.school.search.view</field>-->
+<!--                                    <field name="model">setu.class</field>-->
+<!--                                    <field name="priority">25</field>-->
+<!--                                    <field name="arch" type="xml">-->
+<!--                                        <search string="School Search">-->
+<!--                                            <field name="name"/>-->
+<!--                                        </search>-->
+<!--                                    </field>-->
+<!--                                </record>-->
+<!--                            </page>-->
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+<!--        <record id="location_smart_button" model="ir.ui.view">-->
+<!--            <field name="name">location.smart.buttons</field>-->
+<!--            <field name="model">setu.class</field>-->
+<!--&lt;!&ndash;            <field name="inherit_id" ref="base.view_partner_form" />&ndash;&gt;-->
+<!--            <field name="arch" type="xml">-->
+<!--                <div name="button_box" position="inside">-->
+<!--                    <button class="oe_stat_button" type="object" icon="fa-th-large">-->
+<!--&lt;!&ndash;                            name="get_location"&ndash;&gt;-->
+<!--&lt;!&ndash;                        icon="fa-car"&ndash;&gt;-->
+<!--                        <field string="Vehicle" name="vehicle_count" widget="statinfo"/>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="setu_class_action" model="ir.actions.act_window">
+            <field name="name">Class</field>
+            <field name="res_model">setu.class</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="setu_class_menu" name="Class" action="setu_class_action" parent="submenu"/>-->
+
+
+    </data>
+</odoo>

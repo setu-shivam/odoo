@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--  home page define a return order button -->
+    <template id="portal_my_home_menu_return_order" name="Portal layout : return menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="20" active="False">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'return' or return_order "
+                t-attf-class="breadcrumb-item #{'active ' if not return_order else ''}">
+                <a t-if="return_order" t-attf-href="/my/returns?{{ keep_query() }}">Return Orders</a>
+                <t t-else="">Return Orders</t>
+            </li>
+            <li t-if="return_order" class="breadcrumb-item active">
+                <span t-field="return_order.code"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_return_order" name="Show Quotations / Return Orders" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="20" active="False">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Return Orders</t>
+                <t t-set="url" t-value="'/my/returns'"/>
+                <t t-set="placeholder_count" t-value="'order_counts'"/>
+            </t>
+        </xpath>
+    </template>
+
+         <!--  visible for a list of return order -->
+    <template id="portal_my_return" name="My Return Orders" active="False">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Return Orders</t>
+            </t>
+            <t t-if="not returns">
+                <p>There are currently no Return Order for your account.</p>
+            </t>
+            <t t-if="returns" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-left">Return Order Reference</th>
+                        <th class="text-right">Return Request Date</th>
+                        <th class="text-right">Sale Order Reference</th>
+                        <th class="text-right">Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="returns" t-as="order">
+                    <tr>
+                        <td>
+                            <a t-att-href="'/my/returns/%s'%order.id">
+                                <t t-esc="order.code"/>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order.date"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order.sale_order_id.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order.state"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+     <!--  visible for a return order button in sale order report -->
+    <template id="sale_order_portal_content_extended" name="Sales Order Portal Content Extended"
+              inherit_id="sale.sale_order_portal_content" active="False">
+        <xpath expr="//div[@id='introduction']" position="attributes">
+            <attribute name="style">display: flex; justify-content: space-between;</attribute>
+        </xpath>
+        <xpath expr="//div[@id='introduction']" position="inside">
+            <t t-set="delivery_orders"
+               t-value="sale_order.picking_ids.filtered(lambda picking: picking.picking_type_id.code == 'outgoing')"/>
+            <t t-if="delivery_orders">
+                <t t-foreach="delivery_orders" t-as="pickings">
+                    <t t-set="return_order_url"
+                       t-value="'/my/return/form/%s?%s' % (pickings.id, keep_query())"/>
+                    <a t-att-href="return_order_url">
+                        <span t-if="pickings.state == 'done'"
+                              class="small badge text-bg-success orders_label_text_align">
+                            <i class="fa fa-fw fa-undo"/>
+                            <b>Return Order</b>
+                        </span>
+                    </a>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+
+     <!-- Complete page of the return_order -->
+    <template id="returns_order_portal_template" name="Return Order Portal Template" inherit_id="portal.portal_sidebar"
+              primary="True" active="False">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div t-if="status" class="alert alert-success mt8" style="font-weight: bolder;">
+                Your return request submit successfully.
+            </div>
+            <div class="row mt16 o_portal_sale_sidebar">
+                <!-- Page content -->
+                <div class="col-12 col-lg justify-content-end">
+                    <!-- main content -->
+                    <div t-attf-class="card pb-5" id="portal_sale_content">
+                        <div t-call="setu_rma.returns_order_portal_content"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!--
+        Return Order content : intro, informations, order lines, remarks, descriptions ....
+        This template should contains all the printable element of the RO. This is the
+        template rendered in PDF with the report engine.
+    -->
+    <template id="returns_order_portal_content" name="Return Order Portal Content" active="False">
+        <!-- Intro -->
+        <div id="introductions" t-attf-class="pb-2 pt-3 card-header bg-white">
+            <h2 class="my-0">
+                <em t-esc="return_order.code"/>
+            </h2>
+        </div>
+
+        <div t-attf-class="card-body">
+            <!-- Informations -->
+            <div id="information">
+                <div class="row" id="so_date">
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Customer</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <span t-field="return_order.partner_id.name"/>
+                            <span t-if="return_order.partner_id.company_id"
+                                  t-field="return_order.partner_id.company_id.name"/>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Sale Order Reference</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <a t-att-href="'/my/orders/%s'%return_order.sale_order_id.id">
+                                <span t-field="return_order.sale_order_id.name"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Shipping/Delivery Reference</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <a t-att-href="'/my/picking/pdf/%s'%return_order.stock_picking_id.id">
+                                <span t-field="return_order.stock_picking_id.name"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Return Request Date:</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <span t-field="return_order.date" t-options='{"widget": "date"}'/>
+                        </div>
+                    </div>
+
+                    <div class="mb-1 col-3">
+                        <t>
+                            <strong>Shipping/Delivery Address</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <address t-field="return_order.sale_order_id.partner_id"
+                                     t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-6">
+                        <t>
+                            <strong>Customer Representative Details</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <span t-field="return_order.user_id.name"/>
+                            <t t-if="return_order.user_id.partner_id.email">
+                                <br/>(Communcation Email Address :
+                                <a t-att-href="'mailto:%s'%return_order.user_id.partner_id.email">
+                                    <span t-field="return_order.user_id.partner_id.email"/>
+                                </a>
+                                )
+                            </t>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-3">
+                        <t>
+                            <strong>Return Order Status</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <span t-field="return_order.state"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="details" style="page-break-inside: auto;" class="mt32">
+                <h3 id="details">Details</h3>
+                <table t-att-data-order-id="return_order.id" class="table table-sm" id="returns_order_table">
+                    <thead class="bg-100">
+                        <tr>
+                            <th class="text-center">Products</th>
+                            <th t-attf-class="text-center { 'd-none d-md-table-cell' }">
+                                <span>Reason Details</span>
+                            </th>
+                            <th t-attf-class="text-center { 'd-none d-sm-table-cell' }">
+                                Delivered Quantity
+                            </th>
+                            <th t-attf-class="text-center { 'd-none d-md-table-cell' }">
+                                <span>Return Quantity</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-foreach="return_order.return_order_line_ids" t-as="line">
+                            <tr t-att-class="'bg-200 o_line_section'">
+                                <t>
+                                    <td id="product_name">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <img t-att-src="'/web/image?model=product.product&amp;id=%s&amp;field=image_48'%line.product_id.id"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a t-att-href="'/shop/product/%s'%line.product_id.product_tmpl_id.id">
+                                                        <span t-field="line.product_id.display_name"/>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="text-left">
+                                        <div class="block">
+                                            Requested Action <t t-if="line.return_order_id.state == 'approve'">-
+                                            Approved Action
+                                        </t> :
+                                            <span t-field="line.return_order_reason_id"/>
+                                            <t t-if="line.return_order_id.state == 'approve'">-
+                                                <span t-field="line.return_order_type"/>
+                                            </t>
+                                        </div>
+                                        <div id="return_reason">
+                                            Reason :
+                                            <span t-field="line.return_reason_id"/>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div id="del_qty">
+                                            <span t-field="line.done_qty"/>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div id="return_qty">
+                                            <span t-field="line.quantity"/>
+                                        </div>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div id="return_order_communication" class="mt-4 card-body">
+            <h4>Discussion :</h4>
+            <t t-call="portal.message_thread">
+                <t t-set="object" t-value="return_order"/>
+            </t>
+        </div>
+    </template>
+
+
+    <!-- Complete page of the return_order -->
+    <template id="returns_order_portal_form_template" name="Return Order Request Form"
+              inherit_id="portal.portal_sidebar" primary="True" active="False">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+
+            <div class="row mt16 o_portal_sale_sidebar">
+                <!-- Page content -->
+                <div class="col-12 col-lg justify-content-end">
+                    <!-- main content -->
+                    <div t-attf-class="card" id="portal_sale_content" t-if="delivery_order">
+                        <div t-call="setu_rma.returns_order_portal_form_content"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="returns_order_portal_form_content" name="Return Order Portal Content" active="False">
+        <!-- Intro -->
+        <div id="introductions" t-attf-class="pb-2 pt-3 card-header bg-white">
+            <h2 class="my-0">
+                Return Order Request:
+            </h2>
+        </div>
+        <div t-attf-class="card-body">
+            <!-- Informations -->
+            <div id="information">
+                <div class="row" id="so_date">
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Customer</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <span t-field="delivery_order.partner_id.name"/>
+                            <span t-if="delivery_order.partner_id.company_id"
+                                  t-field="delivery_order.partner_id.company_id.name"/>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Sale Order Reference</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <a t-att-href="'/my/orders/%s'%sale_id.id">
+                                <span t-field="delivery_order.name"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <t>
+                            <strong>Shipping/Delivery Reference</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <a t-att-href="'/my/picking/pdf/%s'%delivery_order.id">
+                                <span t-field="delivery_order.name"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-3">
+                        <t>
+                            <strong>Shipping/Delivery Address</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <address t-field="delivery_order.partner_id"
+                                     t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-6">
+                        <t>
+                            <strong>Customer Representative Details</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            <span t-field="delivery_order.user_id.name"/>
+                            <t t-if="delivery_order.user_id.partner_id.email">
+                                <br/>(Communcation Email Address :
+                                <a t-att-href="'mailto:%s'%delivery_order.user_id.partner_id.email">
+                                    <span t-field="delivery_order.user_id.partner_id.email"/>
+                                </a>
+                                )
+                            </t>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-3">
+                        <t>
+                            <strong>Return Order Status</strong>
+                            <br/>
+                        </t>
+                        <div>
+                            In Request
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form t-att-action="'/return/form/submit/%s'%delivery_order.id" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <section id="details" style="page-break-inside: auto;" class="mt32">
+                    <h3 id="details">Details</h3>
+                    <table t-att-data-order-id="delivery_order.id" class="table table-sm" id="returns_order_table">
+                        <thead class="bg-100">
+                            <tr colspan="4">
+                                <th class="text-center">Products</th>
+                                <th></th>
+                                <th t-attf-class="text-center {{ 'd-none d-sm-table-cell'}}">
+                                </th>
+                                <th t-attf-class="text-right {{ 'd-none d-md-table-cell' }}">
+                                    <span>Delivered Quantity - Request Return Quantity</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="delivery_order.move_line_ids" t-as="line">
+                                <tr t-att-class="'bg-200 o_line_section'">
+                                    <t>
+                                        <td id="product_name">
+                                            <input type="hidden" t-att-value="line.product_id.id"
+                                                   t-att-name="'product-name-%s'%line.product_id.id"/>
+                                            <a t-att-href="'/shop/product/%s'%line.product_id.product_tmpl_id.id">
+                                                <span t-field="line.product_id.display_name"/>
+                                            </a>
+                                        </td>
+                                        <td class="text-left">
+
+                                        </td>
+                                        <td class="text-center">
+                                        </td>
+                                        <td class="text-right">
+                                            <div id="return_qty">
+                                                <t t-set="qty" t-value="line.qty_done"/>
+                                                <t t-esc="qty"/>
+                                                -
+                                                <input t-att-data-id="line.product_id.id" class="js_return_qty"
+                                                       type="number" min="1"
+                                                       t-att-name="'request-qty-%s'%line.product_id.id"
+                                                       t-att-max="qty"/>
+                                            </div>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr t-att-class="'bg-200 o_line_section'">
+                                    <td colspan="4" t-att-class="'js_return_details_%s d-none'%line.product_id.id">
+                                        <span>Select Reason for Return:</span>
+                                        <select t-att-name="'return-reason-%s'%line.product_id.id"
+                                                style="border: 0px;border-bottom: 1px solid black;background-color: white;padding:0px  0.3em;">
+                                            <t t-set="reasons"
+                                               t-value="request.env['setu.return.reason'].sudo().search([])"/>
+                                            <t t-foreach="reasons" t-as="reason">
+                                                <option t-att-value="reason.id">
+                                                    <t t-esc="reason.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                        <span>Select Action for Return:</span>
+                                        <select t-att-name="'return-action-%s'%line.product_id.id"
+                                                style="border: 0px;border-bottom: 1px solid black;background-color: white;padding:0px  0.3em;">
+                                            <t t-set="reason_actions"
+                                               t-value="request.env['setu.return.order.reason'].sudo().search([])"/>
+                                            <t t-foreach="reason_actions" t-as="reason_action">
+                                                <option t-att-value="reason_action.id">
+                                                    <t t-esc="reason_action.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr colspan="4">
+                                    <td style="padding:0.2em 0px;"></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <input type="submit" class="float-right btn btn-primary" string="Submit Request"/>
+                </section>
+            </form>
+        </div>
+<!--        <div id="return_order_communication" class="mt-4 card-body">-->
+<!--            <h4>Discussion :</h4>-->
+<!--            <t t-call="portal.message_thread">-->
+<!--                <t t-set="object" t-value="delivery_order"/>-->
+<!--            </t>-->
+<!--        </div>-->
+    </template>
+
+</odoo>

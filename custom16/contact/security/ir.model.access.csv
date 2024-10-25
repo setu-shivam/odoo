@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_city,access.city,contact.model_city,,1,1,1,1
+access_state,access.state,contact.model_state,,1,1,1,1
+access_country,access.country,contact.model_country,,1,1,1,1
+access_contact_partner,access.contact.partner,contact.model_contact_partner,,1,1,1,1

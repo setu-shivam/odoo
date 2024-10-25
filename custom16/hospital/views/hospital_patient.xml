@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <record id="hospital_patient_view_tree" model="ir.ui.view">
+            <field name="name">hospital.patient.view.tree</field>
+            <field name="model">hospital.patient</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="hospital_patient" >
+                    <field name="name"/>
+                    <field name="gender" optional="hide"/>
+                    <field name="address" optional="hide"/>
+                    <field name="city_id" optional="show"/>
+                    <field name="phone" optional="hide"/>
+                    <field name="doctor_id"/>
+                    <field name="type" optional="show"/>
+                    <field name="date" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hospital_patient_form_view" model="ir.ui.view">
+            <field name="name">hospital.patient.form.view</field>
+            <field name="model">hospital.patient</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="hospital_patient">
+                    <sheet>
+                        <group><group>
+                            <field name="name"/>
+                            <field name="gender" widget="radio" options="{'horizontal': true}"/>
+                            <field name="address"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="country_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="state_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}" domain="[('country_id','=',country_id)]"/>
+                            <field name="city_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}" domain="[('state_id','=',state_id)]"/>
+                            <field name="phone" />
+                            <field name="doctor_id"/>
+                            <field name="type"/>
+                            <field name="date"/>
+                        </group></group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hospital_patient_form" model="ir.actions.act_window">
+            <field name="name">Patient</field>
+            <field name="res_model">hospital.patient</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="hospital_patient_menu" name="Patient" action="hospital_patient_form" parent="submenu"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,68 @@
+
+<odoo>
+    <data>
+
+        <record id="setu_admission_form_view_tree" model="ir.ui.view">
+            <field name="name">setu.admission.form.view.tree</field>
+            <field name="model">setu.admission.form</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="setu_admission_form">
+                    <field name="student_name"/>
+                    <field name="class_id"/>
+                    <field name="address"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="dob"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_employee_print_badged" model="ir.actions.act_window">
+            <field name="name">Admission Form</field>
+            <field name="res_model">setu.class</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="setu_admission_form_view_form" model="ir.ui.view">
+            <field name="name">setu.admission.form.view.form</field>
+            <field name="model">setu.admission.form</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="setu_admission_form">
+<!--                    <header>-->
+<!--                        <button name="action_done" string="Action Done" type="object"/>-->
+<!--                        <field name="status" widget="statusbar" statusbar_visible="draft,done"/>-->
+<!--                        <button name="%(hr_employee_print_badged)d" string="Print Badge"  type="action"/>-->
+<!--                    </header>-->
+
+                    <sheet>
+                        <group>
+                            <field name="student_name"/>
+                            <field name="class_id" options="{'no_open':True, 'no_create': True}"/>
+                            <field name="address"/>
+                            <field name="email" widget="email"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="dob" widget="date"/>
+                            <field name="state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="setu_admission_form_action" model="ir.actions.act_window">
+            <field name="name">Admission Form</field>
+            <field name="res_model">setu.admission.form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="setu_admission_form_menu" name="Admission Form" action="setu_admission_form_action"-->
+<!--                  parent="submenu"/>-->
+
+
+    </data>
+</odoo>

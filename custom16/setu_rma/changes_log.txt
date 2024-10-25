@@ -1,0 +1,16 @@
+Date : 7th Feb 2024
+Version : '1.2' (in __manifest__.py)
+Odoo Version : 16
+Done by : Harshit Trivedi
+Tested by : Harshit Trivedi on 12th April 2023
+Module : setu_rma
+ - Change the view related to not open the RMA invoice is More than 1
+
+
+Date : 12th April 2023
+Version : '16.1' (in __manifest__.py)
+Odoo Version : 16
+Done by : Devangi Pabari
+Tested by : Devangi Pabari on 12th April 2023
+Module : setu_rma
+ -Change In Location Of Return Receipt(changed from stock_picking location to warehouse lot_stock_id)

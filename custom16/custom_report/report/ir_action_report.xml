@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_report_product_template" model="ir.actions.report">
+        <field name="name">Product Report</field>
+        <field name="model">product.template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_report.report_product</field>
+        <field name="report_file">custom_report.report_product</field>
+        <field name="print_report_name">'Product Report -%s' %(object.name)</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_sale_order_template" model="ir.actions.report">
+        <field name="name">Sale Order Report</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_report.report_sale_order</field>
+        <field name="report_file">custom_report.report_sale_order</field>
+        <field name="print_report_name">'Sale Order Report -%s' %(object.name)</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_purchase_order_template" model="ir.actions.report">
+        <field name="name">Purchase Order Report</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_report.report_purchase_order</field>
+        <field name="report_file">custom_report.report_purchase_order</field>
+        <field name="print_report_name">'Purchase Order Report -%s' %(object.name)</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--  Main RMA menu   -->
+        <menuitem name="RMA" id="setu_return_order_main_menu" groups="setu_rma.group_setu_rma_user"
+                  web_icon="setu_rma,static/description/icon.png" sequence="3"/>
+
+
+        <menuitem name="Dashboard" id="return_order_dashboard_menu" groups="setu_rma.group_setu_rma_user"
+                   parent="setu_rma.setu_return_order_main_menu"
+                   action="setu_rma.rma_dashboard_client_action"
+                  sequence="1"/>
+
+        <menuitem name="Return Order" id="return_order_menu"  groups="setu_rma.group_setu_rma_user"
+                  action="setu_rma.setu_return_order_action" parent="setu_rma.setu_return_order_main_menu" sequence="2" />
+
+
+        <menuitem name="Operations" id="rma_operations_menu" groups="setu_rma.group_setu_rma_user"
+                  parent="setu_rma.setu_return_order_main_menu" sequence="4"/>
+
+<!--            Sub Operations menu-->
+                 <menuitem name="Repair" id="rma_operations_repair_menu" groups="setu_rma.group_setu_rma_user"
+                  action="setu_rma.action_rma_operations_repair" parent="setu_rma.rma_operations_menu" sequence="1"/>
+
+                 <menuitem name="Refund" id="rma_operations_refund_menu" groups="setu_rma.group_setu_rma_user"
+                  action="setu_rma.action_rma_operations_refund" parent="setu_rma.rma_operations_menu" sequence="2"/>
+
+                 <menuitem name="Buyback" id="rma_operations_buyback_menu" groups="setu_rma.group_setu_rma_user"
+                  action="setu_rma.action_rma_operations_buyback" parent="setu_rma.rma_operations_menu" sequence="3"/>
+
+                 <menuitem name="Replace" id="rma_operations_replace_menu" groups="setu_rma.group_setu_rma_user"
+                  action="setu_rma.action_rma_operations_replace" parent="setu_rma.rma_operations_menu" sequence="4"/>
+
+        <menuitem name="Return Operation" id="return_operation_menu" groups="setu_rma.group_setu_rma_user"
+                  action="setu_rma.action_setu_return_order_reason" parent="setu_rma.setu_return_order_main_menu"
+                  sequence="5"/>
+
+        <menuitem id="return_reason_menu" name="Return Reason" groups="setu_rma.group_setu_rma_user"
+                  parent="setu_rma.setu_return_order_main_menu"
+                  action="setu_rma.action_setu_return_reason" sequence="6"/>
+
+    </data>
+</odoo>

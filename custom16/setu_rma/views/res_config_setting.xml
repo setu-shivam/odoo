@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="rma_res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">rma.res.config.settings.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="99"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="RMA" string="RMA"
+                         data-key="setu_rma">
+                        <h2>RMA Website Configure</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="website_rma"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string="Website RMA" for="website_rma"/>
+                                    <div class="text-muted">These activate RMA from website</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="action_setu_rma_config" model="ir.actions.act_window">
+             <field name="name">Configuration</field>
+             <field name="type">ir.actions.act_window</field>
+             <field name="res_model">res.config.settings</field>
+             <field name="view_mode">form</field>
+             <field name="target">inline</field>
+             <field name="context">{'module' : 'setu_rma', 'bin_size': False}</field>
+         </record>
+
+
+<!--        <record id="rma_res_config_settings_view_action" model="ir.actions.act_window">-->
+<!--            <field name="name">RMA Configuration</field>-->
+<!--            <field name="res_model">res.config.settings</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="view_id" ref="rma_res_config_settings_view_form"/>-->
+<!--        </record>-->
+
+         <!--            Configuration menu-->
+        <menuitem id="rma_configuration_menus" name="Configuration"
+                  groups="setu_rma.group_setu_rma_user"
+                  parent="setu_rma.setu_return_order_main_menu"
+                  sequence="7"/>
+        <menuitem
+                name="Settings"
+                id="rma_configuration_settings_menu"
+                groups="setu_rma.group_setu_rma_user"
+                action="setu_rma.action_setu_rma_config"
+                parent="setu_rma.rma_configuration_menus"
+                sequence="1"/>
+    </data>
+</odoo>

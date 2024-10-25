@@ -1,0 +1,113 @@
+<odoo>
+    <data>
+
+        <record id="setu_teacher_view_tree" model="ir.ui.view">
+            <field name="name">setu.teacher.view.tree</field>
+            <field name="model">setu.teacher</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="setu_teacher" decoration-success="class_teacher == True">
+                    <field name="class_teacher"/>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_teacher_view_form" model="ir.ui.view">
+            <field name="name">setu.teacher.view.form</field>
+            <field name="model">setu.teacher</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="setu_teacher">
+                    <sheet>
+                        <group string="teacher details">
+                            <group>
+                                <field name="isEdited"/>
+                            </group>
+                            <group></group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="age"/>
+                                <field name="dob" widget="date"/>
+
+                                <field name="class_teacher"/>
+                                <field name="alternate_id"/>
+                                <!--                                <field name="student_ids" widget="many2many_tags"/>-->
+                                <!--                                <field name="class_ids"/>-->
+                            </group>
+                            <group>
+                                <field name="standard_id" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="medium_id" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="division_id" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="subject_ids" widget="many2many_tags"
+                                       options="{'no_create': True}"/>
+                                <field name="school_id"
+                                       options="{'no_open':True, 'no_create': True}"/>
+
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="workphone" widget="phone"/>
+                                <field name="workemail" widget="email"/>
+                                <field name="workaddress"/>
+                                <field name="workcity" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="workstate" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="workcountry" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="workzip"/>
+                            </group>
+                            <group>
+                                <field name="homephone" widget="phone"/>
+                                <field name="homeemail" widget="email"/>
+                                <field name="homeaddress"/>
+                                <field name="homecity" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="homestate" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="homecountry" options="{'no_open':True, 'no_create': True}"/>
+                                <field name="homezip"/>
+                            </group>
+                            <group>
+                                <field name="show_notebooks"/>
+                                <field name="show_students"/>
+                            </group>
+                        </group>
+
+                        <notebook attrs="{'invisible':[('show_notebooks','=',False),('show_students','=',False)]}">
+                            <page string="Students">
+                                <field name="student_ids">
+                                    <tree>
+                                        <field name="first_name"/>
+                                        <field name="roll_no"/>
+<!--                                        <field name="school_id"/>-->
+                                        <field name="class_teacher_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_teacher_action" model="ir.actions.act_window">
+            <field name="name">Teacher</field>
+            <field name="res_model">setu.teacher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--        <menuitem id="root" name="Setu School"/>-->
+        <!--        <menuitem id="submenu" name="Forms" parent="root"/>-->
+        <!--        <menuitem id="setu_teacher_menu" name="Teacher" action="setu_teacher_action" parent="submenu"/>-->
+
+
+    </data>
+</odoo>

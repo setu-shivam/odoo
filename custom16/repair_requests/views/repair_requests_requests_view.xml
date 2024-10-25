@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+
+        <record id="repair_requests_requests_view_tree" model="ir.ui.view">
+            <field name="name">repair.requests.requests.view.tree</field>
+            <field name="model">repair.requests.requests</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Repair Requests">
+                    <field name="partner_id"/>
+                    <field name="order_line_id"/>
+                    <field name="purchase_date"/>
+<!--                    <field name="warranty_date" optional="hide"/>-->
+<!--                    <field name="service_type" optional="hide"/>-->
+                    <field name="service_ids" widget="many2many_tags"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="repair_requests_requests_view_form" model="ir.ui.view">
+            <field name="name">repair.requests.requests.view.form</field>
+            <field name="model">repair.requests.requests</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="repair requests">
+                    <sheet>
+                        <group>
+                            <group string="Request Data">
+                                <field name="partner_id"/>
+                                <field name="order_id" domain="[('partner_id', '=', partner_id),'|',('state','=','sale'),('state','=','done')]" options="{'no_create': True}"/>
+<!--                                <field name="customer_email"/>-->
+<!--                                <field name="customer_phone"/>-->
+                                <field name="order_line_id" domain="[('order_id', '=', order_id)]" options="{'no_create': True}"/>
+                                <field name="remarks"/>
+                                <field name="purchase_date" widget="date"/>
+                                <field name="warranty_date" force_save="1"/>
+                                <field name="service_type" widget="radio" options="{'horizontal': true}"/>
+                                <field name="service_ids" widget="many2many_tags"
+                                       options="{'no_open':True, 'no_create': True}"/>
+                                <field name="status"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="repair_requests_requests_action" model="ir.actions.act_window">
+            <field name="name">Repair Requests</field>
+            <field name="res_model">repair.requests.requests</field>
+            <field name="view_id" ref="repair_requests_requests_view_tree"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="root" name="Repair Requests"/>
+        <menuitem id="repair_requests_request_menu" name="All Request" action="repair_requests_requests_action" parent="root"/>
+
+    </data>
+</odoo>

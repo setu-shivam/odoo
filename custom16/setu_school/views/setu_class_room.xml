@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+        <record id="setu_class_room_view_tree" model="ir.ui.view">
+            <field name="name">setu.class.room.view.tree</field>
+            <field name="model">setu.class.room</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="setu_class_room">
+                    <field name="name"/>
+                    <field name="number"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_class_room_view_form" model="ir.ui.view">
+            <field name="name">setu.class.room.view.form</field>
+            <field name="model">setu.class.room</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="setu_class_room">
+                    <sheet>
+                        <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="number"/>
+
+                        </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_class_room_action" model="ir.actions.act_window">
+            <field name="name">Class Room</field>
+            <field name="res_model">setu.class.room</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="setu_class_room_menu" name="Class Room" action="setu_class_room_action" parent="submenu"/>-->
+
+
+    </data>
+</odoo>

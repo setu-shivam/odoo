@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="country_view" model="ir.ui.view">
+            <field name="name">country.view</field>
+            <field name="model">country</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Country">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="country_view_form" model="ir.ui.view">
+            <field name="name">country.view.form</field>
+            <field name="model">country</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+<!--                            <field name="states_ids" widget="one2many_list"/>-->
+<!--                            <field name="cities_ids" />-->
+                            <field name="show_cities"/>
+                            <field name="show_states"/>
+                        </group>
+                        <notebook>
+                            <page string="Cities" attrs="{'invisible':[('show_cities','=',False)]}">
+                                <field name="cities_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="state_id"/>
+                                        <field name="country_city_id"/>
+                                        <field name="isCapital"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="States" attrs="{'invisible':[('show_states','=',False)]}">
+                                <field name="states_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="city_ids"/>
+                                        <field name="country_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="country_form" model="ir.actions.act_window">
+            <field name="name">country form</field>
+            <field name="res_model">country</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="country_menu" name="Country" parent="submenu" action="country_form"/>
+
+    </data>
+</odoo>

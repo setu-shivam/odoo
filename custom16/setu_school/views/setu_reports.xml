@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+
+        <record id="setu_teacher_view_graph" model="ir.ui.view">
+            <field name="name">setu.teacher.graph</field>
+            <field name="model">setu.teacher</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Teachers" type="bar">
+                    <!--                       stacked="0" sample="1">-->
+                    <field name="medium_id"/>
+                    <field name="age"/>
+                    <!--                           type="row"/>-->
+                    <!--                <field name="" interval="week" type="col"/>-->
+                    <!--                <field name="" type="measure" widget="float_time"/>-->
+                </graph>
+            </field>
+        </record>
+
+        <record id="setu_teacher_report_action" model="ir.actions.act_window">
+            <field name="name">Teacher Reports</field>
+            <field name="res_model">setu.teacher</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <menuitem id="setu_teacher_reports_menu" name="Teacher Reports" action="setu_teacher_report_action"
+                  parent="reports"/>
+
+
+
+            <record id="setu_student_view_graph" model="ir.ui.view">
+                <field name="name">setu.student.graph</field>
+                <field name="model">setu.student</field>
+                <field name="type">graph</field>
+                <field name="arch" type="xml">
+                    <sheet>
+                    <group><group>
+                    <graph string="Student" type="bar">
+                        <!--                       stacked="0" sample="1">-->
+                        <field name="age"/>
+<!--                        <field name="isEligible"/>-->
+                        <!--                    <field name="gender"/>-->
+                        <!--                           type="row"/>-->
+                        <!--                <field name="" interval="week" type="col"/>-->
+                        <!--                <field name="" type="measure" widget="float_time"/>-->
+                    </graph>
+                    </group></group>
+                    </sheet>
+                </field>
+            </record>
+
+
+            <record id="setu_student_report_action" model="ir.actions.act_window">
+                <field name="name">Student Reports</field>
+                <field name="res_model">setu.student</field>
+                <field name="view_mode">graph</field>
+            </record>
+
+            <menuitem id="setu_student_reports_menu" name="Student Reports" action="setu_student_report_action"
+                      parent="reports"/>
+
+    </data>
+</odoo>

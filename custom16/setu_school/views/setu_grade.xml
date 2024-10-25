@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+
+        <record id="setu_grade_view_tree" model="ir.ui.view">
+            <field name="name">setu.grade.view.tree</field>
+            <field name="model">setu.grade</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="setu_grade">
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_grade_view_form" model="ir.ui.view">
+            <field name="name">setu.grade.view.form</field>
+            <field name="model">setu.grade</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="setu_grade">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="Grade Lines">
+                                <field name="grade_line_ids">
+                                    <tree>
+                                        <field name="from_mark"/>
+                                        <field name="to_mark"/>
+                                        <field name="grade_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_grade_action" model="ir.actions.act_window">
+            <field name="name">Grade</field>
+            <field name="res_model">setu.grade</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="setu_grade_menu" name="Grade" action="setu_grade_action" parent="submenu"/>-->
+
+
+    </data>
+</odoo>

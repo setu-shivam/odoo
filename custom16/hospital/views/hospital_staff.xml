@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <record id="hospital_staff_view_tree" model="ir.ui.view">
+            <field name="name">hospital.staff.view.tree</field>
+            <field name="model">hospital.staff</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="hospital_staff">
+                    <field name="name"/>
+                    <!--                    <field name="dept"/>-->
+                    <field name="gender"/>
+                    <field name="shift"/>
+                    <field name="working_hours" widget='float_time'/>
+                    <field name="salary"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hospital_staff_form_view" model="ir.ui.view">
+            <field name="name">hospital.staff.form.view</field>
+            <field name="model">hospital.staff</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="hospital_staff">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <!--                    <field name="dept"/>-->
+                            <field name="gender" widget="radio"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="shift"/>
+                            <field name="working_hours" widget='float_time'/>
+                            <field name="city_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="state_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="country_id" options="{'no_open':True, 'no_create': True, 'no_create_edit': True}"/>
+                            <field name="salary"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hospital_staff_form" model="ir.actions.act_window">
+            <field name="name">Staff</field>
+            <field name="res_model">hospital.staff</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="hospital_staff_menu" name="Staff" action="hospital_staff_form" parent="submenu"/>
+
+
+    </data>
+</odoo>

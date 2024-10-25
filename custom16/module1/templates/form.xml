@@ -1,0 +1,47 @@
+<odoo>
+|('state','=','quatation')('state','=','quatation sent')
+    <template id="form">
+        <t t-call="website.layout">
+            <form action="/form" method="post" data-success_page="/thanks">
+<!--                  class="s_website_form form-horizontal container-fluid mt32">-->
+                <label>Name:</label>
+                <input id="name" type="text" name="name" required="1"/>
+
+                <label>Email:</label>
+                <input id="email" type="email" name="email"/>
+                <br/>
+                <label>Phone:</label>
+                <input id="phone" type="text" name="phone"/>
+                <br/>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </t>
+    </template>
+</odoo>
+
+
+        <!--<odoo>-->
+        <!--    <template id="form">-->
+        <!--        <t t-call="website.layout">-->
+        <!--            <form action="/test" method="post" data-success_page="/thanks"-->
+        <!--                  class="s_website_form form-horizontal container-fluid mt32">-->
+        <!--                <input type="text" class="form-control o_website_form_input" name="name" required=""/>-->
+        <!--                <div class="form-group form-field o_website_form_required_custom">-->
+        <!--                    <label class="col-md-3 col-sm-4 control-label" for="name">Name</label>-->
+        <!--                    <div class="col-md-7 col-sm-8">-->
+        <!--                        <input type="text" class="form-control o_website_form_input" name="name" required=""/>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="form-group">-->
+        <!--                    <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">-->
+        <!--                        <span id='submit' class="btn btn-primary btn-lg o_website_form_send">Submit</span>-->
+        <!--                        <span id="o_website_form_result"></span>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </form>-->
+        <!--        </t>-->
+        <!--    </template>-->
+        <!--</odoo>-->
+
+

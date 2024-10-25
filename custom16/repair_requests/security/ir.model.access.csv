@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_repair_requests_requests,access.repair.requests.requests,repair_requests.model_repair_requests_requests,,1,1,1,1
+access_repair_requests_services,access.repair.requests.services,repair_requests.model_repair_requests_services,,1,1,1,1
+
+

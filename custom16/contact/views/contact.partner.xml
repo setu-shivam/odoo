@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="contact.partner_view_tree" model="ir.ui.view">
+            <field name="name">contact.partner.view.tree</field>
+            <field name="model">contact.partner</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Customer">
+                    <field name="customer"/>
+                    <field name="email"/>
+                    <field name="city_id"/>
+                    <field name="state_id"/>
+                    <field name="country_id"/>
+                    <field name="is_partner"/>
+                    <field name="mult_city_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="contact.partner_form_view" model="ir.ui.view">
+            <field name="name">contact.partner.form.view</field>
+            <field name="model">contact.partner</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Customer">
+                    <sheet>
+                        <group>
+                            <field name="customer"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="gender" widget="radio"/>
+                            <field name="city_id"/>
+                            <field name="state_id"/>
+                            <field name="country_id"/>
+                            <field name="is_partner" />
+                            <field name="mult_city_ids"  options="{'no_create': True}"/>
+                            <!--                            <field name="mult_city_ids" widget="many2many_tags" options="{'no_create': True}"/>-->
+                            <!--                            <field name="mult_city_ids" widget="many2many_checkboxes"/>-->
+                            <field name="upload_ids" widget="many2many_binary"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="contact.partner_form" model="ir.actions.act_window">
+            <field name="name">Customer</field>
+            <field name="res_model">contact.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="contact.partner_menu" name="Customer" action="contact.partner_form" parent="submenu"/>
+
+
+    </data>
+</odoo>

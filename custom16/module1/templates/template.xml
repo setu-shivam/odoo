@@ -1,0 +1,64 @@
+<odoo>
+    <template id="page">
+        <t t-call="web.layout">
+            <t t-esc="name"/>
+            <t t-call="module1.data"/>
+        </t>
+    </template>
+
+    <template id="data">
+        <t t-set="i" t-value="1"/>
+        <t t-foreach="partner_ids" t-as="partner_id">
+            <t t-esc="i"/>
+            <t t-out="partner_id.name"/>&#160;&#160;
+            <t t-out="partner_id.email"/>&#160;&#160;
+            <t t-out="partner_id.phone"/>&#160;&#160;
+            <t t-out="partner_id.company_type"/>
+            <br/>
+            <t t-set="i" t-value="i+1"/>
+        </t>
+    </template>
+
+
+    <!--    <template id="child">-->
+    <!--        <t t-set="users" t-value="request.env['res.users'].sudo().search([])"/>-->
+    <!--        <t t-foreach="users" t-as="user">-->
+    <!--            <t t-out="user.name"></t>-->
+    <!--            <t t-if="user.login == 'r@m.com'">-->
+    <!--                not valid-->
+    <!--            </t>-->
+    <!--            <br/>-->
+    <!--        </t>-->
+    <!--    </template>-->
+
+</odoo>
+
+
+        <!--    &lt;!&ndash;===================================================================================&ndash;&gt;-->
+        <!--    &lt;!&ndash;    <template id="child">&ndash;&gt;-->
+        <!--    &lt;!&ndash;        <t t-set="users" t-value="request.env['res.users'].sudo().search([])"/>&ndash;&gt;-->
+        <!--    &lt;!&ndash;        <t t-foreach="users" t-as="user">&ndash;&gt;-->
+        <!--    &lt;!&ndash;            <t t-out="user.name"></t>&ndash;&gt;-->
+        <!--    &lt;!&ndash;            <br/>&ndash;&gt;-->
+
+        <!--    &lt;!&ndash;        </t>&ndash;&gt;-->
+        <!--    &lt;!&ndash;    </template>&ndash;&gt;-->
+
+        <!--    <template id="usr_id">-->
+        <!--        <t t-set="users_set" t-value="request.env['res.users'].sudo().search([])"/>-->
+        <!--        <t t-foreach="users_set" t-as="u">-->
+        <!--            <t t-foreach="range(1,1)" t-as="n">-->
+        <!--                <t t-out="n"></t>-->
+        <!--                <t t-out="u.name"></t>-->
+        <!--                <t t-out="u.login"></t>-->
+        <!--                <t t-out="u.id"></t>-->
+        <!--                &lt;!&ndash;            <t t-if="u.is_company == True">&ndash;&gt;-->
+        <!--                &lt;!&ndash;                not valid&ndash;&gt;-->
+        <!--                &lt;!&ndash;            </t>&ndash;&gt;-->
+        <!--                &lt;!&ndash;            <t t-out="u."></t>&ndash;&gt;-->
+        <!--                <br/>-->
+        <!--            </t>-->
+        <!--        </t>-->
+        <!--    </template>-->
+
+        <!--</odoo>-->

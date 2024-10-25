@@ -1,0 +1,36 @@
+<odoo>
+    <menuitem id="root" name="Setu School"  />
+<!--    groups="setu_school.group_school_user"-->
+
+    <menuitem id="school" name="School" parent="root"/>
+    <menuitem id="setu_school_menu" name="School" action="setu_school_action" parent="school"/>
+    <menuitem id="setu_class_menu" name="Class" action="setu_class_action" parent="school"/>
+    <menuitem id="setu_admission_form_menu" name="Admission Form" action="setu_admission_form_action" parent="school"/>
+    <menuitem id="setu_academic_year_menu" name="Academic Year" action="setu_academic_year_action" parent="school"/>
+    <menuitem id="setu_class_room_menu" name="Classroom" action="setu_class_room_action" parent="school"/>
+    <menuitem id="setu_standard_medium_menu" name="Standard Medium" action="setu_standard_medium_action" parent="school"/>
+    <menuitem id="setu_standard_division_menu" name="Standard Division" action="setu_standard_division_action" parent="school"/>
+    <menuitem id="setu_standard_standard_menu" name="Standard Standard" action="setu_standard_standard_action" parent="school"/>
+
+    <menuitem id="teacher" name="Teacher" parent="root"/>
+    <menuitem id="setu_teacher_menu" name="Teacher" action="setu_teacher_action" parent="teacher"/>
+    <menuitem id="setu_subject_menu" name="Subject" action="setu_subject_action" parent="teacher"/>
+
+    <menuitem id="student" name="Student" parent="root"/>
+    <menuitem id="setu_student_menu" name="Student" action="setu_student_action" parent="student"/>
+    <menuitem id="setu_student_caste_menu" name="Caste" action="setu_student_caste_action" parent="student"/>
+    <menuitem id="setu_mother_tongue_menu" name="Mothertongue" action="setu_mother_tongue_action" parent="student"/>
+    <menuitem id="setu_grade_menu" name="Grade" action="setu_grade_action" parent="student"/>
+    <menuitem id="setu_grade_line_menu" name="Gradeline" action="setu_grade_line_action" parent="student"/>
+
+    <menuitem id="reports" name="Reports" parent="root"/>
+
+
+
+
+
+
+
+
+<!--    <menuitem id="setu_teacher_menu" name="Teacher" action="setu_teacher_action" parent="submenu"/>-->
+</odoo>

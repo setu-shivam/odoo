@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <record id="product_view_tree" model="ir.ui.view">
+            <field name="name">product.view.tree</field>
+            <field name="model">product</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="price" />
+<!--                    <field name="price" widget="monetary"/>-->
+                    <field name="rating"/>
+                    <field name="mfgdate"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_view_form" model="ir.ui.view">
+            <field name="name">product.view.form</field>
+            <field name="model">product</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="category"/>
+<!--                            <field name="price"/>-->
+                            <field name="price" widget="monetary"/>
+                            <field name="rating"/>
+                            <field name="mfgdate"/>
+                            <field name="status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_form" model="ir.actions.act_window">
+            <field name="name">product form</field>
+            <field name="res_model">product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="root" name="Order"/>
+        <menuitem id="submenu" name="Order"  parent="root"/>
+        <menuitem id="product_menu" name="Product Table" action="product_form" parent="submenu"/>
+    </data>
+</odoo>

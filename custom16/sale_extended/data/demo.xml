@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="product_product_laptop" model="product.product">
+            <field name="name">Laptop</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">100.0</field>
+            <field name="detailed_type">product</field>
+            <field name="weight">0.01</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">lap_7777</field>
+        </record>
+
+
+    </data>
+</odoo>
+
+        <!--<?xml version="1.0" encoding="utf-8"?>-->
+        <!--<odoo>-->
+        <!--    <data>-->
+        <!--        <record id="product_product_computer_desk" model="product.product">-->
+        <!--            <field name="name">Laptop</field>-->
+        <!--            <field name="categ_id" ref="product.product_category_5"/>-->
+        <!--            <field name="standard_price">70000</field>-->
+        <!--            <field name="list_price">20000</field>-->
+        <!--            <field name="detailed_type">product</field>-->
+        <!--            <field name="uom_id" ref="uom.product_uom_unit"/>-->
+        <!--            <field name="uom_po_id" ref="uom.product_uom_unit"/>-->
+        <!--        </record>-->
+        <!--    </data>-->
+        <!--</odoo>-->
+
+
+        <!--<?xml version="1.0" encoding="utf-8"?>-->
+        <!--<odoo>-->
+        <!--    <data>-->
+        <!--        <record id="product_product_computer_desk" model="product.product">-->
+        <!--            <field name="name">Table</field>-->
+        <!--            <field name="categ_id" ref="product.product_category_5"/>-->
+        <!--            <field name="standard_price">290</field>-->
+        <!--            <field name="list_price">520</field>-->
+        <!--            <field name="detailed_type">product</field>-->
+        <!--            <field name="weight">0.01</field>-->
+        <!--            <field name="uom_id" ref="uom.product_uom_unit"/>-->
+        <!--            <field name="uom_po_id" ref="uom.product_uom_unit"/>-->
+        <!--            <field name="description">Solid wood table.</field>-->
+        <!--            <field name="default_code">FURN_9666</field>-->
+        <!--            <field name="tracking">serial</field>-->
+        <!--            <field name="image_1920" type="base64" file="mrp/static/img/table.png"/>-->
+        <!--        </record>-->
+        <!--    </data>-->
+        <!--</odoo>-->
