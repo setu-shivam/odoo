@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="setu_ecommerce_stock_quant_form_view_extended" model="ir.ui.view">
+        <field name="name">setu.ecommerce.stock.quant.form.view.extended</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='inventory_date']" position="after">
+                <field name="is_ecommerce_inventory_adjustment" readonly="1"
+                       invisible="is_ecommerce_inventory_adjustment in [False]"/>
+                <field name="multi_ecommerce_connector_id" readonly="1"/>
+                <field name="ecommerce_connector"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

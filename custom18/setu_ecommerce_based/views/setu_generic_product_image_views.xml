@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="setu_generic_product_image_form_view" model="ir.ui.view">
+        <field name="name">setu.generic.product.image.form.view</field>
+        <field name="model">setu.generic.product.image</field>
+        <field name="arch" type="xml">
+            <form string="Product Images">
+                <field name="sequence" invisible="1"/>
+                <div class="row o_website_sale_image_modal">
+                    <div class="col-md-6 col-xl-5">
+                        <label for="name" string="Image Name"/>
+                        <h2>
+                            <field name="name" placeholder="Image Name"/>
+                        </h2>
+                        <label for="url"/>
+                        <br/>
+                        <field name="url" required="image in [False]"/>
+                        <br/>
+                    </div>
+                    <div class="col-md-6 col-xl-7 text-center o_website_sale_image_modal_container">
+                        <div class="row">
+                            <div class="col">
+                                <field name="image" widget="image" required="url in ['']"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_generic_product_image_kanban_view" model="ir.ui.view">
+        <field name="name">setu.generic.product.image.kanban.view</field>
+        <field name="model">setu.generic.product.image</field>
+        <field name="arch" type="xml">
+            <kanban string="Product Images" default_order="sequence">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="image"/>
+                <field name="sequence" widget="handle"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="card oe_kanban_global_click p-0">
+                            <div class="o_kanban_image">
+                                <img class="card-img-top" t-att-alt="record.name.value"
+                                     t-att-src="kanban_image('setu.generic.product.image', 'image', record.id.raw_value)"/>
+                            </div>
+                            <div class="card-body p-0">
+                                <h4 class="card-title p-2 m-0 bg-200">
+                                    <small>
+                                        <field name="name"/>
+                                    </small>
+                                </h4>
+                            </div>
+                            <!-- below 100 Kb: good -->
+                            <t t-if="record.image.raw_value.length &lt; 100*1000">
+                                <t t-set="size_status" t-value="'badge-success'"/>
+                                <t t-set="message">Acceptable file size</t>
+                            </t>
+                            <!-- below 1000 Kb: decent -->
+                            <t t-elif="record.image.raw_value.length &lt; 1000*1000">
+                                <t t-set="size_status" t-value="'badge-warning'"/>
+                                <t t-set="message">Huge file size. The image should be optimized/reduced.</t>
+                            </t>
+                            <!-- above 1000 Kb: bad -->
+                            <t t-else="1">
+                                <t t-set="size_status" t-value="'badge-danger'"/>
+                                <t t-set="message">Optimization required! Reduce the image size or increase your
+                                    compression settings.
+                                </t>
+                            </t>
+                            <span t-attf-class="badge #{size_status} o_product_image_size" t-esc="record.image.value"
+                                  t-att-title="message"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

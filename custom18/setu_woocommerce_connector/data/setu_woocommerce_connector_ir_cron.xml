@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_process_woocommerce_coupon_chain" model="ir.cron">
+            <field name="name">WooCommerce: Process Coupon Chain</field>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">20</field>
+            <field name="interval_type">minutes</field>
+<!--            <field name="numbercall">1</field>removed in v18-->
+            <field name="model_id" ref="setu_woocommerce_connector.model_setu_woocommerce_coupon_chain_line"/>
+            <field name="code">model.auto_process_woocommerce_coupon_chain()</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="ir_cron_process_woocommerce_export_stock" model="ir.cron">
+            <field name="name">WooCommerce Auto Export Stock</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+<!--            <field name="numbercall">-1</field> removed in v18-->
+            <field name="state">code</field>
+<!--            <field name="doall">False</field> removed in v18-->
+            <field name="model_id" ref="setu_ecommerce_based.model_setu_ecommerce_import_export_process_wiz"/>
+            <field name="code">model.cron_auto_update_stock_in_ecommerce()</field>
+        </record>
+
+        <record id="ir_cron_process_woocommerce_import_orders" model="ir.cron">
+            <field name="name">WooCommerce Auto Import Orders</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+<!--            <field name="numbercall">-1</field> removed in v18-->
+            <field name="state">code</field>
+<!--            <field name="doall">False</field> removed in v18-->
+            <field name="model_id" ref="setu_ecommerce_based.model_setu_ecommerce_order_chain"/>
+            <field name="code">model.cron_auto_import_ecommerce_order_chain()</field>
+        </record>
+
+        <record id="ir_cron_process_woocommerce_order_status_export" model="ir.cron">
+            <field name="name">WooCommerce Auto Update Order Status</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+<!--            <field name="numbercall">-1</field> removed in v18-->
+            <field name="state">code</field>
+<!--            <field name="doall">False</field> removed in v18-->
+            <field name="model_id" ref="setu_ecommerce_based.model_setu_ecommerce_import_export_process_wiz"/>
+            <field name="code">model.cron_auto_update_order_status_in_ecommerce()</field>
+        </record>
+    </data>
+</odoo>

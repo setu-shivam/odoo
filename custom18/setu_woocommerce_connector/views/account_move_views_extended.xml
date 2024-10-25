@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="setu_woocommerce_account_move_refund_action" model="ir.actions.act_window">
+        <field name="name">WooCommerce Credit Note</field>
+        <field name="res_model">account.move</field>
+        <field name="context">{'no_create': True}</field>
+        <field name="domain">[('move_type','=','out_refund'),('multi_ecommerce_connector_id','!=',False),
+            ('ecommerce_connector','=','woocommerce_connector')]
+        </field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+    </record>
+
+    <record id="setu_woocommerce_account_move_commerce_refund_action" model="ir.actions.act_window">
+        <field name="name">WooCommerce Credit Note</field>
+        <field name="res_model">account.move</field>
+        <field name="context">{'no_create': True}</field>
+        <field name="domain">[('move_type','=','out_refund'),('multi_ecommerce_connector_id','=',active_id),
+            ('ecommerce_connector','=','woocommerce_connector')]
+        </field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+    </record>
+
+    <record id="setu_woocommerce_account_move_action" model="ir.actions.act_window">
+        <field name="name">WooCommerce Invoices</field>
+        <field name="res_model">account.move</field>
+        <field name="domain">[('move_type','=','out_invoice'),('multi_ecommerce_connector_id','!=',False),
+            ('ecommerce_connector','=','woocommerce_connector')]
+        </field>
+        <field name="context">{'default_move_type':'out_invoice', 'move_type':'out_invoice', 'journal_type':
+            'sale','create':
+            False}
+        </field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+    </record>
+
+    <record id="setu_woocommerce_multi_ecommerce_connector_account_move_action" model="ir.actions.act_window">
+        <field name="name">WooCommerce Invoices</field>
+        <field name="res_model">account.move</field>
+        <field name="domain">
+            [('move_type','=','out_invoice'),('multi_ecommerce_connector_id','=',active_id),
+            ('ecommerce_connector','=','woocommerce_connector')]
+        </field>
+        <field name="context">{'default_move_type':'out_invoice', 'move_type':'out_invoice', 'journal_type':
+            'sale','create':
+            False}
+        </field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+    </record>
+
+    <menuitem id="setu_woocommerce_account_move_customer_invoice_menu" name="Customer Invoices"
+              parent="setu_woocommerce_account_move_main_menu"
+              action="setu_woocommerce_account_move_action" sequence="5"/>
+    <menuitem id="setu_woocommerce_account_move_customer_refund_menu" name="Customer Credit Notes"
+              parent="setu_woocommerce_account_move_main_menu"
+              action="setu_woocommerce_account_move_refund_action" sequence="7"/>
+</odoo>

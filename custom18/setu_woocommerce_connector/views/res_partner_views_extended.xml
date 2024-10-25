@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_woocommerce_res_partner_list_view_extended" model="ir.ui.view">
+        <field name="name">setu.woocommerce.res.partner.list.view.extended</field>
+        <field name="model">res.partner</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <list create="false">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_res_partner_search_view_extended" model="ir.ui.view">
+        <field name="name">setu.woocommerce.res.partner.search.view.extended</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                        context="{'group_by':'multi_ecommerce_connector_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_res_partner_action" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="domain">[('is_woocommerce_customer','=',True)]</field>
+        <field name="view_mode">form,list</field>
+        <field name="context">{"search_default_customer":1}</field>
+        <field name="view_id" ref="setu_woocommerce_res_partner_list_view_extended"/>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_neutral_face">
+                No Customer found!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="setu_woocommerce_res_partner_main_menu"
+              parent="setu_woocommerce_connector.setu_woocommerce_sale_order_main_menu"
+              action="setu_woocommerce_res_partner_action" sequence="4" name="Customers"/>
+</odoo>

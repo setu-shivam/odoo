@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Odoo - WooCommerce Connector | Setu Consulting Services Pvt. Ltd. | Odoo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://www.setuconsulting.com/css/fonts.css" rel="stylesheet">
+    <link href="https://www.setuconsulting.com/css/plugins.css" rel="stylesheet">
+    <!-- <link href="https://www.setuconsulting.com/css/style.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<!-- odoo description page css -->
+<style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        line-height: 1.1;
+        color: #21272b;
+    }
+
+    ul {
+        color: #222020;
+    }
+
+    * {
+        font-family: "Montserrat", sans-serif;
+    }
+    .responsive {
+        max-width: 100% ;
+        height: auto;
+    }
+</style>
+<!-- <body style="background-image: url('images/bgimage5.jpeg'); background-position: center center; background-repeat: no-repeat;background-attachment: fixed; background-size: cover;"> -->
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="row justify-content-md-between justify-content-center border-bottom align-items-center py-2 mx-0">
+        <div id="logo">
+            <img src="images/odoo_images/setu.png" width="150px" class="logo-default" data-toggle="tooltip" data-placement="right" title="Setu Consulting" alt="Setu Consulting">
+        </div>
+        
+        <div style="border-radius:10px; padding:5px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+            User Guide : 
+            <a title="User Guide">
+                <span class="d-none d-sm-inline badge badge-primary" style="font-size: 14px;">
+                    https://www.setuconsulting.com/slides/woocommerce-user-guide-18
+                </span>
+            </a>
+        </div>
+
+        <!-- <div class="ml-sm-center">
+            <a href="#" target="_blank" class="btn btn-success mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-user mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Live Preview</span></a>
+        </div> -->
+        <!-- <div class="mt-md-0 mt-3 mr-3">
+            <a class="btn btn-outline-warning btn-sm mb-2 mb-lg-0" style="font-size: 13px; border-radius: 4px !important; position: relative; overflow: hidden; color: #585e64; padding: 10px 4px;line-height: 0px;"><i class="fa fa-user"></i><strong><span class="ml-2 mr-3">Username : demo@setuconsulting.com</span></strong> </a>
+            <a class="btn btn-outline-warning btn-sm mb-2 mb-lg-0" style="font-size: 13px; border-radius: 4px !important; position: relative; overflow: hidden; color: #585e64; padding: 10px 4px;line-height: 0px;"><i class="fa fa-key"></i><strong><span class="ml-2 mr-3">Password : demo</span></strong></a>
+        </div> -->
+        <div class="text-center">
+            <a href="mailto:apps@setuconsulting.com?subject=Odoo WooCommerce Connector 15.0 - Demo Request" target="_blank" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request a demo</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="text-center mt-3 mb-3">
+                <a class="btn btn-info" style="width: auto;font-weight: bold;font-size: 21px;background: linear-gradient(to right, #F27E00, #F29500);box-shadow: 0px 0px 6px 3px #d7e5f1;padding-top: 12px;padding-bottom: 12px;padding-left: 60px;padding-right: 60px;border-radius: 28px; color: white; border: none;" href="https://www.setuconsulting.com" target="_blank">Odoo WooCommerce Connector
+                </a>
+                <a href="https://www.youtube.com/playlist?list=PLH6xCEY0yCIBDOMVjc9z4koyOGQMZ4XeD" target="_blank"><img src="images/video_userguide.png" title="Odoo WooCommerce Connector Video user guide" alt="Odoo WooCommerce Connector Video user guide" width="300px" class="ml-4"></a>
+                <!-- <a href="https://www.youtube.com/playlist?list=PLH6xCEY0yCICHqjvyKR_ju_FnMIHu8giz" target="_blank"><img src="images/video_userguide.png" title="Shopify Video user guide" alt="Shopify Video user guide" width="300px" class="ml-4"></a> -->
+            </div>
+            <div class="row p-3 pt64 pb64 shadow ml-1" style="border-radius:10px; padding:5px; border-top:4px solid #5A63A6; width: 100%;">
+                <div class="col-lg-12 text-center">
+                    <!-- <h2 class="mb-3">OVERVIEW</h2> -->
+                    <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify;" class="px-sm-4 p-2">
+                        With this fastest-growing digital transformation of business, many powerful eCommerce platforms available in business today, use of WooCommerce plugin provided by WordPress for their B2B, B2C selling is most in demand as it allows Business owners to create an online store and sell most conveniently with many built-in features.
+                    </p>
+                </div>
+                <!-- <div class="col-lg-4">
+                    <img src="images/product-return.png" alt="Proeduct Returns" class="w-100 mt-6" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div> -->
+                <div class="col-lg-12 text-center">
+                    <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify;" class="px-sm-4 p-2">
+                        To manage various functionalities that the WooCommerce plugin provides as a powerful e-Commerce platform, the need for the most effective ERP management System that operates all the functionalities providing the most user-friendly environment is a must. Odoo is one such best and most famous Open source ERP management systems providing excellent, all-in-one features the use of it for all backend operations lets your business reach new heights providing multi scheme architecture in one platform, and hence use of Odoo wooCommerce integrator becomes vital for you to implement in your business.
+                    </p>
+                </div>
+
+                <div class="col-lg-4 mt-6">
+                    <img src="images/Odoo-WooCommerce-Integration.jpg" alt="Odoo WooCommerce Connector" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-8 text-center mt-3">
+                    <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify;" class="px-sm-4 p-2">
+                        Odoo WooCommerce Integrator will help you manage all Operations of your WooCommerce store in Odoo by integrating the WooCommerce plugin with odoo ERP. This connector allows to perform various functionalities like Importing Customer’s Data, Orders, Products and their Categories, Product Tags, Stock Details, Reports, Invoices, Returns, Refunds, Exporting and Updating Products tags, Product Categories, Coupon Details, and Products Stock. It also allows automation of various vital tasks like Importing Orders, their Status Update, and Stock Update functionalities to ease Users' work and increase potential outcomes in business.
+                    </p>
+                </div>
+                <!-- <div class="col-lg-12 text-center mt-3">
+                    <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify;" class="px-sm-4 p-2">
+                        Moreover, RMA (Return Material Authorization) lets you accept returns for credit, repair, replacement or buy back for whatever reason you authorize. Order processing controls allow you to establish the appropriate activity for your different returned goods channels. Also smart analytical data in the form of charts for various activities can further help you strategize processes for improvements in revenue and business.
+                    </p>
+                </div> -->
+            </div>
+            <p class="text-justify text-muted" data-animate="fadeIn" data-animate-delay="400">
+                <font size="4"></font>
+            </p><br>
+            
+            <!-- KEY FEATURES START -->
+            <div class="row" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                <div class="row px-1 py-4">
+                    <h2 class="w-100 text-center my-3"><strong>Import operations from WooCommerce to Odoo</strong></h2>
+                    <div class="text-center w-100 mb-4">
+                        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                    </div>
+                </div>
+                <div class="col-md-6" style="height: 100px;">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Products</strong></div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 120px;">
+                    Import all Products from WooCommerce to Odoo.
+                    Easiest access to details about products from WooCommerce to Odoo</li></font>
+                </div>
+                <div class="col-md-6" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Products Tags</strong></div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 120px;">
+                        Import all details about various Tags and Products belonging to all Tags created in WooCommerce to Odoo.
+                    </li></font>
+                </div>
+                <div class="col-md-6" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Products Categories</strong></div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Import all details about various Categories defined for all Products and also all the Products belonging to each Category from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="col-md-6" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Products Attributes</strong></div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Import all details about Products that define Size, Color, and other such details Products.</li></font>
+                </div>
+                <div class="col-md-6" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Stock</strong></div></li>
+                    <li class="list-group-item p-b-40 text-justify" style="height: 100px;">Details about the Stock of Products are extracted from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="col-md-6" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Customers</strong></div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 100px;">Import details about all Customers from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="col-md-6" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Coupon</strong></div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 100px;">Import Details and Data about various Coupons and Offers given to Customers.
+                    </li></font>
+                </div>
+                <div class="col-md-6" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Orders</strong></div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">Import details about all Orders and their Status from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="col-md-6" style="height: 140px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Specific Order-IDS</strong></div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">Import details about all Specific Orders and their Status from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="col-md-6" style="height: 140px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Import Specific Product-IDS</strong></div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">Import details about all Specific Products from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="row px-1 py-4">
+                    <h2 class="w-100 text-center my-3">Export Operations</h2>
+                    <div class="text-center w-100 mb-4">
+                        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                    </div>
+                </div>
+                <div class="col-md-6" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                        <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Export Products</strong></div>
+                    </li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">
+                        Export details about Products from Odoo to WooCommerce.
+                    </li>
+                    </font>
+                </div>
+                <div class="col-md-6" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Export Stock</strong></div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">Export details about Stock of Products from Odoo to WooCommerce.</li></font>
+                </div>
+                <div class="row px-1 py-4">
+                    <h2 class="w-100 text-center my-3"><strong>Update Operations</strong></h2>
+                    <div class="text-center w-100">
+                        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                    </div>
+                </div>
+                <div class="col-md-12" style="height: 160px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                        <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Update Order Status</strong></div>
+                    </li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">
+                        Auto-Update details about the Status of shipped Orders from Odoo to WooCommerce.
+                    </li>
+                    </font>
+                </div>
+                <div class="row px-1 py-4">
+                    <h2 class="w-100 text-center my-3"><strong>Sync Operation</strong></h2>
+                    <div class="text-center w-100">
+                        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                    </div>
+                </div>
+                <div class="col-md-12" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                        <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Sync Tags</strong></div>
+                    </li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">
+                        Export all details about various Tags and Products belonging to all Tags created and for Existing Tags Update the details from Odoo to WooCommerce.
+                    </li>
+                    </font>
+                </div>
+                <div class="col-md-12" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Sync Categories</strong></div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">Export all details about various Categories defined for all Products and also all the Products belonging to each Category that are newly created and for the ones already existing Update the details from WooCommerce to Odoo.</li></font>
+                </div>
+                <div class="col-md-12" style="height: 220px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600"><strong>Sync Coupons</strong></div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 100px;">Export all Details and Data about various Coupons and Offers given to Customers and for the Existing ones, Update the details from WooCommerce to Odoo.</li></font>
+                </div>
+            </div>
+
+            <!-- ADVANTAGE - START -->
+            <div class="row py-sm-5 px-1 py-4">
+                <div class="row py-sm-5 px-1 py-4">
+                    <h2 class="w-100 text-center my-3">Advantages</h2>
+                    <div class="text-center w-100 mb-4">
+                        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Connect Multiple WooCommerce Stores</b></div>
+                            <div class="card-body text-white bg-primary" style="background-color: #00A09D !important; color: white !important;">
+                                <!-- <h5 class="card-title">Primary card title</h5> -->
+                                <p class="card-text">Allows to connect multiple WooCommerce stores with a single Odoo database and thereby facilitates to Manage, Operate, and Process of the Data from a centralized Platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Automated Workflow</b></div>
+                            <div class="card-body text-white bg-secondary" style="background-color: #adb5bd !important; color: white;">
+                                <!-- <h5 class="card-title">Secondary card title</h5> -->
+                                <p class="card-text">Various operations like Confirming Order, Creating and Validating Invoices, and Register Payment can be operated in a fully automated way.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Synchronize Products</b></div>
+                            <div class="card-body text-white bg-success" style="background-color: #2CBB70 !important; color: white;">
+                                <!-- <h5 class="card-title">Success card title</h5> -->
+                                <p class="card-text">Synchronizes the functions of Import, Export, and Update products and their details between WooCommerce and Odoo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Financial Status of WooCommerce Orders</b></div>
+                            <div class="card-body text-white bg-danger" style="background-color: #D9534F !important; color: white;">
+                                <!-- <h5 class="card-title">Danger card title</h5> -->
+                                <p class="card-text">Allows you to take necessary actions like Confirming orders, Creating and Validating Invoices, and many such functionalities of all Financial Status of Orders in WooCommerce directly from Odoo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Schedule base Synchronization</b></div>
+                            <div class="card-body text-white bg-warning" style="background-color: #F79B5B !important; color: white;">
+                                <!-- <h5 class="card-title">Warning card title</h5> -->
+                                <p class="card-text">Allows various Processes of Import, Export, and Update to be operated in an Automated Way during Scheduled Based Time decided by the User.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Real-Time Synchronization via Webhook </b></div>
+                            <div class="card-body text-white bg-info" style="background-color: #4B9EB6 !important; color: white;">
+                                <!-- <h5 class="card-title">Info card title</h5> -->
+                                <p class="card-text">Allows various processes of Import like Import Products, Orders, and Customers to be operated in an Automated Way at any instant of time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header"><b>Process History</b></div>
+                            <div class="card-body text-white bg-primary" style="background-color: #00A09D !important; color: white;">
+                                <!-- <h5 class="card-title">Light card title</h5> -->
+                                <p class="card-text">Helps to Analyze the failures in any of the Operations performed whether it is of Import Process, Export Process, or Update Process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Cancel and Refunds Management</b></div>
+                            <div class="card-body text-white bg-secondary" style="background-color: #adb5bd !important; color: white;">
+                                <!-- <h5 class="card-title">Dark card title</h5> -->
+                                <p class="card-text">Manage details of Cancel and Refunds of Orders between WooCommerce and Odoo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Stock Management</b></div>
+                            <div class="card-body text-white bg-success" style="background-color: #2CBB70 !important; color: white;">
+                                <!-- <h5 class="card-title">Dark card title</h5> -->
+                                <p class="card-text">Manage details of Stock between WooCommerce and Odoo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                            <div class="card-header"><b>Price Management </b></div>
+                            <div class="card-body text-white bg-danger" style="background-color: #D9534F !important; color: white;">
+                                <!-- <h5 class="card-title">Dark card title</h5> -->
+                                <p class="card-text">Synchronizes the details about Changes in the Price of Products between WooCommerce and Odoo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- ADVANTAGE - END -->
+        </div>
+    </div>
+
+   <!-- tab view START -->
+    <h2 class="w-100 text-center">Screenshots</h2>
+    <div class="text-center w-100 mb-4">
+        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+    </div>
+    <div class="row pt-4 px-3">
+        <div class="w-100">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs mb-4 justify-content-center bg-transparent">
+                <li class="nav-item ml-4">
+                    <a class="nav-link active" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem; font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#WooCommerce">WooCommerce</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#WooCommerce-configuration">Configuration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#WooCommerce-operation">Operation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#process-chain">Process Chain</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#process-history">Process History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#salesorder">Sales Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#WooCommerce-template">Template</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#product-tags-cat-attrb">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#export">Export</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <!-- 1.WooCommerce start -->
+                <div class="tab-pane fade show active" id="WooCommerce">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Setup</h3>
+                                                </div>
+                                                <div id="WooCommerce_slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/1-woocommerce-setup/1-setu-woocommerce.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/1-woocommerce-setup/2-setu-woocommerce.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/1-woocommerce-setup/3-setu-woocommerce.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/1-woocommerce-setup/4-setu-woocommerce.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce_slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce_slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 1.WooCommerce over -->
+
+                <!-- 2.Configuration start -->
+                <div class="tab-pane fade" id="WooCommerce-configuration">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Configuration</h3>
+                                                </div>
+                                                <div id="WooCommerce-configuration-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/2-wc-configuration/1-wooCommerce-menu.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/2-wc-configuration/2-wooCommerce-store-setup.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/2-wc-configuration/3-wooCommerce-setup.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/2-wc-configuration/5-wooCommerce-order-process.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/2-wc-configuration/6-wooCommerce-webhook-setup.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce-configuration-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce-configuration-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2.Configuration Over -->
+
+                <!-- 3.Operation start -->
+                <div class="tab-pane fade" id="WooCommerce-operation">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Operations</h3>
+                                                </div>
+                                                <div id="WooCommerce-operation-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4">
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/4-wc-operations/1-wc-operations.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/4-wc-operations/2-wc-operations-import-product.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/4-wc-operations/3-wc-operations-import-specific-product-and-order-ids.PNG" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/4-wc-operations/4-wc-operations-import-sync-tags-and-coupons.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce-operation-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce-operation-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3.Operation Over -->
+
+                <!-- 4.Process Order Chain start -->
+                <div class="tab-pane fade" id="process-chain">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Process Chain</h3>
+                                                </div>
+                                                <div id="process-chain-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/5-process-chain/1-order-chain-menu.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/5-process-chain/2-order-chain.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/5-process-chain/3-order-chain-data-lines.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/5-process-chain/4-product-chain-process.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/5-process-chain/5-product-chain-process-details.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#process-chain-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#process-chain-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4.Process Order Chain Over -->
+
+                <!-- 5.Process History start -->
+                <div class="tab-pane fade" id="process-history">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Process History</h3>
+                                                </div>
+                                                <div id="WooCommerce-process-history-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/6-process-history/1-process-history-menu.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/6-process-history/2-process-history.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/6-process-history/3-process-history-lines.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce-process-history-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce-process-history-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5.Process History Over -->
+
+                <!-- 6.Sales Order start -->
+                <div class="tab-pane fade" id="salesorder">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Sales Order</h3>
+                                                </div>
+                                                <div id="WooCommerce-sales-order-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/7-wc-sales-order/1-sales-orders.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/7-wc-sales-order/2-sale-order.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce-sales-order-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce-sales-order-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 6.Sales Order over  -->
+
+                <!-- 7.WooCommerce Template start -->
+                <div class="tab-pane fade" id="WooCommerce-template">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Templates</h3>
+                                                </div>
+                                                <div id="WooCommerce-template-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/8-wc-templates/1-wc-templates.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/8-wc-templates/2-wc-template-information.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/8-wc-templates/3-wc-template- variants.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/8-wc-templates/4-wc-template-media.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/8-wc-templates/5-wc-template-sync.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce-template-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce-template-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 7.WooCommerce Template Over -->
+
+                <!-- 8.WooCommerce Product-Tags-Attributes start -->
+                <div class="tab-pane fade" id="product-tags-cat-attrb">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Tags / Categories / Attributes</h3>
+                                                </div>
+                                                <div id="WooCommerce-product-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/9-product-tags-category-attributes/1-product-tags.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/9-product-tags-category-attributes/2-product-category.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/9-product-tags-category-attributes/3-product-attributes.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/9-product-tags-category-attributes/4-product-terms.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#WooCommerce-product-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#WooCommerce-product-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 8.WooCommerce Product-Tags-Attributes Over -->
+
+                <!-- 9.Export start -->
+                <div class="tab-pane fade" id="export">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">WooCommerce Export</h3>
+                                                </div>
+                                                <div id="export-slide" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner pt-4">
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/10-export/1-export-products.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/10-export/2-update-product-in-wc.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#export-slide" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#export-slide" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 88.Import Export Over -->
+            </div>
+        </div>
+    </div>
+    <!-- tab view END -->
+    
+    <div class="container" style="width: 100%;">
+        <div class="row">
+            <div class="col-sm-6 col-md-12 px-2">
+                <h2 class="w-100 text-center my-3">Suggested Apps</h2>
+                <div class="text-center w-100 mb-4">
+                    <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                </div>
+            </div>
+            <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966; width: 100%;">
+                <div id="demo11" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                    <div class="row">
+                        <div id="apps" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                            <div class="carousel-inner pt-lg-5" >
+                                <div class="carousel-item px-4 active">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_advance_reordering/" target="_blank">
+                                        <img src="images/odoo_images/advance-reordering.png" alt="Advance Reordering" width="450px"  style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_advance_inventory_reports/" target="_blank">
+                                        <img src="images/odoo_images/advance-inventory-reports.png" alt="Advance Inventory Reports" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item px-4">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_intercompany_transaction/" target="_blank">
+                                        <img src="images/odoo_images/inter-company-transfer.png" alt="Inyter company Transaction" alt="Inter Company Transfer" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_inventory_ledger_report/" target="_blank">
+                                        <img src="images/odoo_images/inventory-ledger-report.png" alt="Inventory Ledger Report" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item px-4">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_abc_analysis_reports/" target="_blank">
+                                        <img src="images/odoo_images/abc-analysis.png"alt="ABC Analysis Reports" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_rfm_analysis/" target="_blank">
+                                        <img src="images/odoo_images/rfm-analysis.png" alt="RFM Analysis" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item px-4">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_customer_rating/" target="_blank">
+                                        <img src="images/odoo_images/customer-rating.png"alt="Customer Rating" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_sales_purchase_price_tracker/" target="_blank">
+                                        <img src="images/odoo_images/price-tracker.png" alt="Sale - Purchase Price Tracker" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item px-4">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_shopify_connector/" target="_blank">
+                                        <img src="images/odoo_images/odoo-shopify-connector.png"alt="Odoo Shopify Connector" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/14.0/setu_inventory_count_management/" target="_blank">
+                                        <img src="images/odoo_images/inventory-count.png" alt="Multi User Inventory Count" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item px-4">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_sales_product_performance_report/" target="_blank">
+                                        <img src="images/odoo_images/sales-and-product-performance-report.png"alt="Sales and Product Performance Report" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_rma/" target="_blank">
+                                        <img src="images/odoo_images/rma-website-rma.png" alt="Return Merchandise Authorization" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item px-4">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_inventory_card_report/" target="_blank">
+                                        <img src="images/odoo_images/ledgerCard.png"alt="Inventory Card Report" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#apps" data-slide="prev" style="left: -5%; width: 60px;">
+                                <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                            </a>
+                            <a class="carousel-control-next" href="#apps" data-slide="next" style="right: -5%; width: 60px;">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FREE SUPPORT -->
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; padding:5px; border-left:4px solid #5A63A6; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h5 class="font-weight-bold">FREE SUPPORT</h5>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">We will provide free support for any issues, queries, and bug fixing upto 90 days from the date of purchase of this application. 
+                    <a href="mailto:support@setuconsulting.com?subject=Odoo WooCommerce Connector Version 15.0 - Support Request" target="_blank" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request free support</span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; padding:5px; border-left:4px solid #5A63A6; height: 150px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h3 class="font-weight-bold">NOTE</h3>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">
+                        Get notified about latest update. Please drop an email when you make purchase at
+                        <a href="mailto:sales@setuconsulting.com?subject=Odoo WooCommerce Connector Version 15.0 - New Purchase" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Setu Consulting</span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-12 mt-6 px-2 text-center">
+        <img src="images/odoo_images/odoo-services-1.png" class="responsive" style="margin:2px 2px 2px 2px;  box-shadow: -1px 0px 10px 2px #888;" alt="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner" title="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner">
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="setu_woocommerce_main_menu" name="WooCommerce"
+              groups="setu_woocommerce_connector.group_setu_woocommerce_connector_user"
+              web_icon="setu_woocommerce_connector,static/description/icon.png" sequence="7"/>
+    <menuitem id="setu_woocommerce_dashboard_main_menu" name="Dashboard"
+              action="open_setu_woocommerce_dashboard_dashboard_kanban"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="1"/>
+    <menuitem id="setu_woocommerce_sale_order_main_menu" name="Sales"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="2"/>
+    <menuitem id="setu_woocommerce_account_move_main_menu" name="Accounting"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="3"/>
+    <menuitem id="setu_woocommerce_product_catalog_main_menu" name="Products"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="4"/>
+    <menuitem id="setu_woocommerce_import_export_main_menu" name="Operations"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="5"/>
+    <menuitem id="setu_woocommerce_chain_process_main_menu" name="Process Queue"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="6"/>
+    <menuitem id="setu_woocommerce_process_history_main_menu" name="Process History"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="7"/>
+    <menuitem id="setu_woocommerce_configuration_main_menu" name="Configuration"
+              parent="setu_woocommerce_connector.setu_woocommerce_main_menu" sequence="8"
+              groups="setu_woocommerce_connector.group_setu_woocommerce_connector_manager"/>
+</odoo>

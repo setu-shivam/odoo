@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_display_message_wiz_form_view" model="ir.ui.view">
+            <field name="name">setu.display.message.wiz.form.view</field>
+            <field name="model">setu.display.message.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <separator string="Message" colspan="6"/>
+                    <field name="text" colspan="4" nolabel="1" readonly="1" widget="html"/>
+                    <newline/>
+                    <separator colspan="6"/>
+                    <footer>
+                        <button special="cancel" class="oe_highlight" string="Close"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_display_message_wiz_action" model="ir.actions.act_window">
+            <field name="name">Display Message</field>
+            <field name="res_model">setu.display.message.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

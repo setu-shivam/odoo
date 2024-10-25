@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_product_attributes_list_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.attributes.list.view</field>
+            <field name="model">setu.woocommerce.product.attributes</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="name"/>
+                    <field name="attribute_id"/>
+                    <field name="is_attributes_enable_disable"/>
+                    <field name="is_product_attributes_exported_in_woocommerce"/>
+                    <field name="multi_ecommerce_connector_id"/>
+                    <field name="woocommerce_attribute_id" string="WooCommerce Attribute ID"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_attributes_form_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.attributes.form.view</field>
+            <field name="model">setu.woocommerce.product.attributes</field>
+            <field name="arch" type="xml">
+                <form string="WooCommerce Product Attributes" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="attribute_id"/>
+                                <field name="woocommerce_attribute_id" readonly="1"/>
+                                <field name="attribute_type" readonly="1"/>
+                                <field name="is_attributes_enable_disable" readonly="1"/>
+                                <field name="is_product_attributes_exported_in_woocommerce" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="slug"/>
+                                <field name="order_by"/>
+                                <field name="active"/>
+                                <field name="multi_ecommerce_connector_id"
+                                       domain="[('state','=','fully_integrated'),
+                                       ('ecommerce_connector','=','woocommerce_connector')]"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_attributes_search_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.attributes.search.view</field>
+            <field name="model">setu.woocommerce.product.attributes</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="WooCommerce Product Attributes Search">
+                    <field name="name"/>
+                    <field name="woocommerce_attribute_id"/>
+                    <filter name="is_product_attributes_exported_in_woocommerce" string="Exported In WooCommerce"
+                            icon="terp-accessories-archiver"
+                            domain="[('is_product_attributes_exported_in_woocommerce','=','True')]"/>
+                    <filter name="not_is_product_attributes_exported_in_woocommerce"
+                            string="Not Exported In WooCommerce" icon="terp-accessories-archiver"
+                            domain="[('is_product_attributes_exported_in_woocommerce','=','False')]"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                                context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                        <filter name="order_by" string="Order By" icon="terp-personal"
+                                context="{'group_by':'order_by'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_attributes_action" model="ir.actions.act_window">
+            <field name="name">Product Attributes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.woocommerce.product.attributes</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="setu_woocommerce_product_attributes_main_menu" name="Product Attributes"
+                  parent='setu_woocommerce_connector.setu_woocommerce_product_catalog_main_menu'
+                  action="setu_woocommerce_product_attributes_action" sequence="5"/>
+    </data>
+</odoo>

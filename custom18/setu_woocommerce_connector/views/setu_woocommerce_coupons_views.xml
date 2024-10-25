@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="setu_woocommerce_coupons_list_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.coupons.list.view</field>
+        <field name="model">setu.woocommerce.coupons</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="amount"/>
+                <field name="expiry_date"/>
+                <field name="multi_ecommerce_connector_id" readonly="1"/>
+                <field name="woocommerce_coupon_id"/>
+                <field name="usage_count"/>
+                <field name="is_coupon_exported_in_woocommerce" readonly="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_coupons_form_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.coupons.form.view</field>
+        <field name="model">setu.woocommerce.coupons</field>
+        <field name="arch" type="xml">
+            <form string="WooCommerce Coupons">
+                <div class="alert alert-warning oe_edit_only" role="alert"
+                     invisible="same_coupon_code_id == False">
+                    A partner with the same
+                    <span>
+                        <span class="o_vat_label">Code</span>
+                    </span>
+                    already exists (<field name="same_coupon_code_id"/>), are you sure to create a new one?
+                </div>
+                <sheet>
+                    <field name="active" class="oe_inline" invisible="1"/>
+                    <div class="ribbon ribbon-top-right" invisible="active ==True">
+                        <span class="bg-danger"
+                              style="left: -4px !important;top: 20px !important">Archived
+                        </span>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="Coupon Code"/>
+                            <field name="usage_count" readonly="1"/>
+                            <field name="same_coupon_code_id"/>
+                        </group>
+                        <group>
+                            <field name="multi_ecommerce_connector_id" domain="[('state','=','fully_integrated')]"
+                                   options="{'no_create':True,'no_create_edit': True}"/>
+                            <field name="woocommerce_coupon_id"
+                                   invisible="is_coupon_exported_in_woocommerce == False"
+                                   readonly="1"/>
+                            <field name="need_to_update" invisible="1"/>
+                            <field name="is_coupon_exported_in_woocommerce" invisible="1"/>
+                        </group>
+                    </group>
+                    <label for="description"/>
+                    <h4>
+                        <field name="description" placeholder="Description"/>
+                    </h4>
+                    <notebook>
+                        <page string="General">
+                            <group>
+                                <group>
+                                    <field name="discount_type" required="1"/>
+                                    <field name="amount"/>
+                                </group>
+                                <group>
+                                    <field name="free_shipping"/>
+                                    <field name="expiry_date"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Usage Restriction">
+                            <group>
+                                <group>
+                                    <field name="minimum_amount"/>
+                                    <field name="maximum_amount"/>
+                                    <field name="individual_use"/>
+                                </group>
+                                <group>
+                                    <field name="exclude_sale_items"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="setu_woocommerce_product_variant_ids" widget="many2many_tags"
+                                           options="{'no_create_edit': True}"
+                                           domain="[('multi_ecommerce_connector_id','=',multi_ecommerce_connector_id),('is_product_variant_exported_in_woocommerce','=',True)]"/>
+                                    <field name="setu_woocommerce_exclude_product_variant_ids" widget="many2many_tags"
+                                           options="{'no_create_edit': True}"
+                                           domain="[('multi_ecommerce_connector_id','=',multi_ecommerce_connector_id),('is_product_variant_exported_in_woocommerce','=',True)]"/>
+                                </group>
+                                <group>
+                                    <field name="setu_woocommerce_product_template_ids" widget="many2many_tags"
+                                           options="{'no_create_edit': True}"
+                                           domain="[('multi_ecommerce_connector_id','=',multi_ecommerce_connector_id),('is_product_template_exported_in_woocommerce','=',True)]"/>
+                                    <field name="setu_woocommerce_exclude_product_template_ids" widget="many2many_tags"
+                                           options="{'no_create_edit': True}"
+                                           domain="[('multi_ecommerce_connector_id','=',multi_ecommerce_connector_id),('is_product_template_exported_in_woocommerce','=',True)]"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Usage Limits">
+                            <group>
+                                <group>
+                                    <field name="usage_limit"/>
+                                    <field name="limit_usage_to_x_items"
+                                           invisible="discount_type in ['fixed_cart']"/>
+                                    <field name="usage_limit_per_user"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_coupons_action" model="ir.actions.act_window">
+        <field name="name">Coupons</field>
+        <field name="res_model">setu.woocommerce.coupons</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_neutral_face">
+                No Coupon/s found!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="setu_woocommerce_coupons_main_menu" name="Coupons"
+              parent="setu_woocommerce_sale_order_main_menu"
+              action="setu_woocommerce_coupons_action" sequence="7"/>
+</odoo>

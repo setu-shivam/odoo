@@ -1,0 +1,6 @@
+Date : 31th Jan 2024
+Version : '1.0' (in __manifest__.py)
+Odoo Version : 17
+Done by : Mamta Jesadiya
+Tested by : Nikhil Sudra
+Module : initial release module

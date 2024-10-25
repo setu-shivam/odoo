@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="True">
+<!--        FURNITURE RECORD-->
+        <record id="PARIN_FURNITURE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Parin Furniture</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="RADHIKA_FURNITURE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Radhika Furniture</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="BAJRANG_FURNITURE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Bajrang Furniture</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="GUJARAT_FURNITURE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Gujarat Furniture</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="UDAN_FURNITURE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Udan Furniture</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="AJANTA_FURNITURE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Ajanta Furniture</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+
+        <!-- PLUMBING RECORD-->
+        <record id="SAMRAT_PIPING" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Samrat Piping</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="ASTRAL_PIPES" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Astral Pipes</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="REDREN_PLUMBING" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Redren Plumbing</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="SASA_BATH" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Sasa Bath</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="MAJOR_ENTERPRISE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Major Enterprise</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="KELVIN_PLASTIC" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Kevin Plastic</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+
+        <!-- ELECTRIC RECORD-->
+        <record id="MORYA_ELECTRICAL" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Morya Electric</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="CABLE_HOUSE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Cable House</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="GOKUL_DISTRIBUTOR" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Gokul Distributor</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="SS_ELECTRICAL_TRADERS" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">SS Electrical Traders</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="PRABHU_ELECTRICALS" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Prabhu Electricals</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="LIGHT_HOUSE" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Light House</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+
+        <!-- COMPUTER ACCESSORIES RECORD-->
+        <record id="UTECH_MALL" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Utech Mall</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="DIVYANG_INFO_WORLD" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Divyang Info World</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="IBIZ" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Ibiz</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="JYOT_INFOTECH" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Jyot Infotech</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="NEPTUNE_TELECOME" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Neptune Telecome</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+        <record id="ENIGMA_INFOTECH" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Enigma Infotech</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+        </record>
+
+
+        <!-- CUSTOMER DATA-->
+        <record id="RAJNIKANT_GAJERA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Rajnikant Gajera</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Gujarat</field>
+            
+        </record>
+        <record id="DIPESH_GAJJAR" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Dipesh Gajjar</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">MP</field>
+            
+        </record>
+        <record id="SANJAY_UCHHADIYA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Sanjay Uchhadiya</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Maharashtra</field>
+            
+        </record>
+        <record id="NIRAV_BHALARA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Nirav Bhalara</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">UP</field>
+            
+        </record>
+        <record id="PARAM_USDADIYA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Param Usdadiya</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Andhra Pradesh</field>
+            
+        </record>
+        <record id="JATIN_MAKWANA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Jatin Makwana</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Goa</field>
+            
+        </record>
+        <record id="KAMLESH_MANDAVIYA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Kamlesh Mandaviya</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Aasam</field>
+            
+        </record>
+        <record id="CHIRAG_SAPARIYA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Chirag Sapariya</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Bengal</field>
+            
+        </record>
+        <record id="AMIT_HAPANI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Amit Hapani</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Ladakh</field>
+            
+        </record>
+        <record id="TUSHAR_PATEL" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Tushar Patel</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Jammu</field>
+            
+        </record>
+        <record id="UMANG_SHUKLA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Umang Shukla</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Lakshdweep</field>
+            
+        </record>
+        <record id="BHARAT_KAKADIYA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Bharat Kakadiya</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Chhatisgarh</field>
+            
+        </record>
+        <record id="DIPESH_BHALANI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Dipesh Bhalani</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Karnataka</field>
+            
+        </record>
+        <record id="DARSHAN_SUREJA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Darshan Sureja</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Dadra</field>
+            
+        </record>
+        <record id="AMITA_BHATT" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Amita Bhatt</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Uttarkhand</field>
+            
+        </record>
+            <record id="ASHISH_KHAMBHAITA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Ashish Khambhaita</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Punjab</field>
+            
+        </record>
+            <record id="MEHUL_CHOVATIYA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Mehul Chovatiya</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Telngana</field>
+            
+        </record>
+            <record id="RAJNI_TANNA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Rajni Tanna</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Puduchery</field>
+            
+        </record>
+            <record id="PARESH_MEHTA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Paresh Mehta</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Sikkim</field>
+            
+        </record>
+            <record id="JAYDEEP_BHATTI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Jaydeep Bhatti</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Tamil Nadu</field>
+            
+        </record>
+            <record id="UMESH_BHALANI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Umesh Bhalani</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Tripura</field>
+            
+        </record>
+            <record id="NAYAN_MENDPARA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Nayan Mendpara</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Mizoram</field>
+            
+        </record>
+            <record id="SHANTILAL_PATEL" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Shantilal Patel</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">HAriyana</field>
+            
+        </record>
+            <record id="NIESH_PATEL" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Nilesh Patel</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Daman</field>
+            
+        </record>
+            <record id="BIRJU_MORI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Birju Mori</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Arunachal Pradesh</field>
+            
+        </record>
+            <record id="RAVINDRA_PARMAR" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Ravindra Parmar</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Himachal</field>
+            
+        </record>
+            <record id="NILESH_BHINDI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Nilesh Bhindi</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Kerala</field>
+            
+        </record>
+            <record id="VIKAS_MATAI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Vikas Matai</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Delhi</field>
+            
+        </record>
+            <record id="MUKESH_RANGANI" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Mukesh Rangani</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Meghalay</field>
+            
+        </record>
+        <record id="CHANDRESH_HARNESHA" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">Chandresh Harnesha</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street">Rajasthan</field>
+            
+        </record>
+    </data>
+</odoo>

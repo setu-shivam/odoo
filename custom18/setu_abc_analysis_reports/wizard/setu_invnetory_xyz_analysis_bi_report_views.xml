@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_inventory_xyz_analysis_bi_report_list" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.bi.report.list</field>
+            <field name="model">setu.inventory.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <list string="Inventory XYZ Analysis" create="false" edit="false" duplicate="false" delete="false"
+                        type="object" action="action_setu_inventory_xya_analysis_bi_report">
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                    <field name="company_id"/>
+                    <field name="current_stock"/>
+                    <field name="stock_value"/>
+                    <field name="stock_value_per"/>
+<!--                    <field name="cum_stock_value_per"/>-->
+                    <field name="analysis_category"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_inventory_xyz_analysis_bi_report_search" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.bi.report.search</field>
+            <field name="model">setu.inventory.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <search string="XYZ Analysis">
+                    <field name="company_id"/>
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                    <field name="analysis_category"/>
+                    <separator/>
+                    <filter string="Classification X " name="x_analysis_category"
+                            domain="[('analysis_category', '=', 'X')]"/>
+                    <filter string="Classification Y" name="y_analysis_category"
+                            domain="[('analysis_category', '=', 'Y')]"/>
+                    <filter string="Classification Z" name="z_analysis_category"
+                            domain="[('analysis_category', '=', 'Z')]"/>
+                    <separator/>
+                    <filter string="XYZ Classification" context="{'group_by':'analysis_category'}"
+                            name="analysis_category_groupby"/>
+                    <filter string="Product" context="{'group_by':'product_id'}" name="product_id_groupby"/>
+                    <filter string="Product Category" context="{'group_by':'product_category_id'}"
+                            name="product_category_id_groupby"/>
+                    <filter string="Company" context="{'group_by':'company_id'}" name="company_id_groupby"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_inventory_xyz_analysis_bi_report_graph" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.bi.report.graph</field>
+            <field name="model">setu.inventory.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <graph string="Inventory XYZ Analysis" type="bar" stacked="False">
+                    <field name="company_id" type="col"/>
+                    <field name="analysis_category" type="row"/>
+                    <field name="stock_value_per" type="measure"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</odoo>

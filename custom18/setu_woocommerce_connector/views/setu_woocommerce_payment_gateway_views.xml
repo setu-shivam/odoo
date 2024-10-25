@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_payment_gateway_list_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.payment.gateway.list.view</field>
+            <field name="model">setu.woocommerce.payment.gateway</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="multi_ecommerce_connector_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_payment_gateway_form_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.payment.gateway.form.view</field>
+            <field name="model">setu.woocommerce.payment.gateway</field>
+            <field name="arch" type="xml">
+                <form string="WooCommerce Payment Gateway">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="multi_ecommerce_connector_id"
+                                       domain="[('state','=','fully_integrated'),
+                                       ('ecommerce_connector','=','woocommerce_connector')]"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_payment_gateway_search_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.payment.gateway.search.view</field>
+            <field name="model">setu.woocommerce.payment.gateway</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="WooCommerce Payment Gateway">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <group expand="0" string="Group By...">
+                        <filter name="multi_ecommerce_connector_id" string="e-Commerce Connector"
+                                context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                        <filter name="code" string="Code" icon="terp-personal" context="{'group_by':'code'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_payment_gateway_action" model="ir.actions.act_window">
+            <field name="name">Payment Gateway</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.woocommerce.payment.gateway</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="setu_woocommerce_multi_ecommerce_payment_gateway_action" model="ir.actions.act_window">
+            <field name="name">Payment Gateway</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.woocommerce.payment.gateway</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('multi_ecommerce_connector_id','=',active_id)]</field>
+        </record>
+
+        <menuitem id="setu_woocommerce_payment_gateway_main_menu" name="Payment Gateway"
+                  parent="setu_woocommerce_connector.setu_woocommerce_configuration_main_menu"
+                  action="setu_woocommerce_payment_gateway_action" sequence="2"/>
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_sale_order_automation_manager,setu.sale.order.automation.manager,model_setu_sale_order_automation,,1,1,1,1
+access_setu_multi_ecommerce_connector_manager,setu.multi.ecommerce.connector.manager,model_setu_multi_ecommerce_connector,,1,1,1,1
+access_setu_generic_product_image_manager,setu.generic.product.image.manager,model_setu_generic_product_image,,1,1,1,1
+access_setu_process_history_manager,setu.process.history.manager,model_setu_process_history,,1,1,1,1
+access_setu_process_history_line_manager,setu.process.history.line.manager,model_setu_process_history_line,,1,1,1,1
+access_setu_cron_configuration_wiz_manager,setu.cron.configuration.wiz.manager,model_setu_cron_configuration_wiz,,1,1,1,1
+access_setu_display_message_wiz_manager,setu.display.message.wiz.manager,model_setu_display_message_wiz,,1,1,1,1
+access_setu_ecommerce_customer_chain,setu.ecommerce.customer.chain,model_setu_ecommerce_customer_chain,,1,1,1,1
+access_setu_ecommerce_customer_chain_line,setu.ecommerce.customer.chain.line,model_setu_ecommerce_customer_chain_line,,1,1,1,1
+access_setu_ecommerce_order_chain,setu.ecommerce.order.chain,model_setu_ecommerce_order_chain,,1,1,1,1
+access_setu_ecommerce_order_chain_line,setu.ecommerce.order.chain.line,model_setu_ecommerce_order_chain_line,,1,1,1,1
+access_setu_ecommerce_product_chain,setu.ecommerce.product.chain,model_setu_ecommerce_product_chain,,1,1,1,1
+access_setu_ecommerce_product_chain_line,setu.ecommerce.product.chain.line,model_setu_ecommerce_product_chain_line,,1,1,1,1
+access_setu_ecommerce_import_export_process_wiz,setu.ecommerce.import.export.process.wiz,model_setu_ecommerce_import_export_process_wiz,,1,1,1,1
+access_setu_ecommerce_process_chain_wiz,setu.ecommerce.process.chain.wiz,model_setu_ecommerce_process_chain_wiz,,1,1,1,1
+access_setu_ecommerce_product_export_wiz,setu.ecommerce.product.export.wiz,model_setu_ecommerce_product_export_wiz,,1,1,1,1
+access_setu_ir_model_manager,setu.ir.model.manager,base.model_ir_model,,1,0,0,0
+access_ir_model_fields_user,ir_model_fields all,base.model_ir_model_fields,base.group_user,1,0,0,0

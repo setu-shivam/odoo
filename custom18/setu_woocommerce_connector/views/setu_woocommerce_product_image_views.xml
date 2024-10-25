@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="setu_woocommerce_product_image_form_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.image.form.view</field>
+        <field name="model">setu.woocommerce.product.image</field>
+        <field name="arch" type="xml">
+            <form string="Product Images" create="0">
+                <div>
+                    <div class="col-md-6 col-xl-5"
+                         invisible="context.get('default_setu_woocommerce_product_variant_id',False)">
+                        <field name="setu_woocommerce_product_template_id" invisible="1" readonly="1"/>
+                        <label for="setu_woocommerce_product_variant_id" string="Product variant"/>
+                        <field name="setu_woocommerce_product_variant_id"
+                               domain="[('setu_woocommerce_product_template_id','=',setu_woocommerce_product_template_id)]"
+                               readonly="1"/>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col">
+                                <field name="image" widget="image" readonly="1"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_image_kanban_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.image.kanban.view</field>
+        <field name="model">setu.woocommerce.product.image</field>
+        <field name="arch" type="xml">
+            <kanban string="Product Images" create="0" default_order="id">
+                <field name="id"/>
+                <field name="image"/>
+                <field name="setu_woocommerce_product_image_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click" style="width:20%">
+                            <div class="o_kanban_image">
+                                <img alt="Product" class="o_image_64_contain"
+                                     t-att-src="kanban_image('setu.woocommerce.product.image', 'image', record.id.raw_value)"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <br/>
+                                <t t-set="size_status" t-value="'badge-success'"/>
+                                <span t-attf-class="badge #{size_status} o_product_image_size"
+                                      t-esc="record.image.value" t-att-title="message"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_image_action" model="ir.actions.act_window">
+        <field name="name">Product images</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">setu.woocommerce.product.image</field>
+        <field name="view_mode">kanban,from</field>
+    </record>
+
+    <menuitem id="setu_woocommerce_product_tags_main_menu" name="Product Images"
+              parent='setu_woocommerce_product_catalog_main_menu'
+              action="setu_woocommerce_product_image_action" sequence="10"/>
+</odoo>

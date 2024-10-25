@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_cron_configuration_wiz_form_view" model="ir.ui.view">
+        <field name="name">setu.cron.configuration.wiz.form.view</field>
+        <field name="model">setu.cron.configuration.wiz</field>
+        <field name="priority">11</field>
+        <field name="arch" type="xml">
+            <form string="Manual Chain Process">
+                <div class="oe_title mb-2 ml-2" invisible="multi_ecommerce_connector_id not in [False]">
+                    <h1 class="o_on_board_heading">
+                        No e-Commerce Connector Created Yet!
+                    </h1>
+                </div>
+                <div class="text-center" invisible="multi_ecommerce_connector_id in [False]">
+                    <h1 class="font-weight-bold o_on_board_heading">
+                        <field name="multi_ecommerce_connector_id" readonly="1" options="{'no_open': True}"/>
+                    </h1>
+                </div>
+                <div name="order_scheduler" class="o_workorder_field text-center"
+                     style="font-size:20px;text-align:left;color:white;background-color:#875A7B;">
+                    Order Scheduler
+                </div>
+                <div class="row mt16 container" name="orders">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="o_setting_left_pane">
+                                <field name="order_auto_import" widget="boolean_toggle"/>
+                            </div>
+                            <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                <span>
+                                    <h6>Import Orders</h6>
+                                </span>
+                                <div class="text-muted">
+                                    If checked, It will create a cron job to automatically Import Orders in Odoo at
+                                    certain intervals.
+                                </div>
+                                <br/>
+                                <div invisible="order_auto_import in [False]">
+                                    <label for="import_order_interval_number"/>
+                                    <div>
+                                        <field name="import_order_interval_number"
+                                               required="order_auto_import in [True]"
+                                               options="{'horizontal': true}"/>
+                                    </div>
+                                    <br/>
+                                    <label for="import_order_interval_type"/>
+                                    <div>
+                                        <field name="import_order_interval_type"
+                                               required="order_auto_import in [True]"
+                                               options="{'horizontal': true}"/>
+                                    </div>
+                                    <br/>
+                                    <label for="import_order_next_execution"/>
+                                    <div>
+                                        <field name="import_order_next_execution"
+                                               required="order_auto_import in [True]"/>
+                                    </div>
+                                    <br/>
+                                    <label for="import_order_user_id"/>
+                                    <div>
+                                        <field name="import_order_user_id"
+                                               required="order_auto_import in [True]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2"/>
+                        <div class="col-5">
+                            <div class="o_setting_left_pane">
+                                <field name="order_status_auto_update" widget="boolean_toggle"/>
+                            </div>
+                            <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                <span>
+                                    <h6>Update Order Status</h6>
+                                </span>
+                                <div class="text-muted">
+                                    If checked, It will create a cron job to automatically Update Order Status in
+                                    e-Commerce Channel at certain intervals.
+                                </div>
+                                <br/>
+                                <div class="o_onboard_cron_settings"
+                                     invisible="order_status_auto_update in [False]">
+                                    <label for="order_status_interval_number"/>
+                                    <div>
+                                        <field name="order_status_interval_number"
+                                               required="order_status_auto_update in [True]"/>
+                                    </div>
+                                    <br/>
+                                    <label for="order_status_interval_type"/>
+                                    <div>
+                                        <field name="order_status_interval_type"
+                                               required="order_status_auto_update in [True]"
+                                               class="o_onboard_cron_type"/>
+                                    </div>
+                                    <br/>
+                                    <label for="order_status_next_execution"/>
+                                    <div>
+                                        <field name="order_status_next_execution"
+                                               required="order_status_auto_update in [True]"
+                                               class="o_onboard_cron_execution"/>
+                                    </div>
+                                    <br/>
+                                    <label for="order_status_user_id"/>
+                                    <div>
+                                        <field name="order_status_user_id"
+                                               required="order_status_auto_update in [True]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="stock_scheduler" class="o_workorder_field text-center"
+                     style="font-size:20px;text-align:left;color:white;background-color:#875A7B;margin-top:20px;">Stock
+                    Scheduler
+                </div>
+                <div class="row mt16 container" name="stock">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="o_setting_left_pane">
+                                <field name="stock_auto_export" widget="boolean_toggle"/>
+                            </div>
+                            <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                <span>
+                                    <h6>Export Stock</h6>
+                                </span>
+                                <div class="text-muted">
+                                    If checked, It will create a cron job to automatically Export Stock in
+                                    e-Commerce Channel at certain intervals.
+                                </div>
+                                <br/>
+                                <div invisible="stock_auto_export in [False]">
+                                    <label for="inventory_export_interval_number"/>
+                                    <div>
+                                        <field name="inventory_export_interval_number"
+                                               required="stock_auto_export in [True]"/>
+                                    </div>
+                                    <br/>
+                                    <label for="inventory_export_interval_type"/>
+                                    <div>
+                                        <field name="inventory_export_interval_type"
+                                                required="stock_auto_export in [True]"/>
+                                    </div>
+                                    <br/>
+                                    <label for="inventory_export_next_execution"/>
+                                    <div>
+                                        <field name="inventory_export_next_execution"
+                                               required="stock_auto_export in [True]"/>
+                                    </div>
+                                    <br/>
+                                    <label for="inventory_export_user_id"/>
+                                    <div>
+                                        <field name="inventory_export_user_id"
+                                               required="stock_auto_export in [True]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2"/>
+                <div class="col-5">
+                    <div class="o_setting_right_pane" style="margin-left: 35px;"/>
+                </div>
+                <footer>
+                    <button string="Process Cron Configuration" class="oe_highlight o_onboard_button" type="object"
+                            name="process_cron_configuration"/>
+                    <button string="Cancel" special="cancel" class="oe_highlight o_onboard_button_white"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_cron_configuration_wiz_action" model="ir.actions.act_window">
+        <field name="name">Scheduled Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">setu.cron.configuration.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

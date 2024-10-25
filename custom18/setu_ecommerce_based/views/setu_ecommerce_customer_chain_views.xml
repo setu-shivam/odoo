@@ -1,0 +1,184 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="setu_ecommerce_customer_chain_list_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.customer.chain.list.view</field>
+        <field name="model">setu.ecommerce.customer.chain</field>
+        <field name="arch" type="xml">
+            <list create="0" default_order="name desc">
+                <field name="name"/>
+                <field name="multi_ecommerce_connector_id"/>
+                <field name="create_date"/>
+                <field name="is_chain_in_process" invisible="1"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_customer_chain_form_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.customer.chain.form.view</field>
+        <field name="model">setu.ecommerce.customer.chain</field>
+        <field name="arch" type="xml">
+            <form string="eCommerce Synced Customer Data" create="0" duplicate="0" edit="0">
+                <header>
+                    <button name="%(setu_ecommerce_based.setu_ecommerce_process_chain_customer_action)d"
+                            string="Process Queue Manually" type="action" class="btn-primary"
+                            invisible="is_chain_in_process in [True] and state in ['completed']"/>
+                    <button name="%(setu_ecommerce_based.setu_ecommerce_process_chain_cancel_customer_action)d"
+                            string="Set To Completed" type="action" class="btn-primary"
+                            invisible="is_chain_in_process in [True] and state in ['completed']"/>
+                    <field name="state" widget="statusbar"/>
+                    <field name="is_chain_in_process" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:#5EBEC4;" icon="fa-database">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_customer_records" readonly="1"/>
+                                </span>
+                                <span class="o_stat_text">Records</span>
+                            </div>
+                        </button>
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:#9A341E;" icon="fa-info">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_draft_customer_records" readonly="1"/>
+                                </span>
+                                <span class="o_stat_text">Draft</span>
+                            </div>
+                        </button>
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:red;" icon="fa-times"
+                                invisible="state == 'in_progress'">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_fail_customer_records" readonly="1"/>
+                                </span>
+                                <span class="o_stat_text">Fail</span>
+                            </div>
+                        </button>
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:red;" icon="fa-times"
+                                invisible="state != 'in_progress'">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_fail_customer_records"/>
+                                </span>
+                                <span class="o_stat_text">Fail</span>
+                            </div>
+                        </button>
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:green;" icon="fa-thumbs-up"
+                                invisible="state == 'completed'">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_done_customer_records" readonly="1"/>
+                                </span>
+                                <span class="o_stat_text">Done</span>
+                            </div>
+                        </button>
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:green;" icon="fa-thumbs-up"
+                                invisible="state != 'completed'">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_done_customer_records"/>
+                                </span>
+                                <span class="o_stat_text">Done</span>
+                            </div>
+                        </button>
+                        <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                style="color:#FF6A3D;" icon="fa-ban">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="total_cancel_customer_records" readonly="1"/>
+                                </span>
+                                <span class="o_stat_text">Cancelled</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_left" style="width: 500px;">
+                        <div class="oe_title" style="width: 390px;">
+                            <label class="oe_edit_only" for="name" string="Name"/>
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group name="basic_info">
+                        <group>
+                            <field name="multi_ecommerce_connector_id" readonly="1"/>
+                            <field name="create_date" string="Created On" readonly="1"/>
+                            <field name="is_action_require" invisible="1"/>
+                            <field name="no_records_processed" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="ecommerce_connector" invisible="1"/>
+                            <field name="process_history_id" readonly="1"/>
+                            <field name="record_created_from" string="Created From" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="eCommerce Customer" name="ecommerce_customer">
+                            <field name="setu_ecommerce_customer_chain_line_ids">
+                                <list create="false" delete="false" edit="false" editable="bottom"
+                                      decoration-danger="state=='fail'" decoration-success="state=='done'"
+                                      decoration-info="state=='draft'">
+                                    <field name="ecommerce_customer_id"/>
+                                    <field name="name"/>
+                                    <field name="write_date"/>
+                                    <field name="state"/>
+                                </list>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="ecommerce_customer_id"/>
+                                                <field name="name"/>
+                                            </group>
+                                            <group>
+                                                <field name="write_date"/>
+                                                <field name="state"/>
+                                            </group>
+                                        </group>
+                                        <notebook>
+                                            <page string="Customer Chain Line Data" name="customer_chain_line_data">
+                                                <field name="customer_chain_line_data"/>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+               <chatter/>
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>-->
+<!--                    <field name="activity_ids" widget="mail_activity"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_customer_chain_search_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.customer.chain.search.view</field>
+        <field name="model">setu.ecommerce.customer.chain</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="not_completed" string="Not Completed" domain="[('state','!=','completed')]"/>
+                <filter name="cancel" string="Cancelled" domain="[('state','=','cancel')]"/>
+                <filter name="in_progress" string="In Progress" domain="[('state','=','in_progress')]"/>
+                <filter name="fail" string="Failed" domain="[('state','=','fail')]"/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <group>
+                    <filter name="multi_ecommerce_connector_id" string="e-Commerce Connector"
+                            context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

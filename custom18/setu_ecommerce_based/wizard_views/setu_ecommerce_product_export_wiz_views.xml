@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="setu_ecommerce_product_export_wiz_form_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.product.export.wiz.form.view</field>
+        <field name="model">setu.ecommerce.product.export.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Export Products">
+                <sheet>
+                    <group name="export_product_wiz_setu_ecommerce">
+                        <group>
+                            <field name="multi_ecommerce_connector_id"
+                                   options="{'no_create':True,'no_create_edit':True}" required="True"
+                                   domain="[('active','=',True),('state','=','fully_integrated')]"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="basic_details" widget="boolean_toggle"/>
+                            <field name="price_export" widget="boolean_toggle"/>
+                            <field name="set_image" widget="boolean_toggle"/>
+                            <field name="inventory_export" widget="boolean_toggle"/>
+                        </group>
+                        <group>
+                            <field name="export_action" options="{'verticle': true}" widget="radio"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="prepare_product_export_to_ecommerce" string="Export Product To eCommerce"
+                                type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_product_export_wiz_action" model="ir.actions.act_window">
+        <field name="name">eCommerce - Export Products</field>
+        <field name="res_model">setu.ecommerce.product.export.wiz</field>
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_product_export_wiz_form_view"/>
+    </record>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="setu_woocommerce_ecommerce_order_chain_form_view_extended" model="ir.ui.view">
+        <field name="name">setu.woocommerce.ecommerce.order.chain.form.view.extended</field>
+        <field name="model">setu.ecommerce.order.chain</field>
+        <field name="inherit_id" ref="setu_ecommerce_based.setu_ecommerce_order_chain_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='data_lines']" position="after">
+                <page string="Process History Line"
+                      invisible="ecommerce_connector != 'woocommerce_connector'">
+                    <field name="process_history_line_ids">
+                        <list create="false" editable="bottom">
+                            <field name="setu_ecommerce_order_chain_line_id"/>
+                            <field name="message"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_ecommerce_order_chain_action" model="ir.actions.act_window">
+        <field name="name">Order Queue Process</field>
+        <field name="res_model">setu.ecommerce.order.chain</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_order_chain_list_view"/>
+        <field name="context">{'search_default_draft': 1,'search_default_in_progress': 2,'search_default_fail':3}
+        </field>
+        <field name="domain">[('ecommerce_connector', '=', 'woocommerce_connector')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_neutral_face">
+                No Order Chain found!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="setu_woocommerce_order_chain_menu" name="Order Queue"
+              parent="setu_woocommerce_chain_process_main_menu"
+              action="setu_woocommerce_ecommerce_order_chain_action" sequence="3"/>
+</odoo>

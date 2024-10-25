@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_abc_sales_frequency_analysis_report_form" model="ir.ui.view">
+            <field name="name">setu.abc.sales.frequency.analysis.report.form</field>
+            <field name="model">setu.abc.sales.frequency.analysis.report</field>
+            <field name="arch" type="xml">
+                <form string="ABC Sales Frequency Analysis Report">
+                    <sheet string="ABC Sales Frequency Analysis">
+                        <group expand="0" string="Filters">
+                            <group expand="0" string="Choose dates to calculate sales">
+                                <field name="start_date" required="True"/>
+                                <field name="end_date" required="True"/>
+                            </group>
+                            <group expand="0" string="Choose sales category">
+                                <field name="abc_analysis_type" widget="radio" required="True"/>
+                            </group>
+                        </group>
+                        <group expand="0">
+                            <group expand="0" string="Products &#038; Categories">
+                                <field name="product_category_ids" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="product_ids" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                       domain="[('id','in',products_ids)]"/>
+                                <field name="products_ids" invisible="1"/>
+                            </group>
+                            <group expand="0" string="Companies &#038; Warehouses">
+                                <field name="company_ids" widget="many2many_tags"
+                                       domain="[('id', 'in', allowed_company_ids)]"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="warehouse_ids" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                       domain="[('id','in',warehouses_ids)]"/>
+                                <field name="warehouses_ids" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="download_report" string="Excel Report" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Data" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Graph" type="object"
+                                class="oe_highlight" context="{'graph_report':True}"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_abc_sales_frequency_analysis_report_action" model="ir.actions.act_window">
+            <field name="name">ABC Sales Frequency Analysis</field>
+            <field name="res_model">setu.abc.sales.frequency.analysis.report</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_abc_sales_frequency_analysis_report_action_menu"
+                  action="setu_abc_sales_frequency_analysis_report_action"
+                  parent="setu_abc_analysis_reports.setu_advance_sales_reports_menu"
+                  sequence="4"/>
+    </data>
+</odoo>

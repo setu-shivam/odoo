@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_woocommerce_order_cancel_refund_wiz_form_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.order.cancel.refund.wiz.form.view</field>
+        <field name="model">setu.woocommerce.order.cancel.refund.wiz</field>
+        <field name="arch" type="xml">
+            <form string="WooCommerce Order">
+                <group>
+                    <group>
+                        <field name="is_auto_create_credit_note"/>
+                    </group>
+                </group>
+                <group string="Refund Info" invisible="is_auto_create_credit_note == False">
+                    <group>
+                        <field name="woocommerce_order_note"/>
+                        <field name="journal_id" required="is_auto_create_credit_note != False"/>
+                    </group>
+                    <group>
+                        <field name="refund_date"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_cancel_refund_woocommerce_order" string="Cancel/Refund Order" type="object"
+                            class="oe_highlight"/>
+                    <button string="Close" class="oe_highlight" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

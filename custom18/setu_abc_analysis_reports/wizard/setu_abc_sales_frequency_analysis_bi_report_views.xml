@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_abc_sales_frequency_analysis_bi_report_list" model="ir.ui.view">
+            <field name="name">setu.abc.sales.frequency.analysis.bi.report.list</field>
+            <field name="model">setu.abc.sales.frequency.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <list string="ABC Sales Frequency Analysis" create="false" edit="false" duplicate="false" delete="false"
+                        type="object" action="action_setu_abc_sales_frequency_analysis_bi_report">
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                    <field name="company_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="sales_qty"/>
+                    <field name="total_orders"/>
+                    <field name="total_orders_per"/>
+<!--                    <field name="cum_total_orders_per"/>-->
+                    <field name="analysis_category"/>
+                    <field name="wizard_id" column_invisible="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_abc_sales_frequency_analysis_bi_report_searchview" model="ir.ui.view">
+            <field name="name">setu.abc.sales.frequency.analysis.bi.report.searchview</field>
+            <field name="model">setu.abc.sales.frequency.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <search string="ABC Sales Frequency Analysis">
+                    <field name="company_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                    <field name="analysis_category"/>
+                    <separator/>
+                    <filter string="Highest Orders" name="abc_high" domain="[('analysis_category', '=', 'A')]"/>
+                    <filter string="Average Orders" name="abc_medium" domain="[('analysis_category', '=', 'B')]"/>
+                    <filter string="Lowest Orders" name="abc_low" domain="[('analysis_category', '=', 'C')]"/>
+                    <separator/>
+                    <filter string="ABC Classification" context="{'group_by':'analysis_category'}"
+                            name="analysis_category_groupby"/>
+                    <filter string="Product" context="{'group_by':'product_id'}" name="product_id_groupby"/>
+                    <filter string="Warehouse" context="{'group_by':'warehouse_id'}" name="warehouse_id_groupby"/>
+                    <filter string="Product Category" context="{'group_by':'product_category_id'}"
+                            name="product_category_id_groupby"/>
+                    <filter string="Company" context="{'group_by':'company_id'}" name="company_id_groupby"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_abc_sales_frequency_analysis_bi_report_graph" model="ir.ui.view">
+            <field name="name">setu.abc.sales.frequency.analysis.bi.report.graph</field>
+            <field name="model">setu.abc.sales.frequency.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <graph string="ABC Sales Frequency Analysis" type="bar" stacked="False">
+                    <field name="warehouse_id" type="col"/>
+                    <field name="analysis_category" type="row"/>
+                    <field name="total_orders" type="measure"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="setu_sale_order_automation_data" model="setu.sale.order.automation">
+            <field name="name">WorkFlow Automation</field>
+            <field name="is_confirm_order" eval="0"/>
+            <field name="is_create_invoice" eval="0"/>
+            <field name="is_order_date_same_as_invoice_date" eval="0"/>
+            <field name="sale_journal_id" model="account.journal"
+                   eval="obj().search([('type', '=', 'sale'),('company_id', '=', obj().env.company.id)], limit=1).id"/>
+        </record>
+    </data>
+</odoo>

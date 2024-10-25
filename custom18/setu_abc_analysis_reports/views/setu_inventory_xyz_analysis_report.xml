@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_inventory_xyz_analysis_report_form" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.report.form</field>
+            <field name="model">setu.inventory.xyz.analysis.report</field>
+            <field name="arch" type="xml">
+                <form string="Inventory XYZ Analysis Report">
+                    <sheet string="Inventory XYZ Analysis">
+                        <group expand="0" string="Filters">
+                            <group expand="0" string="Choose stock value category">
+                                <field name="inventory_analysis_type" required="True"/>
+                            </group>
+                            <group expand="0" string=""/>
+                        </group>
+                        <group expand="0">
+                            <group expand="0" string="Products &#038; Categories">
+                                <field name="product_category_ids" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="product_ids" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                       domain="[('id','in',products_ids)]"/>
+                                <field name="products_ids" invisible="1"/>
+                            </group>
+                            <group expand="0" string="Companies">
+                                <field name="company_ids" widget="many2many_tags"
+                                       domain="[('id', 'in', allowed_company_ids)]"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="download_report" string="Excel Report" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Data" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Graph" type="object"
+                                class="oe_highlight" context="{'graph_report':True}"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_xyz_analysis_report_action" model="ir.actions.act_window">
+            <field name="name">XYZ Analysis</field>
+            <field name="res_model">setu.inventory.xyz.analysis.report</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_xyz_analysis_report_menu" action="setu_xyz_analysis_report_action"
+                  parent="setu_abc_analysis_reports.setu_advance_sales_reports_menu"
+                  sequence="2"/>
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_abc_xyz_analysis_bi_report_list" model="ir.ui.view">
+            <field name="name">setu.abc.xyz.analysis.bi.report.list</field>
+            <field name="model">setu.abc.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <list string="ABC-XYZ Analysis" create="false" edit="false" duplicate="false" delete="false"
+                        type="object" action="action_setu_abc_xyz_analysis_bi_report">
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                    <field name="company_id"/>
+                    <field name="sales_qty"/>
+                    <field name="sales_amount"/>
+                    <field name="total_orders"/>
+                    <field name="sales_amount_per"/>
+<!--                    <field name="cum_sales_amount_per"/>-->
+                    <field name="abc_classification"/>
+                    <field name="current_stock"/>
+                    <field name="stock_value"/>
+                    <field name="xyz_classification"/>
+                    <field name="combine_classification"/>
+                    <field name="wizard_id" column_invisible="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_abc_xyz_analysis_bi_report_search" model="ir.ui.view">
+            <field name="name">setu.abc.xyz.analysis.bi.report.search</field>
+            <field name="model">setu.abc.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <search string="ABC Analysis">
+                    <field name="company_id"/>
+                    <field name="product_id"/>
+                    <field name="product_category_id"/>
+                    <field name="abc_classification"/>
+                    <field name="xyz_classification"/>
+                    <field name="combine_classification"/>
+                    <separator/>
+                    <filter string="ABC Classification" context="{'group_by':'abc_classification'}"
+                            name="abc_classification_groupby"/>
+                    <filter string="XYZ Classification" context="{'group_by':'xyz_classification'}"
+                            name="xyz_classification_groupby"/>
+                    <filter string="ABC-XYZ Classification" context="{'group_by':'combine_classification'}"
+                            name="combine_classification_groupby"/>
+                    <filter string="Product" context="{'group_by':'product_id'}" name="product_id_groupby"/>
+                    <filter string="Product Category" context="{'group_by':'product_category_id'}"
+                            name="product_category_id_groupby"/>
+                    <filter string="Company" context="{'group_by':'company_id'}" name="company_id_groupby"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_abc_xyz_analysis_bi_report_graph" model="ir.ui.view">
+            <field name="name">setu.abc.xyz.analysis.bi.report.graph</field>
+            <field name="model">setu.abc.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <graph string="ABC-XYZ Analysis" type="bar" stacked="False">
+                    <field name="company_id" type="col"/>
+                    <field name="combine_classification" type="row"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</odoo>

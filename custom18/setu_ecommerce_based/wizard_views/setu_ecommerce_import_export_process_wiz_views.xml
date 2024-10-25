@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_ecommerce_generic_export_update_process_wiz_form_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.generic.export.update.process.wiz.form.view</field>
+        <field name="model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="priority">11</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div>
+                        <strong>
+                            <li>
+                                Export/Update functionality allows to Export the data and for already existing one it
+                                will Update the data.
+                            </li>
+                            <li>
+                                If any error is arising while performing this functionality, You can check its log in
+                                the Process history.
+                            </li>
+                        </strong>
+                    </div>
+                    <footer>
+                        <button string="Export/Update" class="oe_highlight" type="object"
+                                name="action_generic_export_update_process"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_update_product_process_wiz_form_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.update.product.process.wiz.form.view</field>
+        <field name="model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Update Product">
+                <sheet>
+                    <group name='Export Product'>
+                        <group>
+                            <field name="ecommerce_is_update_basic_detail" widget="boolean_toggle"/>
+                            <field name='ecommerce_is_update_price' widget="boolean_toggle" string="Update Price ?"/>
+                        </group>
+                        <group>
+                            <field name='ecommerce_is_set_image' widget="boolean_toggle" string="Update Image ?"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Update Product" class="oe_highlight" type="object"
+                                name="manual_update_product_to_ecommerce"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

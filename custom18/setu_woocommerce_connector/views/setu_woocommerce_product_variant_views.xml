@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_woocommerce_product_variant_list_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.variant.list.view</field>
+        <field name="model">setu.woocommerce.product.variant</field>
+        <field name="arch" type="xml">
+            <list create="false">
+                <field name="name"/>
+                <field name="default_code"/>
+                <field name="odoo_product_id"/>
+                <field name="is_product_variant_exported_in_woocommerce" widget="boolean_toggle"/>
+                <field name="multi_ecommerce_connector_id"/>
+                <field name="woocommerce_product_variant_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_variant_form_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.variant.form.view</field>
+        <field name="model">setu.woocommerce.product.variant</field>
+        <field name="arch" type="xml">
+            <form string="WooCommerce Product Form View">
+                <sheet>
+                    <field name="active" class="oe_inline" invisible='1'/>
+                    <div invisible="active == True">
+                        <span class="bg-danger">Archived</span>
+                    </div>
+                    <div class="oe_title" style="width: 390px;">
+                        <label class="oe_edit_only" for="name" string="Title"/>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="Variant Information">
+                            <group>
+                                <group>
+                                    <field name="multi_ecommerce_connector_id"
+                                           readonly="is_product_variant_exported_in_woocommerce == True"/>
+                                    <field name="setu_woocommerce_product_template_id"/>
+                                    <field name="odoo_product_id" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="woocommerce_product_variant_id" readonly="1"/>
+                                    <field name="default_code"/>
+                                    <field name="is_product_variant_exported_in_woocommerce" widget="boolean_toggle"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Inventory Information">
+                            <group>
+                                <group>
+                                    <field name="is_woocommerce_manage_stock" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Variant Media">
+                            <group string="Images Info" colspan="4">
+                                <field name="setu_woocommerce_product_image_ids"
+                                       context="{'default_setu_woocommerce_variant_id':id,
+                                       'default_setu_woocommerce_template_id':setu_woocommerce_product_template_id}"
+                                       mode="kanban" options="{'create_text':'Add a Media'}" nolabel="1">
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Sync">
+                            <group>
+                                <group>
+                                    <field name="is_product_variant_exported_in_woocommerce" readonly="1"
+                                           widget="boolean_toggle"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_variant_search_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.variant.search.view</field>
+        <field name="model">setu.woocommerce.product.variant</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="default_code"/>
+                <field name="odoo_product_id"/>
+                <field name="woocommerce_product_variant_id" string="WooCommerce Variant Id"/>
+                <field name="multi_ecommerce_connector_id"/>
+                <filter name="is_product_variant_exported_in_woocommerce" string="Not Synced"
+                        domain="[('is_product_variant_exported_in_woocommerce','=',False)]"/>
+                <group>
+                    <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                            context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_variant_action" model="ir.actions.act_window">
+        <field name="name">Variants</field>
+        <field name="res_model">setu.woocommerce.product.variant</field>
+        <field name="view_id" ref="setu_woocommerce_product_variant_list_view"/>
+    </record>
+
+    <menuitem id="setu_woocommerce_product_variant_main_menu" name="WooCommerce Variants"
+              parent="setu_woocommerce_connector.setu_woocommerce_product_catalog_main_menu"
+              action="setu_woocommerce_product_variant_action" sequence="2"/>
+</odoo>

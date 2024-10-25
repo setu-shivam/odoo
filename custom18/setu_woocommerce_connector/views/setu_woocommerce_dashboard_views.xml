@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_multi_connector_kanban_dashboard" model="ir.ui.view">
+            <field name="name">setu.woocommerce.multi.connector.kanban.dashboard</field>
+            <field name="model">setu.multi.ecommerce.connector</field>
+            <field name="arch" type="xml">
+                <kanban string="WooCommerce Overview"
+                        class="o_emphasize_colors o_kanban_dashboard o_slide_kanban breadcrumb_item active"
+                        create="false" sample="1">
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-menu" t-if="!selection_mode">
+                            <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                <div role="menuitem" aria-haspopup="true">
+                                    <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <!--                                <div class="o_dropdown_kanban dropdown">-->
+                                <!--                                    <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown"-->
+                                <!--                                       href="#" aria-label="Dropdown menu" title="Dropdown menu">-->
+                                <!--                                        <span class="fa fa-ellipsis-v" aria-hidden="false"/>-->
+                                <!--                                    </a>-->
+                                <!--                                    <div class="o_kanban_card_manage_pane dropdown-menu" role="menu">-->
+                                <!--                                        <div role="menuitem" aria-haspopup="true"-->
+                                <!--                                             class="o_no_padding_kanban_colorpicker">-->
+                                <!--                                            <ul class="oe_kanban_colorpicker" data-field="color" role="popup"/>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <div class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title mb16">
+                                        <div class="o_primary">
+                                            <a type="edit" class="mr-auto">
+                                                <span>
+                                                    <field name="name" class="o_primary"/>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content mt0">
+                                    <div class="row mt3">
+                                        <div class="col-4 border-right">
+                                            <a name="action_woocommerce_product_count" type="object"
+                                               class="d-flex flex-column align-items-center">
+                                                <span class="font-weight-bold">
+                                                    <field name="woocommerce_product_count"/>
+                                                </span>
+                                                <span class="text-muted">Products</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-4 border-right">
+                                            <a name="action_woocommerce_sale_order_count" type="object"
+                                               class="d-flex flex-column align-items-center">
+                                                <span class="font-weight-bold">
+                                                    <field name="woocommerce_sale_order_count"/>
+                                                </span>
+                                                <span name="number_of_sale_orders" class="text-muted">Sales</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a name="action_woocommerce_account_move_account" type="object"
+                                               class="d-flex flex-column align-items-center">
+                                                <span class="font-weight-bold">
+                                                    <field name="woocommerce_account_move_ids"/>
+                                                </span>
+                                                <span class="text-muted">Invoices</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="open_setu_woocommerce_dashboard_dashboard_kanban" model="ir.actions.act_window">
+            <field name="name">WooCommerce Dashboard</field>
+            <field name="res_model">setu.multi.ecommerce.connector</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="setu_woocommerce_multi_connector_kanban_dashboard"/>
+            <field name="usage">menu</field>
+            <field name="context">{'search_default_dashboard':1}</field>
+            <field name="domain">[('ecommerce_connector','=','woocommerce_connector')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_neutral_face">
+                    This is the WooCommerce Dashboard
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

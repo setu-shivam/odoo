@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Inventory Coverage Days Report | Setu Consulting Services Pvt. Ltd. | Odoo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<!-- odoo description page css -->
+<style>
+    h1,    h2,    h3,    h4,    h5,    h6,    .h1,    .h2,    .h3,    .h4,    .h5,    .h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        line-height: 1.1;
+        color: #21272b;
+    }
+    ul {
+        color: #222020;
+    }
+    * {
+        font-family: "Montserrat", sans-serif;
+    }
+</style>
+<body>
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px;">
+    <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/1-background.jpg" style="border-radius: 10px;" />
+    <div class="container p-md-4 p-4 position-relative">
+        <div class="row align-items-center">
+            <div class="col-md-2 text-center text-md-left">
+                <img src="images/odoo_images/setu.png" alt="Setu Consulting Services Pvt. Ltd." title="Setu Consulting Services Pvt. Ltd." class="img img-fluid" >
+            </div>
+            <div class="col-md-2 text-center text-md-left" style="margin-left: auto;padding-right: 10px; padding-left: 2px;">
+                <a href="mailto:apps@setuconsulting.com?subject=Inventory Coverage Days Report V17.0 - Demo Request" target="_blank">
+                    <h6 style="font-size:18px;margin:10px 0">
+                        <span class="badge badge-pill badge-light w-md-100 w-auto" style="color:#ffffff; background-color:#0298FF; border-radius:0.5rem; padding:1rem;"><i class="fa fa-envelope-square"></i> Request a Demo </span>
+                    </h6>
+                </a>
+            </div>
+            <div class="col-md-2 text-center text-md-left" style="margin-left: auto;padding-right: 10px; padding-left: 10px;">
+                <h6 style="font-size:18px;margin:10px 0">
+                    <span class="badge badge-pill badge-light w-md-100 w-auto" style="color:#ffffff; background-color:#f62943; border-radius:0.5rem; padding:1rem;"><i class="fa fa-check"></i> Community </span>
+                </h6>
+            </div>
+            <div class="col-md-2 text-center text-md-left" style="padding-right: 10px; padding-left: 10px;">
+                <h6 style="font-size:18px;margin:10px 0">
+                    <span class="badge badge-pill badge-light w-md-100 w-auto" style="color:#ffffff; background-color:#dab000; border-radius:0.5rem; padding:1rem"><i class="fa fa-check"></i> Enterprise </span>
+                </h6>
+            </div>
+            <div class="col-md-2 text-center text-md-left" style="padding-right: 10px; padding-left: 10px;">
+                <h6 style="font-size:18px;margin:10px 0">
+                    <span class="badge badge-pill badge-light w-md-100 w-auto" style="color:#ffffff; background-color:#00c157; border-radius:0.5rem; padding:1rem;"><i class="fa fa-check"></i> Odoo.sh</span>
+                </h6>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <!-- Header -->
+    <div class="row justify-content-md-between justify-content-center border-bottom align-items-center py-2 mx-0">
+        <!-- <div class="ml-sm-center">
+            <strong>User Guide:</strong>
+            <span class="btn-success mx-2 pr-sm-4 mb-2 mb-lg-0" style="padding: 7px 7px 7px 7px; font-size: 14px; border-radius: 5px;" title="Copy this link and paste it to new tab or window"><strong>
+                https://www.setuconsulting.com/slides/advance-reordering-user-guide-13</strong></span>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="text-center">
+                <h6 style="font-size:18px;margin:10px 0">
+                    <span class="badge badge-pill badge-light w-md-100 w-auto" style="color:#ffffff; font-size: 32px; font-weight: bold; background-color:#0298FF; border-radius:0.5rem; padding:1rem;">
+                        Inventory Coverage Days Report 
+                    </span>
+                </h6>
+            </div>
+            <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px;">
+                <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/2-background.jpg" style="border-radius: 10px;" />
+                <div class="container p-md-3 p-4 position-relative">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify; margin-top: 25px;">
+                                Addressing Inventory uncertainties is crucial for businesses. Without a robust system, companies often contend with challenges like stockouts, excess holding costs, and missed sales opportunities. Imagine the frustration of dissatisfied customers and the financial strain of excessive inventory.
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/how_to_calculate_average_inventory_operations_management.jpg" alt="Odoo Inventory Coverage Report" title="Odoo Inventory Coverage Report" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                        </div>
+                        <div class="col-md-12">
+                            <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify; margin-top:10px">
+                                Introducing the Inventory Coverage Days Report Application – a transformative solution that utilizes historical sales data to calculate average daily sales. Through analysis of on-hand quantities, this solution provides a clear roadmap, enabling businesses to precisely determine how many days their current stock can cover. Optimize your stock levels, strategically reorder on-time, and enhance customer satisfaction with this essential solution. It's not merely a tool; it enhances your decision-making strategies, mastering the art of inventory management.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- <p class="text-justify text-muted" data-animate="fadeIn" data-animate-delay="400">
+                <font size="4"></font>
+            </p><br> -->
+
+            <!-- KEY FEATURES START -->
+            <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 15px;">
+                <!-- <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/2-background.jpg" style="border-radius: 10px;" /> -->
+                <div class="container p-md-3 p-4 position-relative">
+                     <div class="sh_center text-center" style="margin-bottom: 40px;">
+                        <h4 style="font-size: 28px;font-weight: 600;color: #1e266d;font-family: 'Montserrat', sans-serif;">Key Features</h4>
+                        <img src="heading.png" alt="heading" />
+                     </div>
+                    <div class="row" style="background-color: #ffffff;">
+                        <div class="col-12">
+                           <div class="row text-left">
+                              <div class="col-lg-6">
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Dynamic Report Generation</h5>
+                                          <p style="color:#616060">
+                                             Create reports for your entire company or specific warehouses according to your requirements.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Vendor Selection Strategy</h5>
+                                          <p style="color:#616060">
+                                            Option to choose the Quickest or Cheapest vendor to align your delivery needs.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Coverage Ratio Calculation</h5>
+                                          <p style="color:#616060">
+                                            Evaluate stock level effectiveness against vendor lead times.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Multiple Options for Calculating Coverage Days</h5>
+                                          <p style="color:#616060">
+                                            Versatile stock coverage assessment with flexible calculation options for coverage days  - Static Coverage Days or Vendor Lead Days.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Coverage Days</h5>
+                                          <p style="color:#616060">
+                                            Determine the number of days your the current inventory stock can sustain sales demand.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Real-time Stock Visibility</h5>
+                                          <p style="color:#616060">
+                                            Gain real-time visibility into stock levels information.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Accurate Financial Analysis</h5>
+                                          <p style="color:#616060">
+                                            Ensure accurate financial insights from the vendor currency specification.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Re-Order Timeline Management</h5>
+                                          <p style="color:#616060">
+                                            Effectively schedule re-order timelines using lead days information.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                        <div class="sh_icon">
+                                            <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        </div>
+                                        <div class="sh_dec">
+                                            <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;"> Cost implication Analysis</h5>
+                                            <p style="color:#616060">
+                                                Evaluate the cost considerations from the product price insights
+                                            </p>
+                                        </div>
+                                    </div>
+                                 </div>
+                                 <div class="img_dec shadow mt-4"
+                                    style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                    <div class="sh_inner_box d-flex align-items-baseline">
+                                       <div class="sh_icon">
+                                          <span class="fa fa-hand-o-right"
+                                             style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                       </div>
+                                       <div class="sh_dec">
+                                          <h5 style="font-size: 22px;line-height: 1.455;font-weight: 600;color: #1e266d;">Stock Out Days</h5>
+                                          <p style="color:#616060">
+                                            Assess potential stockout days for each inventory in comparison to your planned days.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- KEY FEATURES END -->
+
+            <!-- Inventory Coverage Days enable users START -->
+            <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 15px;">
+                <!-- <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/2-background.jpg" style="border-radius: 10px;" /> -->
+                <div class="container p-md-3 p-4 position-relative">
+                    <h2 class="text-left">Inventory Coverage Days Report enable users to:</h2><br>
+                    <div class="row">
+                        <div class="col-md-12 text-muted" style="height: 70px">
+                            <font size="4">
+                            <li class="list-group-item list-group-item-info">
+                                <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">
+                                    <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px">
+                                    Identify cost-effective ways to manage stock levels, reducing unnecessary expenses.
+                                </div>
+                            </li>
+                            </font>
+                        </div>
+                        <div class="col-md-12 text-muted" style="padding: 10px;">
+                            <font size="4">
+                            <li class="list-group-item list-group-item-info">
+                            <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">
+                            <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px">
+                            Identify the most suitable vendor based on Vendor Selection strategynd low sales.
+                            </div></li>
+                            </font>
+                        </div>
+                        <div class="col-md-12 text-muted" style="padding: 10px;">
+                            <font size="4">
+                            <li class="list-group-item list-group-item-info">
+                            <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">
+                            <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px">
+                            Make informed decision of - when to 
+                            <a href="https://apps.odoo.com/apps/modules/17.0/setu_advance_reordering" target="_blank">
+                                <<b>reorder </b>
+                            </a>
+                            to prevent stockouts by analyzing coverage days.
+                            </div></li>
+                            </font>
+                        </div>
+                        
+                        <div class="col-md-12 text-muted" style="padding: 10px;">
+                            <font size="4">
+                            <li class="list-group-item list-group-item-info">
+                            <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">
+                            <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px">
+                                Optimize procurement decisions by gaining insights into vendor prices and lead times.
+                            </div></li>
+                            </font>
+                        </div>
+                        <div class="col-md-12 text-muted" style="padding: 10px;">
+                            <font size="4">
+                            <li class="list-group-item list-group-item-info">
+                            <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">
+                            <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px">
+                                Analyze purchase costs and make smart financial decisions, through currency specification for businesses with multiple currencies.
+                            </div></li>
+                            </font>
+                        </div>
+                        <div class="col-md-12 text-muted" style="padding: 10px;">
+                            <font size="4">
+                            <li class="list-group-item list-group-item-info">
+                            <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">
+                            <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px">
+                                Quickly assess financial well-being through effortless calculation of coverage ratio.
+                            </div></li>
+                            </font>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Inventory Coverage Days enable users END -->
+        <div class="line"></div>
+    </div>
+
+    <!-- Screenshot START -->
+    <div class="col-sm-6 col-md-12 px-2">
+       <h2 class="w-100 text-center my-3">Screenshots</h2>
+        <div class="text-center w-100 mb-4">
+            <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+       </div>
+    </div>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide1.png" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide2.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide3.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide4.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide5.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide6.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide7.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide8.PNG" alt="inventory coverage days">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+            <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshot/Slide9.PNG" alt="inventory coverage days">
+    </section>
+    <!-- Screenshot END -->
+</div>
+
+<!-- Contact Details START-->
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 20px;">
+    <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/1-background.jpg" style="border-radius: 10px;" />
+    <div class="container p-md-4 p-4 position-relative">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                <div class="h3 p-2 mb-2 font-weight-bold">Contact Us</div> 
+                <div class="w-100 w-md-75 w-lg-100 my-1 pl-3 text-nowrap text-truncate btn btn-info rounded">
+                    <i class="fa fa-envelope fa-fw" style="font-size:1.2rem;"></i>
+                    <a href="mailto:support@setuconsulting.com" target="_blank" style="color:#ffffff; font-weight:600;">support@setuconsulting.com</a>
+                </div>
+                <div class="w-100 w-md-75 w-lg-100 my-1 pl-3 text-nowrap text-truncate btn btn-info rounded">
+                    <i class="fa fa-skype fa-fw" style="font-size:1.2rem;"></i>
+                    <span>Skype: </span>
+                    <a href="skype:live:.cid.7abebb3d4adef53f?chat" target="_blank" style="color:#ffffff; font-weight:600;">Setu Consulting</a>
+                </div>
+                <div class="w-100 w-md-75 w-lg-100 m-auto my-1 pl-3 text-nowrap text-truncate btn-light border border-dark rounded" style="line-height: 2.4rem;">
+                    <a href="https://setuconsulting.com/contactus" target="_blank">www.setuconsulting.com</a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 border-left border-right" style="border-left: 10px;">
+                <div class="h3 p-2 mb-3 text-center font-weight-bold">Odoo Certified Partner</div> 
+                <div class="text-left">
+                    <div class="my-3 pl-3 text-nowrap text-truncate lead text-white" data-container="body" data-toggle="popover" data-placement="top">
+                        <img src="images/odoo15.png" width="100px" style="margin-left:60px" alt="Odoo 15 Certified" title="Odoo 15 Certified"> 
+                        <img src="images/odoo16.png" width="100px" alt="Odoo 16 Certified" title="Odoo 16 Certified"> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+                <div class="h4 p-2 text-center font-weight-bold">Watch and subscribe</div> 
+                <div class="text-center">
+                    <a href="https://www.youtube.com/@setuconsulting" target="_blank">
+                        <img src="images/youtube.png" width="200px">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Details END-->
+
+<!-- Suggested Solution START-->
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 20px;">
+    <!-- <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/1-background.jpg" style="border-radius: 10px;" /> -->
+    <div class="container p-md-4 p-4 position-relative">    
+        <section class="oe_container mt32">
+            <h3 style='color:#091E42; font-family:"Montserrat"; text-align:center; margin:25px auto; text-transform:uppercase' class="oe_slogan">
+                <b>Suggested Solutions</b>
+            </h3>
+            <div id="demo" class="row carousel slide mt64 mb32" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_cash_flow_forecasting" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/cash-forecasting-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_advance_reordering" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/advance-reordering-purchase-ordering-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_advance_inventory_reports" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/advance-inventory-reports-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_inventory_count_management" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/inventory-count-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_inventory_ledger_report" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/inventory-ledger-report-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_intercompany_transaction" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/inter-company-transfer-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_rfm_analysis" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/rfm-analysis-marketing-strategy-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/16.0/setu_rma" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/rma-website-rma-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_abc_analysis_reports" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/abc-analysis-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_shopify_connector" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/odoo-shopify-connector-setu-consulting-odoo-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_woocommerce_connector" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/woocommerce-odoo-connector-setu-consulting-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float:left">
+                            <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_wayfair_connector" target="_blank">
+                                <div style="border-radius:10px" class="shadow-sm">
+                                    <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/odoo_images/odoo-wayfair-connector-setu-consulting-erp-consultant.png">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#demo" data-bs-slide="prev" style="margin-left:-30px; width:35px; color:#000">
+                    <span class="carousel-control-prev-icon">
+                        <i class="fa fa-chevron-left" style="font-size:24px"></i>
+                    </span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-bs-slide="next" style="margin-right:-30px; width:35px; color:#000">
+                    <span class="carousel-control-next-icon">
+                        <i class="fa fa-chevron-right" style="font-size:24px"></i>
+                    </span>
+                </a>
+            </div>
+        </section>
+    </div>
+</section>
+<!-- Suggested Solution END-->
+
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 15px;">
+    <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/2-background.jpg" style="border-radius: 10px;" />
+    <div class="container p-md-3 p-4 position-relative">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; border-left:4px solid #5A63A6; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h5 class="font-weight-bold">FREE SUPPORT</h5>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">We will provide free support for any issues, queries, and bug fixing upto 90 days from the date of purchase of this application. 
+                    <a href="mailto:support@setuconsulting.com?subject=Inventory Coverage Days Report V17.0 - Support Request" target="_blank" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request free support</span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; border-left:4px solid #5A63A6; height: 150px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h3 class="font-weight-bold">NOTE</h3>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">
+                        Get notified about latest update. Please drop an email when you make purchase at
+                        <a href="mailto:info@setuconsulting.com?subject=Inventory Coverage Days Report V17.0 - New Purchase" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Setu Consulting</span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-3 mb-4">
+    <div class="row">
+        <div class="col-sm-6 col-md-12 mt-3 px-2 text-center">
+            <div class="col-sm-6 col-md-12 mt-6 px-2 text-center">
+                <img src="images/odoo_images/odoo-services-1.png" class="responsive" style="margin:2px 2px 2px 2px; border-radius: 10px;  box-shadow: -1px 0px 10px 2px #888;" alt="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner" title="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

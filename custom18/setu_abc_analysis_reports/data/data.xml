@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--For ABC-->
+        <record model="ir.config_parameter" id="setu_abc_a_from">
+            <field name="key">setu_abc_analysis_reports.setu_abc_a_from</field>
+            <field name="value">0</field>
+        </record>
+        <record model="ir.config_parameter" id="setu_abc_a_to">
+            <field name="key">setu_abc_analysis_reports.setu_abc_a_to</field>
+            <field name="value">40</field>
+        </record>
+
+        <record model="ir.config_parameter" id="setu_abc_b_from">
+            <field name="key">setu_abc_analysis_reports.setu_abc_b_from</field>
+            <field name="value">41</field>
+        </record>
+        <record model="ir.config_parameter" id="setu_abc_b_to">
+            <field name="key">setu_abc_analysis_reports.setu_abc_b_to</field>
+            <field name="value">80</field>
+        </record>
+
+        <record model="ir.config_parameter" id="setu_abc_c_from">
+            <field name="key">setu_abc_analysis_reports.setu_abc_c_from</field>
+            <field name="value">81</field>
+        </record>
+        <record model="ir.config_parameter" id="setu_abc_c_to">
+            <field name="key">setu_abc_analysis_reports.setu_abc_c_to</field>
+            <field name="value">100</field>
+        </record>
+
+
+        <!--For XYZ-->
+        <record model="ir.config_parameter" id="setu_xyz_x_from">
+            <field name="key">setu_abc_analysis_reports.setu_xyz_x_from</field>
+            <field name="value">0</field>
+        </record>
+        <record model="ir.config_parameter" id="setu_xyz_x_to">
+            <field name="key">setu_abc_analysis_reports.setu_xyz_x_to</field>
+            <field name="value">69</field>
+        </record>
+
+        <record model="ir.config_parameter" id="setu_xyz_y_from">
+            <field name="key">setu_abc_analysis_reports.setu_xyz_y_from</field>
+            <field name="value">70</field>
+        </record>
+        <record model="ir.config_parameter" id="setu_xyz_y_to">
+            <field name="key">setu_abc_analysis_reports.setu_xyz_y_to</field>
+            <field name="value">90</field>
+        </record>
+
+        <record model="ir.config_parameter" id="setu_xyz_z_from">
+            <field name="key">setu_abc_analysis_reports.setu_xyz_z_from</field>
+            <field name="value">91</field>
+        </record>
+        <record model="ir.config_parameter" id="setu_xyz_z_to">
+            <field name="key">setu_abc_analysis_reports.setu_xyz_z_to</field>
+            <field name="value">100</field>
+        </record>
+    </data>
+</odoo>

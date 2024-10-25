@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ecommerce_process_history_sequence" model="ir.sequence">
+            <field name="name">Process History</field>
+            <field name="code">setu.process.history</field>
+            <field name="prefix">PHLOG</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="ecommerce_product_chain_sequence" model="ir.sequence">
+            <field name="name">eCommerce Product Chain Sequence</field>
+            <field name="code">setu.ecommerce.product.chain</field>
+            <field name="prefix">PCS</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="ecommerce_customer_chain_sequence" model="ir.sequence">
+            <field name="name">eCommerce Customer Chain Sequence</field>
+            <field name="code">setu.ecommerce.customer.chain</field>
+            <field name="prefix">COCS</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="ecommerce_order_chain_sequence" model="ir.sequence">
+            <field name="name">eCommerce Order Chain Sequence</field>
+            <field name="code">setu.ecommerce.order.chain</field>
+            <field name="prefix">OCS</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
