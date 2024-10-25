@@ -1,0 +1,23 @@
+Date : 29th November 2023
+Version : '17.0.0.0' (in __manifest__.py)
+Odoo Version : 17
+Done by : Richisha Acharya
+Tested by : Richisha Acharya
+Module : setu_abc_analysis_reports
+ - Migrated from v16 to v17.
+
+Date : 1st June 2023
+Version : '16.1' (in __manifest__.py)
+Odoo Version : 16
+Done by : Udit Ramani
+Module : setu_abc_analysis_reports
+ - Menuitem related issue resolved.
+
+Date : 5th October 2022
+Version : '16.0' (in __manifest__.py)
+Odoo Version : 16
+Done by : Niyati Palan
+Tested by : Udit Ramani on 31st Oct 2022
+Module : setu_abc_analysis_reports
+ - Took jsonb related change in sql (tmpl.name)
+ - Division ny zero error solved

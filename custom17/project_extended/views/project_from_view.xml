@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="project_extended_view" model="ir.ui.view">
+        <field name="name">project Form Extended view</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="type_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="project_extended_inherit_view_task_tree2" model="ir.ui.view">
+            <field name="name">project_extended.inherit_view_task_tree2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="display_name"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="project_extended_inherit_view_task_search_form" model="ir.ui.view">
+        <field name="name">project_extended_inherit_view_task_search_form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="replace">
+                 <field name="name" string="Task" filter_domain="['|', ('name', 'ilike', self),('id', 'ilike', self)]" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+
+<!--    <record id="project_task_form_view_extended" model="ir.ui.view">-->
+<!--        <field name="name">project.task.form.view.extended</field>-->
+<!--        <field name="model">project.task</field>-->
+<!--        <field name="inherit_id" ref="project.view_task_form2"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='tag_ids']" position="after">-->
+<!--                <div class="o_td_label">-->
+<!--                    <label for="planned_hours" string="Initially Planned Hours"-->
+<!--                           attrs="{'invisible': [('encode_uom_in_days', '=', True)]}"/>-->
+<!--                    <label for="planned_hours" string="Initially Planned Days"-->
+<!--                           attrs="{'invisible': [('encode_uom_in_days', '=', False)]}"/>-->
+<!--                </div>-->
+<!--                <field name="planned_hours" widget="timesheet_uom_no_toggle" nolabel="1"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->

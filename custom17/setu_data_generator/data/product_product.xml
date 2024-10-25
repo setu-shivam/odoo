@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Plumbing Category Products -->
+
+        <record id="product_product_plumbing_01" model="product.product">
+            <field name="name">4' Flexi Valve</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">110.0</field>
+            <field name="list_price">170.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">4_INCH_FLEXI_VALVE</field>
+        </record>
+        <record id="product_product_plumbing_02" model="product.product">
+            <field name="name">6' Flexi Valve</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">110.0</field>
+            <field name="list_price">170.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">6_INCH_FLEXI_VALVE</field>
+        </record>
+        <record id="product_product_plumbing_03" model="product.product">
+            <field name="name">6' ON/OFF Valve</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">130.0</field>
+            <field name="list_price">190.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">6_INCH_ONOFF_VALVE</field>
+        </record>
+        <record id="product_product_plumbing_04" model="product.product">
+            <field name="name">4' ON/OFF Valve</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">130.0</field>
+            <field name="list_price">190.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">4_INCH_ONOFF_VALVE</field>
+        </record>
+        <record id="product_product_plumbing_05" model="product.product">
+            <field name="name">Open wall pcb panel board</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">210.0</field>
+            <field name="list_price">290.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">OPENWELL_PCB_PANEL_BOARD</field>
+        </record>
+        <record id="product_product_plumbing_06" model="product.product">
+            <field name="name">Srinks</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">600.0</field>
+            <field name="list_price">790.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Srinks</field>
+        </record>
+        <record id="product_product_plumbing_07" model="product.product">
+            <field name="name">Faucets</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">210.0</field>
+            <field name="list_price">430.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Faucets</field>
+        </record>
+        <record id="product_product_plumbing_08" model="product.product">
+            <field name="name">Showers</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">350.0</field>
+            <field name="list_price">590.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Showers</field>
+        </record>
+        <record id="product_product_plumbing_09" model="product.product">
+            <field name="name">PVC Cotted Pipes</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">45.0</field>
+            <field name="list_price">70.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">PVC_COTTED_PIPES</field>
+        </record>
+        <record id="product_product_plumbing_10" model="product.product">
+            <field name="name">Wash Basin</field>
+            <field name="categ_id" ref="product_category_plumbing"/>
+            <field name="standard_price">400.0</field>
+            <field name="list_price">750.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Wash_Basin</field>
+        </record>
+
+        <!-- Electric Category Products -->
+        <record id="product_product_electric_01" model="product.product">
+            <field name="name">Modular Switch</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">35.0</field>
+            <field name="list_price">60.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Modular_Switch</field>
+        </record>
+        <record id="product_product_electric_02" model="product.product">
+            <field name="name">Modular Switch Board</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">150.0</field>
+            <field name="list_price">270.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Modular_Switch_Board</field>
+        </record>
+        <record id="product_product_electric_03" model="product.product">
+            <field name="name">MCB</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">450.0</field>
+            <field name="list_price">700.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">MCB</field>
+        </record>
+        <record id="product_product_electric_04" model="product.product">
+            <field name="name">15 Watt LED</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">220.0</field>
+            <field name="list_price">430.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">15_Watt_LED</field>
+        </record>
+        <record id="product_product_electric_05" model="product.product">
+            <field name="name">Rope Light</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">120.0</field>
+            <field name="list_price">290.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Rope_Light</field>
+        </record>
+        <record id="product_product_electric_06" model="product.product">
+            <field name="name">Universal Charger</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">400.0</field>
+            <field name="list_price">650.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Universal_Charger</field>
+        </record>
+        <record id="product_product_electric_07" model="product.product">
+            <field name="name">Lamp Holder</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">80</field>
+            <field name="list_price">130.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Lamp_Holder</field>
+        </record>
+        <record id="product_product_electric_08" model="product.product">
+            <field name="name">Electric Tape</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">40.0</field>
+            <field name="list_price">70.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Electric_Tape</field>
+        </record>
+        <record id="product_product_electric_09" model="product.product">
+            <field name="name">Robot</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">1600.0</field>
+            <field name="list_price">2150.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Robot</field>
+        </record>
+        <record id="product_product_electric_10" model="product.product">
+            <field name="name">Stabilizer</field>
+            <field name="categ_id" ref="product_category_electric"/>
+            <field name="standard_price">700.0</field>
+            <field name="list_price">1100.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Stabilizer</field>
+        </record>
+
+
+        <!-- Furniture Category Produdcts -->
+        <record id="product_product_furniture_01" model="product.product">
+            <field name="name">Office Chair</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">2900.0</field>
+            <field name="list_price">4500.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Office_Chair</field>
+        </record>
+        <record id="product_product_furniture_02" model="product.product">
+            <field name="name">Computer Table</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">1100.0</field>
+            <field name="list_price">1700.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Computer_Table</field>
+        </record>
+        <record id="product_product_furniture_03" model="product.product">
+            <field name="name">Dinning Table</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">3260.0</field>
+            <field name="list_price">4900.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Dinning_Table</field>
+        </record>
+        <record id="product_product_furniture_04" model="product.product">
+            <field name="name">Sofa Set</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">6500</field>
+            <field name="list_price">9990.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Sofa_Set</field>
+        </record>
+        <record id="product_product_furniture_05" model="product.product">
+            <field name="name">TV Unit</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">2100.0</field>
+            <field name="list_price">2900.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">TV_Unit</field>
+        </record>
+        <record id="product_product_furniture_06" model="product.product">
+            <field name="name">Relaxing Chair</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">1350.0</field>
+            <field name="list_price">2150.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Relaxing_Chair</field>
+        </record>
+        <record id="product_product_furniture_07" model="product.product">
+            <field name="name">Hanging Zulla</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">1850.0</field>
+            <field name="list_price">2900.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Hanging_Zulla</field>
+        </record>
+        <record id="product_product_furniture_08" model="product.product">
+            <field name="name">Wood Temple</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">2450.0</field>
+            <field name="list_price">3650.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Wood_Temple</field>
+        </record>
+        <record id="product_product_furniture_09" model="product.product">
+            <field name="name">Study Table</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">2010.0</field>
+            <field name="list_price">3250.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Study_Table</field>
+        </record>
+        <record id="product_product_furniture_10" model="product.product">
+            <field name="name">Flexi Drawer</field>
+            <field name="categ_id" ref="product_category_furniture"/>
+            <field name="standard_price">2000.0</field>
+            <field name="list_price">2900.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Flexi_Drawer</field>
+        </record>
+
+
+        <!-- Computer Accessories Category Products -->
+        <record id="product_product_computer_accessory_01" model="product.product">
+            <field name="name">Keyboard</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">750.0</field>
+            <field name="list_price">1170.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Keyboard</field>
+        </record>
+        <record id="product_product_computer_accessory_02" model="product.product">
+            <field name="name">Mouse</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">280.0</field>
+            <field name="list_price">470.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Mouse</field>
+        </record>
+        <record id="product_product_computer_accessory_03" model="product.product">
+            <field name="name">DVD drive</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">780.0</field>
+            <field name="list_price">1090.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">DVD_Drive</field>
+        </record>
+        <record id="product_product_computer_accessory_04" model="product.product">
+            <field name="name">Pen Drive</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">130.0</field>
+            <field name="list_price">290.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Pen_Drive</field>
+        </record>
+        <record id="product_product_computer_accessory_05" model="product.product">
+            <field name="name">SSD External Hardisk</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">3210.0</field>
+            <field name="list_price">4390.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">SSD_External_Hardisk</field>
+        </record>
+        <record id="product_product_computer_accessory_06" model="product.product">
+            <field name="name">Webcam</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">910.0</field>
+            <field name="list_price">1390.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Webcam</field>
+        </record>
+        <record id="product_product_computer_accessory_07" model="product.product">
+            <field name="name">RAM</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">2100.0</field>
+            <field name="list_price">2690.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">RAM</field>
+        </record>
+        <record id="product_product_computer_accessory_08" model="product.product">
+            <field name="name">Headphone</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">710.0</field>
+            <field name="list_price">1290.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Headphone</field>
+        </record>
+        <record id="product_product_computer_accessory_09" model="product.product">
+            <field name="name">SMPS</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">400.0</field>
+            <field name="list_price">690.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">SMPS</field>
+        </record>
+        <record id="product_product_computer_accessory_10" model="product.product">
+            <field name="name">Graphics Card</field>
+            <field name="categ_id" ref="product_category_computer_accessories"/>
+            <field name="standard_price">2100.0</field>
+            <field name="list_price">2490.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Graphics_Card</field>
+        </record>
+
+
+        <!-- Computer Accessories Category Products -->
+        <record id="product_product_mobile_accessory_01" model="product.product">
+            <field name="name">Screen Guard</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">199.0</field>
+            <field name="list_price">350.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">screen_guard</field>
+        </record>
+        <record id="product_product_mobile_accessory_02" model="product.product">
+            <field name="name">Mobile Back CashCover</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">199.0</field>
+            <field name="list_price">399.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">back_cashcover</field>
+        </record>
+        <record id="product_product_mobile_accessory_03" model="product.product">
+            <field name="name">Handsfree</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">499.0</field>
+            <field name="list_price">799.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">Handsfree</field>
+        </record>
+        <record id="product_product_mobile_accessory_04" model="product.product">
+            <field name="name">Lithium Battery 4000</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">399.0</field>
+            <field name="list_price">649.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">battery_4000</field>
+        </record>
+        <record id="product_product_mobile_accessory_05" model="product.product">
+            <field name="name">Tuffer Glass</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">79.0</field>
+            <field name="list_price">150.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">tuffen_glass</field>
+        </record>
+        <record id="product_product_mobile_accessory_06" model="product.product">
+            <field name="name">Bluetooth Handsfree</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">1999.0</field>
+            <field name="list_price">2700.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">bluetooth_handsfree</field>
+        </record>
+        <record id="product_product_mobile_accessory_07" model="product.product">
+            <field name="name">C-type Charger</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">230.0</field>
+            <field name="list_price">370.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">c_type_charger</field>
+        </record>
+        <record id="product_product_mobile_accessory_08" model="product.product">
+            <field name="name">Andriod Charger</field>
+            <field name="categ_id" ref="product_category_mobile_accessories"/>
+            <field name="standard_price">199.0</field>
+            <field name="list_price">350.0</field>
+            <field name="type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">andriod_charger</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_ecommerce_process_chain_manual_form_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.process.chain.manual.form.view</field>
+        <field name="model">setu.ecommerce.process.chain.wiz</field>
+        <field name="priority">11</field>
+        <field name="arch" type="xml">
+            <form string="Manually Chain Process">
+                <sheet>
+                    <div>
+                        <strong>
+                            - It will perform the regarding Operations like, create record or update in existing record.
+                        </strong>
+                    </div>
+                    <footer>
+                        <button string="Process Queue Manually" class="oe_highlight" type="object"
+                                name="manual_main_chain_process"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_cancel_form_view" model="ir.ui.view">
+        <field name="name">setu.ecommerce.process.chain.cancel.form.view</field>
+        <field name="model">setu.ecommerce.process.chain.wiz</field>
+        <field name="priority">11</field>
+        <field name="arch" type="xml">
+            <form string="Completed Chain Process">
+                <sheet>
+                    <footer>
+                        <button string="Completed Chain Process" class="oe_highlight" type="object"
+                                name="cancel_main_chain_process"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_product_action" model="ir.actions.act_window">
+        <field name="name">Manual Product Chain Process</field>
+        <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+        <field name="binding_model_id" ref="model_setu_ecommerce_product_chain"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_manual_form_view"/>
+        <field name="context">{'current_chain_process':'manual_product_chain_process'}</field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_customer_action" model="ir.actions.act_window">
+        <field name="name">Manual Customer Chain Process</field>
+        <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+        <field name="binding_model_id" ref="model_setu_ecommerce_customer_chain"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_manual_form_view"/>
+        <field name="context">{'current_chain_process':'manual_customer_chain_process'}</field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_order_action" model="ir.actions.act_window">
+        <field name="name">Manual Order Chain Process</field>
+        <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+        <field name="binding_model_id" ref="model_setu_ecommerce_order_chain"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_manual_form_view"/>
+        <field name="context">{'current_chain_process':'manual_order_chain_process'}</field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_cancel_product_action" model="ir.actions.act_window">
+        <field name="name">Completed Product Chain Process</field>
+        <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_cancel_form_view"/>
+        <field name="context">{'current_chain_process':'cancel_product_chain_process'}</field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_cancel_customer_action" model="ir.actions.act_window">
+        <field name="name">Completed Customer Chain Process</field>
+        <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_cancel_form_view"/>
+        <field name="context">{'current_chain_process':'cancel_customer_chain_process'}</field>
+    </record>
+
+    <record id="setu_ecommerce_process_chain_cancel_order_action" model="ir.actions.act_window">
+        <field name="name">Completed Order Chain Process</field>
+        <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_cancel_form_view"/>
+        <field name="context">{'current_chain_process':'cancel_order_chain_process'}</field>
+    </record>
+</odoo>

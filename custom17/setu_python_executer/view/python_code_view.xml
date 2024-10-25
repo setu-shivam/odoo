@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_execute_python_code_tree" model="ir.ui.view">
+            <field name="name">view.execute.python.code.tree</field>
+            <field name="model">setu.python.executer</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Python Code">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_execute_python_code" model="ir.ui.view">
+            <field name="name">view.execute.python.code</field>
+            <field name="model">setu.python.executer</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Execute Python Code">
+                    <sheet>
+                        <field name="name" colspan="4" nolabel="1"/>
+                        <separator string="Generate your python code below and click on Execute button."/>
+                        <field name="code" colspan="4" nolabel="1" widget="ace" options="{'mode':'python'}"/>
+<!--                        <group colspan="4">-->
+<!--                            <html>-->
+<!--                                <b style="font-size:25px;">-->
+<!--                                    <field name="code" colspan="4" nolabel="1" widget="ace" options="{'mode':'python'}"/>-->
+<!--                                </b>-->
+<!--                            </html>-->
+<!--                        </group>-->
+                        <group style="border:dotted;">
+                            <button special="cancel" string="Cancel"
+                                    style="background: aqua;">
+                                <i class="fa fa-close" style="color:red"></i>
+                            </button>
+                            <button name="execute_code" string="Execute" type="object"
+                                    style="background: greenyellow;">
+                                <i class="fa fa-caret-square-o-right" style="color:green"></i>
+                            </button>
+                        </group>
+<!--                        <group colspan="4">-->
+                            <separator string="Result"/>
+                            <field name="result" colspan="4" nolabel="1"/>
+<!--                        </group>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_execute_python_code" model="ir.actions.act_window">
+            <field name="name">Python executor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.python.executer</field>
+            <!--            <field name="this.env">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_execute_python_code_tree"/>
+        </record>
+
+        <menuitem
+                parent="base.menu_automation"
+                id="menu_execute_python_code"
+                action="action_execute_python_code"
+                name="Python executor"/>
+
+    </data>
+</odoo>

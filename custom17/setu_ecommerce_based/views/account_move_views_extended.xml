@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_ecommerce_account_move_form_view_extended" model="ir.ui.view">
+        <field name="name">setu.ecommerce.account.move.form.view.extended</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <button name="button_draft" position="after">
+                <button name="action_refund_order_in_ecommerce" type="object" string="Refund in eCommerce"
+                        invisible="multi_ecommerce_connector_id in [False] and state not in ['posted'] and type not in ['out_refund'] and is_refund_move_in_ecommerce not in [False] and invoice_payment_state not in ['paid']"
+                       />
+            </button>
+            <field name="partner_id" position="after">
+                <field name='is_refund_move_in_ecommerce' invisible="1"/>
+                <field name="multi_ecommerce_connector_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

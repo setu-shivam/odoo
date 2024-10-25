@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="setu_return_order_reject_form_view" model="ir.ui.view">
+            <field name="name">setu.return.order.reject.form.view</field>
+            <field name="model">setu.return.order.reject</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name" required="1"/>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

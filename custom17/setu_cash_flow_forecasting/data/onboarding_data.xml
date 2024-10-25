@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="1">
+    <record id="onboarding_onboarding_step_fiscal_year" model="onboarding.onboarding.step">
+        <field name="title">Forecast Periods</field>
+        <field name="description">Define your Fiscal years &amp; Fiscal Period.</field>
+        <field name="button_text">Configure Fiscal years &amp; Period</field>
+        <field name="done_text">Step Completed!</field>
+        <field name="panel_step_open_action_name">cash_setting_init_fiscal_year_action</field>
+        <field name="step_image" type="base64" file="setu_cash_flow_forecasting/static/src/img/cash_dashboard_onboarding_bg.jpg"/>
+        <field name="step_image_filename">cash_dashboard_onboarding_bg.jpg</field>
+        <field name="step_image_alt">Onboarding Forecast Periods</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="onboarding_onboarding_step_forecast_categories" model="onboarding.onboarding.step">
+        <field name="title">Forecast Category</field>
+        <field name="description">Define your multiple categories of Income/Expense.</field>
+        <field name="button_text">Add Forecast categories</field>
+        <field name="done_text">Step Completed!</field>
+        <field name="panel_step_open_action_name">cash_setting_init_forecast_categories_action</field>
+        <field name="step_image" type="base64" file="setu_cash_flow_forecasting/static/src/img/cash_dashboard_onboarding_bg.jpg"/>
+        <field name="step_image_filename">cash_dashboard_onboarding_bg.jpg</field>
+        <field name="step_image_alt">Onboarding Forecast Category</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="onboarding_onboarding_step_forecast_type" model="onboarding.onboarding.step">
+        <field name="title">Forecast Type</field>
+        <field name="description">Define Income/Expense Type for each Income/Expense category,
+                formulation of Cash Forecast and link multiple accounts.</field>
+        <field name="button_text">Add Forecast Types</field>
+        <field name="done_text">Forecast Type Created!</field>
+        <field name="panel_step_open_action_name">cash_setting_init_forecast_type_action</field>
+        <field name="step_image" type="base64" file="setu_cash_flow_forecasting/static/src/img/cash_dashboard_onboarding_bg.jpg"/>
+        <field name="step_image_filename">cash_dashboard_onboarding_bg.jpg</field>
+        <field name="step_image_alt">Onboarding Forecast Type</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="onboarding_onboarding_step_create_forecast" model="onboarding.onboarding.step">
+        <field name="title">Create Forecast</field>
+        <field name="description">Calculate your first Cash Forecast.</field>
+        <field name="button_text">Create</field>
+        <field name="done_text">First Forecast Created!</field>
+        <field name="panel_step_open_action_name">cash_setting_init_create_forecast_action</field>
+        <field name="step_image" type="base64" file="setu_cash_flow_forecasting/static/src/img/cash_dashboard_onboarding_bg.jpg"/>
+        <field name="step_image_filename">cash_dashboard_onboarding_bg.jpg</field>
+        <field name="step_image_alt">Onboarding Create Forecast</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <!-- ONBOARDING PANELS -->
+    <record id="onboarding_onboarding_cash_dashboard" model="onboarding.onboarding">
+        <field name="name">Cash Dashboard Onboarding</field>
+        <field name="step_ids" eval="[
+            Command.link(ref('setu_cash_flow_forecasting.onboarding_onboarding_step_fiscal_year')),
+            Command.link(ref('setu_cash_flow_forecasting.onboarding_onboarding_step_forecast_categories')),
+            Command.link(ref('setu_cash_flow_forecasting.onboarding_onboarding_step_forecast_type')),
+            Command.link(ref('setu_cash_flow_forecasting.onboarding_onboarding_step_create_forecast'))
+        ]"/>
+        <field name="route_name">cash_dashboard</field>
+        <field name="panel_close_action_name">action_close_panel_cash_dashboard</field>
+    </record>
+
+</data>
+</odoo>

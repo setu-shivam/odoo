@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!--        tree view-->
+        <record id="setu_return_order_tree_view" model="ir.ui.view">
+            <field name="name">setu.return.order.tree.view</field>
+            <field name="model">setu.return.order</field>
+            <field name="arch" type="xml">
+                <tree string="Return Order">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!--        form view-->
+        <record id="setu_return_order_form_view" model="ir.ui.view">
+            <field name="name">setu.return.order.form.view</field>
+            <field name="model">setu.return.order</field>
+            <field name="arch" type="xml">
+                <form string="Claim">
+                    <header>
+                        <field name="approve_button_visible" invisible="1"/>
+                        <button type="object" name="action_return_request_approval" invisible="state != 'draft'"
+                                string="Request Approval" class="oe_highlight"/>
+                        <button type="object" name="action_return_request_approval_without_receipt" invisible="state != 'draft'"
+                                string="Request Approval without receipt" class="oe_highlight"/>
+                        <button type="object" name="action_return_approve"
+                                invisible="state != 'to_be_approved' or approve_button_visible == False"
+                                groups="setu_rma.group_setu_rma_manager" string="Return Approve" class="oe_highlight"/>
+                        <button type="object" name="action_return_reject"
+                                invisible="state != 'to_be_approved' or approve_button_visible == False"
+                                groups="setu_rma.group_setu_rma_manager" string="Return Reject" class="oe_highlight"/>
+                        <button type="object" name="action_process_return" string="Validate" class="oe_highlight"
+                               invisible="state != 'approve'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,to_be_approved,approve,done"/>
+                    </header>
+                    <sheet string="Claims">
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_return_receipt" type="object"
+                                    invisible="return_picking_id == False" icon="fa-truck">
+                                <span class="o_stat_text">Return Receipt</span>
+                            </button>
+                            <button class="oe_stat_button" name="action_return_delivery" type="object"
+                                    invisible="not return_picking_ids" icon="fa-truck">
+                                <span class="o_stat_text">Deliveries</span>
+                            </button>
+                            <button class="oe_stat_button" name="action_return_refund" type="object"
+                                    invisible="not refund_invoice_ids" icon="fa-money">
+                                <span class="o_stat_text">Refund Invoices</span>
+                            </button>
+                            <button class="oe_stat_button" name="action_return_sale_order" type="object"
+                                    invisible="new_sale_order_id == False"
+                                    context="{'sale_order_id': new_sale_order_id}" icon="fa-usd">
+                                <span class="o_stat_text">Sale Order</span>
+                            </button>
+                            <button class="oe_stat_button" name="action_return_repair" type="object"
+                                    invisible="not repair_order_ids" icon="fa-wrench">
+                                <span class="o_stat_text">Repairs</span>
+                            </button>
+                        </div>
+                        <h1>
+                            <field name="new_sale_order_id" invisible="1"/>
+                            <field name="refund_invoice_ids" invisible="1"/>
+                            <field name="return_picking_ids" invisible="1"/>
+                            <field name="repair_order_ids" invisible="1"/>
+                            <field name="is_return_order_email_send" invisible="1"/>
+                            <field name="code" class="oe_inline" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group groups="base.group_user">
+                                <field name="name" readonly="state != 'draft'"
+                                       context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'base.group_sale_salesman_all_leads']}"/>
+                                <field name="stock_picking_id" context="{'return_order':True}"
+                                       readonly="state != 'draft'" required="1"
+                                       options="{'no_quick_create':True,'no_create_edit':True,'no_quick_open': True}"/>
+                                <field name="sale_order_id" readonly="1"/>
+                                <field name="reject_message_id" readonly="1"
+                                       invisible="state != 'reject'" options='{"no_open": True}'/>
+                                <field name="internal_stock_picking_id" invisible="1"/>
+                            </group>
+                            <group groups="base.group_user">
+                                <field name="date" readonly="state != 'draft'"/>
+                                <field name="user_id" readonly="state != 'draft'"
+                                       context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'base.group_sale_salesman_all_leads']}"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Return Request Info">
+                                <field name="return_order_line_ids" mode="tree"
+                                       readonly="state in ['done']">
+                                    <tree  editable="bottom" create="0" edit="1">
+                                        <button name="action_return_order_refund_process" class="oe_stat_button"
+                                                invisible="parent.state not in ('approve','done') or return_order_type != 'replace'"
+                                                icon="fa-cogs" title="Set product to be replace"
+                                                type="object"/>
+                                        <button name="action_return_order_buyback_process"
+                                                invisible="parent.state not in ['approve','done'] or return_order_type != 'buyback'"
+                                                icon="fa-cogs" title="Set product for buyback" width="0.1" type="object"/>
+                                        <field name="stock_move_id" column_invisible="1"/>
+                                        <field name="product_id"
+                                               readonly="parent.state not in ['draft']" required="parent.state in ['draft']"
+                                               options="{'no_quick_create':True,'no_create_edit':True}"
+                                               domain="[('id','in',parent.move_product_ids)]"/>
+                                        <field name="done_qty"
+                                               readonly="parent.state != False"/>
+                                        <field name="quantity"
+                                               readonly="parent.state != 'draft'" required="parent.state == 'draft'"/>
+                                        <field name="return_order_reason_id" readonly="parent.state not in ['draft']" required="parent.state in ['draft']"/>
+                                        <field name="return_reason_id" readonly="parent.state != 'draft'" required="parent.state == 'draft'"/>
+                                        <field name="return_qty" readonly="1" column_invisible="parent.is_approval_without_receipt == True or parent.state == 'draft'"/>
+                                        <field name="return_order_type" column_invisible="parent.state not in ('approve','in_progress','done','reject','cancel')" readonly="parent.state != 'approve'" required="parent.state == 'approve'"/>
+
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="return_order_type"/>
+                                        </group>
+                                        <group>
+                                            <field name="done_qty"/>
+                                            <field name="quantity"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group name="note_group">
+                                    <group>
+                                        <field name="description" nolabel="1" colspan="2"
+                                               placeholder="Terms and conditions..."/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Customer Info">
+                                <group groups="base.group_user">
+                                    <group string="Customer Information" groups="base.group_user">
+                                        <field name="partner_id" required="1"
+                                               options="{'no_quick_create':True,'no_create_edit':True,'no_quick_open': True}"
+                                               readonly="state != 'draft'"/>
+                                        <field name="delivery_address_id"
+                                               readonly="state != 'draft'"/>
+                                        <field name="partner_phone" readonly="state != 'draft'"/>
+                                        <field name="email_from" widget="email" required="1"
+                                               readonly="state != 'draft'"/>
+                                        <field name="section_id" readonly="state != 'draft'"/>
+                                    </group>
+                                    <group string="Dates" groups="base.group_no_one">
+                                        <field name="delivered_date"/>
+                                        <field name="date_closed" invisible="1"/>
+                                        <field name="write_date" invisible="1"/>
+                                        <field name="location_id" readonly="state != 'draft'"
+                                               options="{'no_quick_create':True,'no_create_edit':True,'no_quick_open': True}"
+                                               domain="[('return_location', '=', True)]"/>
+                                    </group>
+                                </group>
+                                <group invisible="1">
+                                    <field name="move_product_ids" invisible="1"/>
+                                    <field name="return_picking_id" invisible="1"/>
+                                    <field name="is_return_internal_transfer" invisible="1"/>
+                                    <field name="is_approval_without_receipt" invisible="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_return_order_calendar_view" model="ir.ui.view">
+            <field name="name">setu.return.order.calender.view</field>
+            <field name="model">setu.return.order</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Return Order" color="user_id">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="setu_return_order_search_filter_view" model="ir.ui.view">
+            <field name="name">setu.return.order.search.filter.view</field>
+            <field name="model">setu.return.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Return">
+                    <field name="name" string="Return"/>
+                    <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
+                    <field name="user_id"/>
+                    <filter string="Unassigned Return" domain="[('user_id','=', False)]" name="Unassigned_Return"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Partner" name="partner" domain="[]" help="Partner"
+                                context="{'group_by':'partner_id'}"/>
+                        <filter string="Responsible" name="user" domain="[]" help="Responsible User"
+                                context="{'group_by':'user_id'}"/>
+                        <filter string="State" domain="[]" name="state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_return_order_action" model="ir.actions.act_window">
+            <field name="name">Return Order</field>
+            <field name="res_model">setu.return.order</field>
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="view_id" ref="setu_return_order_tree_view"/>
+            <field name="context">{"search_default_user_id":uid, "stage_type":'claim'}</field>
+        </record>
+
+        <record id="setu_return_order_tree_view_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="setu_return_order_tree_view"/>
+            <field name="act_window_id" ref="setu_return_order_action"/>
+        </record>
+
+        <record id="setu_return_order_calender_view_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="setu_return_order_calendar_view"/>
+            <field name="act_window_id" ref="setu_return_order_action"/>
+        </record>
+
+
+        <record id="setu_return_order_form_view_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="setu_return_order_form_view"/>
+            <field name="act_window_id" ref="setu_return_order_action"/>
+        </record>
+
+
+        <!--        Return order SO veiw and action for extra added menu-->
+
+        <record id="action_rma_sale_order_to_invoice" model="ir.actions.act_window">
+            <field name="name">RMA Sale To Invoice</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="context">{"search_default_user_id":uid, "stage_type":'claim'}</field>
+            <field name="domain">[('return_order_count','!=',False),('invoice_status','=','to invoice')]</field>
+        </record>
+
+        <!--        Return order repair,refund,buyback,replace line view and action for Operation menu-->
+
+        <record id="action_rma_operations_repair" model="ir.actions.act_window">
+            <field name="name">Repair</field>
+            <field name="res_model">repair.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="repair.view_repair_order_tree"/>
+            <field name="domain">[('return_order_id', '!=', False)]</field>
+            <field name="context">{'from_rma_repair': True}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Order found.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_rma_operations_refund" model="ir.actions.act_window">
+            <field name="name">Refund</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="account.view_invoice_tree"/>
+            <field name="domain">[('move_type','=','out_refund'),('return_order_id','!=',False)]</field>
+            <!-- ,('return_order_id.state', '=', 'done'), -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Reufund found.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_rma_operations_buyback" model="ir.actions.act_window">
+            <field name="name">Buyback</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="domain">[('return_order_id','!=',False)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Sale Order found.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_rma_operations_replace" model="ir.actions.act_window">
+            <field name="name">Replace</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="stock.vpicktree"/>
+            <field name="domain">[('return_order_id','!=',False)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Picking found.
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

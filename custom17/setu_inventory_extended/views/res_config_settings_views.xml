@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="setu_inventory_extended_inherited_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='manage_product_packaging']" position="after">
+                <setting id="default_uom" invisible="not group_uom">
+                    <field name="def_uom_id" invisible="not group_uom"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

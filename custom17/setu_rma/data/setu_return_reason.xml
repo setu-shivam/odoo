@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="setu_rma_product_not_needed" model="setu.return.reason">
+            <field name="name">Product No Longer Needed</field>
+        </record>
+        <record id="setu_rma_product_not_as_expectation" model="setu.return.reason">
+            <field name="name">Product Did Not Meet Customer's Expectations</field>
+        </record>
+        <record id="setu_rma_wrong_shipped_product" model="setu.return.reason">
+            <field name="name">The merchant shipped the wrong item</field>
+        </record>
+        <record id="setu_rma_damaged_or_defactive" model="setu.return.reason">
+            <field name="name">The product was damaged or defective</field>
+        </record>
+        <record id="setu_rma_wardrobing" model="setu.return.reason">
+            <field name="name">Wardrobing</field>
+        </record>
+
+    </data>
+</odoo>

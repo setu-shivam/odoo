@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_stock_to_sale_report_form" model="ir.ui.view">
+            <field name="name">setu.stock.to.sale.report.form</field>
+            <field name="model">setu.stock.to.sale.report</field>
+            <field name="arch" type="xml">
+                <form string="Stock To Sale">
+                    <sheet string="Stock to sale">
+                        <group expand="0" string="Filters">
+                            <group expand="0" string="Transactions up to a certain date">
+                                <field name="get_report_from_beginning"/>
+                            </group>
+                            <group expand="0" string="Select Proper Date To Filter Transactions ">
+                                <field name="upto_date" required="get_report_from_beginning"
+                                       invisible="not get_report_from_beginning"/>
+                                <field name="start_date" required="not get_report_from_beginning"
+                                       invisible="get_report_from_beginning"/>
+                                <field name="end_date" required="not get_report_from_beginning"
+                                       invisible="get_report_from_beginning"/>
+                            </group>
+                        </group>
+                        <group expand="0">
+                            <group expand="0" string="Products &#038; Categories">
+                                <field name="product_category_ids" widget="many2many_tags"
+                                       options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                                <field name="product_ids" widget="many2many_tags"
+                                       options="{'no_edit': True, 'no_create': True, 'no_open': True}"
+                                       domain="[('id','in',products_ids)]"/>
+                                <field name="products_ids" invisible="1"/>
+                            </group>
+                            <group expand="0" string="Company">
+                                <field name="company_ids" widget="many2many_tags"
+                                       options="{'no_edit': True, 'no_create': True, 'no_open': True}"
+                                />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="download_report" string="Excel Report" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Data" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Graph" type="object"
+                                class="oe_highlight" context="{'graph_report':True}"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="setu_stock_to_sale_report_action" model="ir.actions.act_window">
+            <field name="name">Stock to Sale Ratio Report</field>
+            <field name="res_model">setu.stock.to.sale.report</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_stock_to_sale_ratio_report_menu" name="Setu Stock to Sale Ratio Report"
+                  parent="stock.menu_warehouse_report"/>
+        <menuitem id="setu_stock_to_sale_ratio_report" action="setu_stock_to_sale_report_action"
+                  parent="setu_stock_to_sale_ratio_report.setu_stock_to_sale_ratio_report_menu"/>
+
+        <record id="setu_stock_to_sale_bi_report_tree" model="ir.ui.view">
+            <field name="name">setu.stock.to.sale.bi.report.tree</field>
+            <field name="model">setu.stock.to.sale.bi.report</field>
+            <field name="arch" type="xml">
+                <tree string="Stock To Sale Ratio" create="false">
+                    <field name="company_id"/>
+                    <field name="currency_id"/>
+                    <field name="product_id"/>
+                    <field name="categ_id"/>
+                    <field name="opening" widget="monetary"/>
+                    <field name="closing" widget="monetary"/>
+                    <field name="avg_stock_value" widget="monetary"/>
+                    <field name="sales" widget="monetary"/>
+                    <field name="sales_return" widget="monetary"/>
+                    <field name="net_sales" widget="monetary"/>
+                    <field name="avg_cost" widget="monetary"/>
+                    <field name="ratio"/>
+                    <field name="ratio_status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_stock_to_sale_bi_report_search" model="ir.ui.view">
+            <field name="name">setu.stock.to.sale.bi.report.search</field>
+            <field name="model">setu.stock.to.sale.bi.report</field>
+            <field name="arch" type="xml">
+                <search string="Ratio">
+                    <field name="company_id"/>
+                    <field name="product_id"/>
+                    <field name="categ_id"/>
+                    <separator/>
+                    <filter string="Lost Sales" domain="[('ratio_status','=','Lost Sales')]"
+                            name="lost_sales_status_filter"/>
+                    <filter string="Capital Lock" domain="[('ratio_status','=','Capital Lock')]"
+                            name="capital_lock_status_filter"/>
+                    <filter string="Good Performance" domain="[('ratio_status','=','Good Performance')]"
+                            name="good_performance_status_filter"/>
+
+                    <filter string="Product" context="{'group_by':'product_id'}" name="product_id_groupby"/>
+                    <filter string="Product Category" context="{'group_by':'categ_id'}"
+                            name="categ_id_groupby"/>
+                    <filter string="Company" context="{'group_by':'company_id'}" name="company_id_groupby"/>
+                    <filter string="Ratio Status" context="{'group_by':'ratio_status'}" name="ratio_status_groupby"/>
+                    <separator/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_stock_to_sale_bi_report_graph" model="ir.ui.view">
+            <field name="name">setu.stock.to.sale.bi.report.graph</field>
+            <field name="model">setu.stock.to.sale.bi.report</field>
+            <field name="arch" type="xml">
+                <graph string="Stock to Sale Ratio" type="bar" stacked="False">
+                    <field name="product_id" type="col"/>
+                    <field name="ratio_status" type="row"/>
+                    <field name="ratio" type="measure"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</odoo>

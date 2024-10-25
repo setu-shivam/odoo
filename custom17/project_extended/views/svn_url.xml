@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="svn_url_tree_view" model="ir.ui.view">
+        <field name="name">svn_url_tree_view</field>
+        <field name="model">svn.url</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="odoo_version" />
+                <field name="repository_url"/>
+<!--                <field name="credential_mgmt_id" />-->
+                <field name="product_id" />
+                <field name="project_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="svn_url_form_view" model="ir.ui.view">
+        <field name="name">svn_url_form_view</field>
+        <field name="model">svn.url</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name" />
+                        <field name="odoo_version" />
+                        <field name="repository_url" />
+<!--                        <field name="credential_mgmt_id" />-->
+                    </group>
+                    <group>
+                        <field name="product_id" />
+                        <field name="project_id" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="svn_url_action" model="ir.actions.act_window">
+        <field name="name">Repository Url</field>
+        <field name="res_model">svn.url</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="svn_url_root"
+            name="Repository Url"
+            parent="project_extended.menu_of_project_extended"
+            action="svn_url_action" />
+
+</odoo>

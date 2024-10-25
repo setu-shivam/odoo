@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="setu_stock_to_sale_ratio_report_inherited_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='warehouse_setting_container']" position="before">
+                <block id="stock_to_sale_ratio_report" title="Stock to Sale Ratio Report">
+                    <settings string="Ratio" id="ratio_configuration" class="col-12 col-lg-6 o_setting_box">
+
+                            <div class="row mt16">
+                                <label for="lost_sales" string="Lost Sales"
+                                       class="col-lg-4 o_light_label"/>
+                                <field name="lost_sales" class="oe_inline"/>
+                                <span/>
+                                <label for="good_performance" string="Good Performance"
+                                       class="col-lg-4 o_light_label"/>
+                                <field name="good_performance" class="oe_inline"/>
+                                <span/>
+                                <label for="capital_lock" string="Capital Lock"
+                                       class="col-lg-4 o_light_label"/>
+                                <field name="capital_lock" class="oe_inline"/>
+                            </div>
+
+                    </settings>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_abc_configuration_form" model="ir.ui.view">
+            <field name="name">setu.abc.configuration.form</field>
+            <field name="model">setu.abc.configuration</field>
+            <field name="arch" type="xml">
+                <form string="ABC XYZ Configuration(In %)">
+                    <sheet string="ABC XYZ Configuration">
+                        <div class="oe_inline" style="margin-bottom:10px;" invisible="updated">
+                            <b>ABC Configuration(%)</b>
+                        </div>
+                        <table class="table table-sm table-hover" invisible="updated">
+                          <tr>
+                            <th style="width: 90px;background: #714B67;color: white;padding: 5px;">Classification</th>
+                            <th style="width: 90px;background: #714B67;color: white;padding: 5px;">From</th>
+                            <th style="width: 90px;background: #714B67;color: white;padding: 5px;">To</th>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px;">A</td>
+                            <td style="padding: 5px;"><field name="a_from"/></td>
+                            <td style="padding: 5px;"><field name="a_to"/></td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px;">B</td>
+                            <td style="padding: 5px;"><field name="b_from"/></td>
+                            <td style="padding: 5px;"><field name="b_to"/></td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px;">C</td>
+                            <td style="padding: 5px;"><field name="c_from"/></td>
+                            <td style="padding: 5px;"><field name="c_to"/></td>
+                          </tr>
+                        </table>
+                        <div class="oe_inline" style="margin-bottom:10px;margin-top:10px;" invisible="updated">
+                            <b>XYZ Configuration(%)</b>
+                        </div>
+                        <table class="table table-sm table-hover" invisible="updated">
+                          <tr>
+                            <th style="width: 90px;background: #714B67;color: white;padding: 5px">Classification</th>
+                            <th style="width: 90px;background: #714B67;color: white;padding: 5px">From</th>
+                            <th style="width: 90px;background: #714B67;color: white;padding: 5px">To</th>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px;">X</td>
+                            <td style="padding: 5px;"><field name="x_from"/></td>
+                            <td style="padding: 5px;"><field name="x_to"/></td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px;">Y</td>
+                            <td style="padding: 5px;"><field name="y_from"/></td>
+                            <td style="padding: 5px;"><field name="y_to"/></td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px;">Z</td>
+                            <td style="padding: 5px;"><field name="z_from"/></td>
+                            <td style="padding: 5px;"><field name="z_to"/></td>
+                          </tr>
+                        </table>
+
+
+                        <div class="oe_inline" invisible="not updated">
+                            <b>Configuration has been updated successfully!</b>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <field name="updated" invisible="1"/>
+                        <button name="update_range" string="Update" type="object"
+                                invisible="updated"
+                                class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" invisible="updated"/>
+                        <button string="Ok" class="oe_link" special="cancel" invisible="not updated"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_abc_configuration_action" model="ir.actions.act_window">
+            <field name="name">ABC XYZ Configuration</field>
+            <field name="res_model">setu.abc.configuration</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_abc_configuration_action_menu" action="setu_abc_configuration_action"
+                  parent="setu_abc_analysis_reports.setu_advance_sales_reports_menu"
+                  sequence="10"/>
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="setu_ecommerce_gift_card_product" model="product.product">
+            <field name="name">Gift Card Product</field>
+            <field name="type">service</field>
+            <field name="default_code">ecommerce_gift</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_shipping_product" model="product.product">
+            <field name="name">Shipping Product</field>
+            <field name="type">service</field>
+            <field name="default_code">ecommerce_ship</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_discount_product" model="product.product">
+            <field name="name">Discount Product</field>
+            <field name="type">service</field>
+            <field name="default_code">ecommerce_discount</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_custom_product" model="product.product">
+            <field name="name">Custom Service Product</field>
+            <field name="type">service</field>
+            <field name="default_code">ecommerce_custom_service</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_custom_storable_product" model="product.product">
+            <field name="name">Custom Storable Product</field>
+            <field name="type">product</field>
+            <field name="default_code">ecommerce_custom_storable</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_invoice_adjustment_product" model="product.product">
+            <field name="name">Invoice Adjustment Product</field>
+            <field name="type">product</field>
+            <field name="default_code">ecommerce_invoice_adjustment</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_tip_product" model="product.product">
+            <field name="name">TIP Product</field>
+            <field name="type">service</field>
+            <field name="default_code">ecommerce_tip</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record id="setu_ecommerce_refund_adjustment_product" model="product.product">
+            <field name="name">Refund Adjustment Product</field>
+            <field name="type">product</field>
+            <field name="default_code">ecommerce_refund</field>
+            <field name="invoice_policy">order</field>
+        </record>
+    </data>
+</odoo>

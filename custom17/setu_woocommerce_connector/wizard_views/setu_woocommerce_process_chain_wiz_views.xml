@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_process_chain_coupon_action" model="ir.actions.act_window">
+            <field name="name">Manual Coupon Chain Process</field>
+            <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+            <field name="binding_model_id" ref="model_setu_woocommerce_coupon_chain"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_manual_form_view"/>
+            <field name="context">{'current_chain_process':'manual_coupon_chain_process'}</field>
+        </record>
+
+        <record id="setu_woocommerce_process_chain_cancel_coupon_action" model="ir.actions.act_window">
+            <field name="name">Completed Coupon Chain Process</field>
+            <field name="res_model">setu.ecommerce.process.chain.wiz</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_process_chain_cancel_form_view"/>
+            <field name="context">{'current_chain_process':'cancel_coupon_chain_process'}</field>
+        </record>
+    </data>
+</odoo>

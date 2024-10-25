@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="setu_membership_view_partner_form_inherited" model="ir.ui.view">
+            <field name="name">setu.membership.view.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='vat']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='vat']" position="after">
+                        <field name="bloodgroup"/>
+                        <field name="date_of_birth" widget="date"/>
+                        <field name="adhar_no"/>
+                    </xpath>
+
+                    <xpath expr="//notebook/page[@name='sales_purchases']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//notebook/page[@name='accounting']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//notebook/page[@name='internal_notes']" position="before">
+                        <xpath expr="//notebook/page[@name='membership']" position="move"/>
+                    </xpath>
+
+                    <xpath expr="//notebook/page[@name='contact_addresses']//form//field[@name='mobile']" position="after">
+                        <field name="bloodgroup"/>
+                        <field name="date_of_birth" widget="date"/>
+                        <field name="adhar_no"/>
+                        <field name="relation_to_contact"/>
+                    </xpath>
+
+                    <xpath expr="//notebook/page[@name='contact_addresses']//form//field[@name='type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    </xpath>
+
+<!--                    <xpath expr="//notebook/page[@name='contact_addresses']//form//div[hasclass('text-muted')]" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                    </xpath>-->
+                    <xpath expr="//notebook/page[@name='contact_addresses']//form//div[hasclass('text-muted')]" position="replace"/>
+                    <xpath expr="//notebook/page[@name='contact_addresses']//form//hr" position="replace"/>
+
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

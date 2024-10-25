@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_view_extended" model="ir.ui.view">
+        <field name="name">sale.order.form.view.extended</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div" position="inside">
+                <button name="action_view_return_order" type="object" class="oe_stat_button" icon="fa-mail-reply"
+                        groups="setu_rma.group_setu_rma_user">
+                    <field name="return_order_count" widget="statinfo" string="Return Order"/>
+                </button>
+            </xpath>
+            <xpath expr="//sheet/group[@name='sale_header']/group[@name='partner_details']" position="inside">
+                <field name="return_order_id" string="Return Order"
+                       groups="setu_rma.group_setu_rma_user"
+                       invisible="return_order_id == False" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_sale_order_return_order_search" model="ir.ui.view">
+        <field name="name">view.sale.order.return.order.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <filter name="order_month" position="after">
+                <filter string="Return Order" groups="setu_rma.group_setu_rma_user" name="return_sale_order" domain="[]"
+                        context="{'group_by': 'return_order_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

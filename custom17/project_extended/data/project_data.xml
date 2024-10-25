@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    <data noupdate="1">-->
+        <record id="project_project_meeting" model="project.project">
+            <field name="name">Internal Meeting</field>
+        </record>
+<!--    </data>-->
+</odoo>

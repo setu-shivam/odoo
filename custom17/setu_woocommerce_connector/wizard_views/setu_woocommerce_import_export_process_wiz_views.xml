@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="woocommerce_setu_ecommerce_import_export_process_wiz_form_view" model="ir.ui.view">
+        <field name="name">woocommerce.setu.ecommerce.import.export.process.wiz.form.view</field>
+        <field name="model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Import/Export eCommerce Operation">
+                <sheet>
+                    <group name='multi_ecommerce_connector_id'>
+                        <group>
+                            <field name='multi_ecommerce_connector_id'
+                                   options="{'no_create':True,'no_create_edit': True,'no_open': True}" required="1"
+                                   domain="[('active','=',True),('state','=','fully_integrated'),('ecommerce_connector', '=', 'woocommerce_connector')]"/>
+                        </group>
+                        <group>
+                            <field name='ecommerce_operation_woo' string="Operations" required="1"/>
+                        </group>
+                    </group>
+                    <notebook
+                            invisible="ecommerce_operation_woo not in ['import_product','import_orders',
+                            'export_stock','import_specific_product', 'import_specific_order']">
+                        <page string='Sync Option'>
+                            <group name='ecommerce_import_products'
+                                   invisible="ecommerce_operation_woo != 'import_product'">
+                                <group>
+                                    <field name="orders_from_date"
+                                           required="ecommerce_operation_woo == 'import_product'"/>
+                                    <field name="orders_to_date"
+                                           required="ecommerce_operation_woo == 'import_product'"/>
+                                </group>
+                                <group>
+                                    <field name="is_skip_existing_product_update"/>
+                                </group>
+                            </group>
+                            <group name="ecommerce_import_orders"
+                                   invisible="ecommerce_operation_woo != 'import_orders'">
+                                <group>
+                                    <field name="orders_from_date"
+                                           required="ecommerce_operation_woo == 'import_orders'"/>
+                                    <field name="orders_to_date"
+                                           required="ecommerce_operation_woo == 'import_orders'"/>
+                                </group>
+                            </group>
+                            <group name="export_stock"
+                                   invisible="ecommerce_operation_woo != 'export_stock'">
+                                <group>
+                                    <field name="export_stock_from"
+                                           required="ecommerce_operation_woo == 'export_stock'"/>
+                                </group>
+                            </group>
+                            <group name="import_specific_product"
+                                   invisible="ecommerce_operation_woo != 'import_specific_product'">
+                                <field name="import_specific_template_ids"
+                                       required="ecommerce_operation_woo == 'import_specific_product'"/>
+                            </group>
+                            <group name="import_specific_order"
+                                   invisible="ecommerce_operation_woo != 'import_specific_order'">
+                                <field name="import_specific_order_ids" string="Sale Order IDS"
+                                       required="ecommerce_operation_woo == 'import_specific_order'"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <field name="is_hide_perform_operation_button" invisible="1"/>
+                        <button name="ecommerce_perform_operation" string="Perform Operation" class="oe_highlight"
+                                type="object" invisible="is_hide_perform_operation_button == True"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_ecommerce_update_existing_product_wiz_action" model="ir.actions.act_window">
+        <field name="name">Update Existing Product in WooCommerce</field>
+        <field name="res_model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="binding_model_id" ref="model_setu_woocommerce_product_template"/>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_update_product_process_wiz_form_view"/>
+    </record>
+
+    <record id="setu_ecommerce_import_export_process_wiz_action" model="ir.actions.act_window">
+        <field name="name">WooCommerce Operations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="woocommerce_setu_ecommerce_import_export_process_wiz_form_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="setu_ecommerce_import_export_child_menu" name="WooCommerce Operations"
+              parent="setu_woocommerce_import_export_main_menu"
+              action="setu_ecommerce_import_export_process_wiz_action" sequence="2"/>
+
+    <record id="action_export_product_tags" model="ir.actions.act_window">
+        <field name="name">Synchronize with WooCommerce</field>
+        <field name="res_model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="binding_model_id" ref="model_setu_woocommerce_product_tags"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_generic_export_update_process_wiz_form_view"/>
+        <field name="context">{'operation':'wiz_tags_export'}</field>
+    </record>
+
+    <record id="action_export_product_category" model="ir.actions.act_window">
+        <field name="name">Synchronize with WooCommerce</field>
+        <field name="res_model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="binding_model_id" ref="model_setu_woocommerce_product_category"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_generic_export_update_process_wiz_form_view"/>
+        <field name="context">{'operation':'wiz_category_export'}</field>
+    </record>
+
+    <record id="action_export_coupons" model="ir.actions.act_window">
+        <field name="name">Synchronize with WooCommerce</field>
+        <field name="res_model">setu.ecommerce.import.export.process.wiz</field>
+        <field name="binding_model_id" ref="model_setu_woocommerce_coupons"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="setu_ecommerce_based.setu_ecommerce_generic_export_update_process_wiz_form_view"/>
+        <field name="context">{'operation':'wiz_coupons_export'}</field>
+    </record>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_product_tags_tree_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.tags.tree.view</field>
+            <field name="model">setu.woocommerce.product.tags</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="slug"/>
+                    <field name="is_product_tags_exported_in_woocommerce"/>
+                    <field name="multi_ecommerce_connector_id"/>
+                    <field name="woocommerce_tag_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_tags_form_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.tags.form.view</field>
+            <field name="model">setu.woocommerce.product.tags</field>
+            <field name="arch" type="xml">
+                <form string="WooCommerce Product Tags">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="multi_ecommerce_connector_id" widget="selection"
+                                       domain="[('active','=',True),('state','=','fully_integrated'),
+                                       ('ecommerce_connector','=','woocommerce_connector')]"/>
+                                <field name="slug"/>
+                            </group>
+                            <group>
+                                <field name="is_product_tags_exported_in_woocommerce" readonly="1"/>
+                                <field name="need_to_update" invisible="1"/>
+                                <field name="woocommerce_tag_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Description">
+                            <field name="description" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_tags_search_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.tags.search.view</field>
+            <field name="model">setu.woocommerce.product.tags</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="WooCommerce Product Tags Search">
+                    <field name="name"/>
+                    <field name="woocommerce_tag_id"/>
+                    <filter name="is_product_tags_exported_in_woocommerce" string="Exported In Woo"
+                            icon="terp-accessories-archiver"
+                            domain="[('is_product_tags_exported_in_woocommerce','=','True')]"/>
+                    <filter name="not_is_product_tags_exported_in_woocommerce" string="Not Exported In Woo"
+                            icon="terp-accessories-archiver"
+                            domain="[('is_product_tags_exported_in_woocommerce','=','False')]"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                                context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_tags_action" model="ir.actions.act_window">
+            <field name="name">Product Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.woocommerce.product.tags</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="setu_woocommerce_product_tags_main_menu" name="Product Tags"
+                  parent='setu_woocommerce_connector.setu_woocommerce_product_catalog_main_menu'
+                  action="setu_woocommerce_product_tags_action" sequence="3"/>
+    </data>
+</odoo>

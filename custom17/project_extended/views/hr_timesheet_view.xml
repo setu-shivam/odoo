@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="hr_timesheet_modified_Tree_view" model="ir.ui.view">
+            <field name="name">account.analytic.line.tree.hr_timesheet</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                <!-- <button name="current month" type="object" action="action_timesheet_current_month" />-->
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_extended_action_timesheet_current_month" model="ir.actions.act_window">
+            <field name="name">Timesheet Current Month</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">grid,tree,kanban,pivot,graph</field>
+            <field name="search_view_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="context">{'grid_range': 'month', 'group_by': 'task_id'}
+            </field>
+        </record>
+        <record id="product_extended_action_timesheet_previous_month" model="ir.actions.act_window">
+            <field name="name">Timesheet Previous Month</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">grid,tree,kanban,pivot,graph</field>
+            <field name="search_view_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="context">{
+                'grid_anchor': (datetime.date.today() - relativedelta(months=1)).strftime('%Y-%m-%d'), 'grid_range':
+                'month', 'group_by': 'task_id'}
+            </field>
+        </record>
+
+        <record id="project_extended_inherited_hr_timesheet_line_search" model="ir.ui.view">
+            <field name="name">project_extended_inherited_hr_timesheet_line_search</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='month']" position="before">
+                    <filter name="today" string="Today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter name="this_week" string="This Week" domain="[
+                        ('date', '>=', (datetime.datetime.combine(context_today() + relativedelta(weeks=-1,days=1,weekday=0),
+                        datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S')),
+                        ('date', '&lt;', (datetime.datetime.combine(context_today() + relativedelta(days=1,weekday=0),
+                        datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))
+                        ]"/>
+                    <filter name="this_month" string="This Month"
+                            domain="[
+                            ('date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')),
+                            ('date','&gt;=',time.strftime('%%Y-%%m-01'))
+                            ]"/>
+                    <filter name="previous_week" string="Prev Week"
+                            domain="[
+                            ('date','&gt;', (context_today() + relativedelta(weeks=-2,days=1,weekday=5))),
+                            ('date','&lt;', (context_today() + relativedelta(weeks=-1,days=1,weekday=6)))
+                            ]"/>
+                    <filter string="Prev Month" name="previous_month"
+                            domain="[
+                            ('date', '&gt;=', (context_today() + relativedelta(day=1, months=-1)).strftime('%Y-%m-%d')),
+                            ('date', '&lt;=', (context_today() + relativedelta(day=1, days=-1)).strftime('%Y-%m-%d'))
+                            ]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Date" name="groupby_date" domain="[]" context="{'group_by': 'date:month'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_timesheet.timesheet_action_all" model="ir.actions.act_window">
+            <field name="context">{
+                'group_expand': True,
+                "is_timesheet": 1,
+                'search_default_groupby_date': 1
+            }</field>
+        </record>
+
+        <menuitem id="timesheet_menu_report_timesheet"
+                  name="Daily Timesheet"
+                  sequence="25"
+                  action="hr_timesheet.act_hr_timesheet_report"
+                  groups="hr_timesheet.group_hr_timesheet_approver"
+                  parent="hr_timesheet.menu_timesheets_reports_timesheet"
+        />
+    </data>
+</odoo>

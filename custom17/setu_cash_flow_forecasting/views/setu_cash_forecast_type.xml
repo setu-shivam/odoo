@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="form_setu_cash_forecast_type" model="ir.ui.view">
+            <field name="name">setu.cash.forecast.type.form</field>
+            <field name="model">setu.cash.forecast.type</field>
+            <field name="arch" type="xml">
+                <form name="cash_forecast_type" string="Cash Forecast Type">
+                    <sheet name="cash_forecast_type">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" required="1" placeholder="Name"/>
+                            </h1>
+                            <group>
+                                <field name="company_id" required="1"/>
+                                <!--<field name="parent_forecast_type_id"/>-->
+                            </group>
+                        </div>
+
+                        <group>
+                            <group string="Cash Forecast Category">
+                                <field name="is_group_for_opening" invisible='1'/>
+                                <field name="cash_forecast_category_id" required="1"/>
+                                <field name="type" force_save="1" readonly="1"/>
+                            </group>
+                            <group string="Cash Forecast Calculation"
+                                   invisible="is_group_for_opening or type in ['closing','opening','net_forecast'] or
+                                              calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']">
+                                <label for="auto_calculate" class="oe_inline font-weight-bold"/>
+                                <field name="auto_calculate" class="oe_inline" widget="boolean_toggle" nolabel="1"/>
+
+                                <label for="fixed_value" class="oe_inline font-weight-bold"
+                                       invisible="auto_calculate"/>
+                                <field name="fixed_value" class="oe_inline"
+                                       invisible="auto_calculate" nolabel="1"/>
+
+
+                            </group>
+                        </group>
+                        <group string="Auto Calculation formula"
+                               invisible="not auto_calculate or type in ['opening','closing','net_forecast']">
+                            <group>
+                                <label for="calculate_from" class="oe_inline font-weight-bold"/>
+                                <field name="calculate_from" class="oe_inline"
+                                       required="auto_calculate and type not in ['opening','closing','net_forecast']"
+                                       nolabel="1"/>
+                                <label for="multiply_by" class="oe_inline font-weight-bold"
+                                       invisible="not calculate_from"/>
+                                <field name="multiply_by" class="oe_inline" nolabel="1"
+                                       invisible="not calculate_from"/>
+                                <label for="calculation_pattern" class="oe_inline font-weight-bold"
+                                       invisible="not calculate_from or calculate_from not in ['past_sales','past_account_entries']"/>
+                                <field class="oe_inline" name="calculation_pattern" nolabel="1"
+                                       invisible="not calculate_from or
+                                                          calculate_from not in ['past_sales','past_account_entries']"
+                                       required="calculate_from in ['past_sales','past_account_entries']"/>
+
+                                <label for="average_value_of_days" string='Number of Days'
+                                       invisible="calculation_pattern != 'average' or
+                                       calculate_from not in ['past_account_entries'] or
+                                                              not calculation_pattern or
+                                                              calculation_pattern not in ['average','average_entries']"
+                                       class="oe_inline font-weight-bold"/>
+                                <label for="average_value_of_days" string='Number of Entries'
+                                       class="oe_inline font-weight-bold"
+                                       invisible="calculation_pattern != 'average_entries' or
+                                       calculate_from not in ['past_account_entries'] or
+                                                              not calculation_pattern or
+                                                              calculation_pattern not in ['average','average_entries']"/>
+                                <field name="average_value_of_days" class="oe_inline" nolabel="1"
+                                       required="calculation_pattern in ['average','average_entries']"
+                                       invisible="calculate_from not in ['past_account_entries'] or
+                                                              not calculation_pattern or
+                                                              calculation_pattern not in ['average','average_entries']"/>
+
+                                <label for="number_of_period_months" class="oe_inline font-weight-bold"
+                                       invisible="calculate_from != 'past_period_forecasting_entries'"/>
+                                <field name="number_of_period_months" class="oe_inline" nolabel="1"
+                                       invisible="calculate_from != 'past_period_forecasting_entries'"
+                                       required="calculate_from == 'past_period_forecasting_entries'"/>
+                            </group>
+                            <group invisible="calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']">
+                                <label for="analytic_account_id" class="oe_inline font-weight-bold"/>
+                                <field name="analytic_account_id" class="oe_inline" nolabel="1"/>
+
+                                <label for="extra_gain_and_loss" class="oe_inline font-weight-bold"/>
+                                <field name="extra_gain_and_loss" class="oe_inline" nolabel="1"/>
+                            </group>
+                        </group>
+
+                        <group string="Cash Forecast Configuration"
+                               invisible="type in ['closing','opening','net_forecast']">
+                            <group>
+                                <label for="sequence" class="oe_inline font-weight-bold"/>
+                                <field name="sequence" readonly="1" nolabel="1"/>
+                                <label for="real_value_multiply_by" class="oe_inline font-weight-bold"
+                                       invisible="calculate_from != 'past_account_entries' or not auto_calculate"/>
+
+                                <field name="real_value_multiply_by" class="oe_inline font-weight-bold"
+                                       invisible="calculate_from != 'past_account_entries' or
+                                                            not auto_calculate" nolabel="1"/>
+                                <label for="invisible_in_report" class="oe_inline font-weight-bold"/>
+                                <field name="invisible_in_report" widget="boolean_toggle" class="oe_inline"
+                                       nolabel="1"/>
+                                <label for="is_recurring" class="oe_inline font-weight-bold"
+                                       invisible="calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+
+                                <field name="is_recurring" widget="boolean_toggle" class="oe_inline" nolabel="1"
+                                       invisible="calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+                                <field name="period_interval" invisible="1"/>
+
+                                <label for="recurring_duration_interval" class="oe_inline o_form_label"
+                                       string="Forecast Execution Duration"
+                                       invisible="not is_recurring or period_interval or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+
+                                <label for="recurring_duration_interval" class="oe_inline o_form_label"
+                                       string="Forecast Execution Duration(In Months)"
+                                       invisible="not is_recurring or period_interval != 'months' or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+
+                                <label for="recurring_duration_interval" class="oe_inline o_form_label"
+                                       string="Forecast Execution Duration(In days)"
+                                       invisible="not is_recurring or period_interval != 'days' or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+
+                                <label for="recurring_duration_interval" class="oe_inline o_form_label"
+                                       string="Forecast Execution Duration(In weeks)"
+                                       invisible="not is_recurring or period_interval != 'weeks' or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+
+                                <field name="recurring_duration_interval" class="oe_inline" nolabel="1"
+                                       required="is_recurring and calculate_from not in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"
+                                       invisible="not is_recurring or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+                            </group>
+                            <group>
+                                <label for="forecast_start_period" class="oe_inline font-weight-bold"
+                                       invisible="calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+                                <field name="forecast_start_period" class="oe_inline" nolabel="1"
+                                       domain="[('company_id','=',company_id),('end_date','&gt;',datetime.datetime.now().strftime('%Y-%m-%d'))]"
+                                       options="{'no_create':1, 'no_create_edit': 1}"
+                                       required="type in ['expense','income'] and calculate_from not in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"
+                                       invisible="calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+                                <label for="forecast_end_period" class="oe_inline font-weight-bold"
+                                       invisible="not is_recurring or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+                                <field name="forecast_end_period" class="oe_inline" nolabel="1"
+                                       domain="[('company_id','=',company_id)]"
+                                       invisible="not is_recurring or calculate_from in ['pending', 'unbilled_purchase', 'uninvoiced_sales']"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Dependant Forecast Type" invisible="calculate_from != 'dependant' or
+                                                                                        type in ['closing','opening','net_forecast'] or
+                                                                                        not auto_calculate">
+                                <field name="dep_forecast_ids" domain="[('company_id','=',company_id),
+                                                                        ('type','not in',['closing','opening','net_forecast'])]">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="type"/>
+                                        <field name="company_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Accounts"
+                                  invisible="type in ['closing','net_forecast'] or calculate_from in ['uninvoiced_sales','unbilled_purchase']">
+                                <field name="account_ids" domain="[('company_id','=',company_id)]"
+                                       required="type in ['closing','net_forecast']">
+                                    <tree>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="account_type"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button string="Save" class="btn-primary" type="object" name="document_layout_save"
+                                    data-hotkey="q"/>
+                        </footer>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_setu_cash_forecast_type" model="ir.ui.view">
+            <field name="name">setu.cash.forecast.type.tree</field>
+            <field name="model">setu.cash.forecast.type</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <!--                    <field name="parent_forecast_type_id"/>-->
+                    <field name="type"/>
+                    <field name="company_id"/>
+                    <field name="is_recurring" widget="boolean_toggle"/>
+                    <field name="recurring_duration_interval" optional="hide"/>
+                    <field name="forecast_start_period" optional="hide"/>
+                    <field name="forecast_end_period" optional="hide"/>
+                    <field name="auto_calculate" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="kanban_setu_cash_forecast_type" model="ir.ui.view">
+            <field name="name">setu.cash.forecast.type.kanban</field>
+            <field name="model">setu.cash.forecast.type</field>
+            <field name="arch" type="xml">
+                <kanban class="o_setu_cash_forecast_type_kanban"
+                        banner_route="/onboarding/cash_dashboard">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="">
+                                <div class="oe_kanban_details">
+                                    <div t-attf-class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title">
+                                            <div class="o_primary">
+                                                <a type="object" class="h3 o_primary cursor-pointer" name="open_action"
+                                                   style="color: #017e84;">
+                                                    <field name="name"/>
+                                                </a>
+                                                <span class="float-end" t-if="record.type.raw_value">
+                                                    Group :
+                                                    <field name="type"/>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_gauge_value o_dashboard_graph m-4">
+                                        <field name="kanban_dashboard_graph" graph_type="gauge"
+                                               widget="dashboard_graph"/>
+                                    </div>
+
+                                    <div groups="base.group_multi_company" t-if="record.company_id.raw_value">
+                                        Company :
+                                        <field name="company_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="setu_cash_forecast_type_search" model="ir.ui.view">
+            <field name="name">setu.cash.forecast.type.search</field>
+            <field name="model">setu.cash.forecast.type</field>
+            <field name="arch" type="xml">
+                <search string="Cash Forecast Type">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="cash_forecast_category_id"/>
+                    <field name="company_id"/>
+                    <field name="forecast_start_period"/>
+                    <field name="forecast_end_period"/>
+                    <field name="calculate_from"/>
+                    <field name="recurring_duration_interval"/>
+                    <field name="account_ids"/>
+                    <separator/>
+                    <filter string="Cash IN" name="cash_in" domain="[('type','=','income')]"/>
+                    <filter string="Cash OUT" name="cash_out" domain="[('type','=','expense')]"/>
+                    <filter string="Opening Forecast" name="opening" domain="[('type','=','opening')]"/>
+                    <filter string="Closing Forecast" name="closing" domain="[('type','=','closing')]"/>
+                    <separator/>
+                    <filter string="Auto Calculate" name="auto_calc" domain="[('auto_calculate','=',True)]"/>
+                    <filter string="Manual Calculate" name="manual_calc" domain="[('auto_calculate','=',False)]"/>
+                    <filter string="Invisible in Reports" name="invisible_in_report"
+                            domain="[('invisible_in_report','=',True)]"/>
+                    <separator/>
+                    <filter name="is_recurring" string="Recurring" domain="[('is_recurring', '=', True)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Cash Forecast Category" name="cash_forecast_category_id"
+                                context="{'group_by':'cash_forecast_category_id'}"/>
+                        <filter string="Group" name="type" context="{'group_by':'type'}"/>
+                        <filter string="Company" name="company_id" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="actions_setu_cash_forecast_type" model="ir.actions.act_window">
+            <field name="name">Cash Forecast Type</field>
+            <field name="res_model">setu.cash.forecast.type</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem id="menu_setu_cash_forecast_type" name="Cash Forecast Type"
+                  parent="setu_cash_flow_forecasting.menu_sub_setu_cash_forecast" sequence="3"
+                  action="setu_cash_flow_forecasting.actions_setu_cash_forecast_type"/>
+
+        <record id="ir_actions_update_forecast_from_forecast_type" model="ir.actions.server">
+            <field name="name">Update Forecast from Forecast Type</field>
+            <field name="model_id" ref="setu_cash_flow_forecasting.model_create_update_cash_forecast"/>
+            <field name="binding_model_id" ref="setu_cash_flow_forecasting.model_setu_cash_forecast_type"/>
+            <field name="state">code</field>
+            <field name="code">action = model.with_context(
+                cash_forecast_type_ids = model._context.get('active_ids')).update_cash_forecast()
+            </field>
+        </record>
+    </data>
+</odoo>

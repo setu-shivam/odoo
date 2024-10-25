@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_data_generator_form" model="ir.ui.view">
+            <field name="name">setu.data.generator.form</field>
+            <field name="model">setu.data.generator</field>
+            <field name="arch" type="xml">
+                <form string="Setu Data Generator">
+                    <sheet string="Setu Data Generator">
+                        <group>
+                        <group expand="0" string="Select Proper Date To Filter Transactions ">
+                            <field name="start_date" required="True" />
+                            <field name="end_date" required="True"/>
+                            <field name="generate"/>
+                        </group>
+                        </group>
+                        <notebook>
+                            <page name="sale_purchase" invisible="generate != 'po_so'" string="Sale and Purchase">
+                                <group expand="0">
+                                    <group string="Control Data Flow">
+                                        <field name="max_order_per_day" required="True" />
+                                        <field name="max_products_per_order" required="True" />
+                                        <field name="max_qty_per_product_in_order" required="True" />
+                                        <field name="delivery_day_diff"/>
+                                    </group>
+                                </group>
+                                <group expand="0" >
+                                    <group expand="0" string="Products &#038; Categories">
+                                        <field name="product_category_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                        <field name="product_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('categ_id','child_of',product_category_ids)]"/>
+                                    </group>
+                                    <group expand="0" string="Companies &#038; Warehouses">
+                                        <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                        <field name="warehouse_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('company_id','child_of',company_ids)]"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="journal_entries" string="Journal Entries" invisible="generate != 'entries'">
+
+                                    <field name="journal_entry_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="account_id" options="{'no_create': True}" required="1"/>
+                                            <field name="company_id"/>
+                                            <field name="journal_ids" invisible="1"/>
+                                            <field name="journal_id" options="{'no_create': True}" required="1" domain="[('id','in',journal_ids)]"/>
+                                            <field name="reconcile_account_ids" invisible="1"/>
+                                            <field name="reconcile_account_id" options="{'no_create': True}" required="1" domain="[('id','in',reconcile_account_ids)]"/>
+                                            <field name="amount_from" required="1"/>
+                                            <field name="amount_to" required="1"/>
+                                            <field name="interval" required="1"/>
+                                            <field name="interval_type" required="1"/>
+                                        </tree>
+                                    </field>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                          <button name="generate_so" string="Generate SO" type="object"
+                                            class="oe_highlight" invisible="generate != 'po_so'"/>
+                        <button name="generate_po" string="Generate PO" type="object"
+                                            class="oe_highlight" invisible="generate != 'po_so'"/>
+                        <button name="generate_acc_entries" string="Generate Journal Entries" type="object"
+                                class="oe_highlight" invisible="generate !='entries'"/>
+
+<!--                        <button name="generate_inventory" string="Generate Stock" type="object"-->
+<!--                                class="oe_highlight"/>-->
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="setu_stock_movement_report_action" model="ir.actions.act_window">
+            <field name="name">Setu Data Generator</field>
+            <field name="res_model">setu.data.generator</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_data_generator_menu" action="setu_stock_movement_report_action" sequence="26" />
+    </data>
+</odoo>

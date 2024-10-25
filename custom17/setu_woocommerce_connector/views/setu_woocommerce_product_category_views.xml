@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_product_category_tree_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.category.tree.view</field>
+            <field name="model">setu.woocommerce.product.category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="complete_display_name"/>
+                    <field name="name"/>
+                    <field name="slug"/>
+                    <field name="parent_id"/>
+                    <field name="is_product_category_exported_in_woocommerce"/>
+                    <field name="multi_ecommerce_connector_id"/>
+                    <field name="woocommerce_category_id" string="WooCommerce Category ID"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_category_form_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.category.form.view</field>
+            <field name="model">setu.woocommerce.product.category</field>
+            <field name="arch" type="xml">
+                <form string="WooCommerce Product Tags">
+                    <sheet>
+                        <div class="oe_title oe_left" style="width: 500px;">
+                            <div class="oe_edit_only">
+                                <field name="is_woocommerce_product_image_url" class="oe_inline" invisible="1"/>
+                            </div>
+                            <h1>
+                                <field name="name" required="1" default_focus="1" placeholder="Name"/>
+                            </h1>
+                        </div>
+                        <field name="image" widget="image"
+                               invisible="is_woocommerce_product_image_url == True"
+                               class="oe_avatar oe_right" nolabel="1"/>
+                        <group>
+                            <group>
+                                <field name="multi_ecommerce_connector_id" widget="selection"
+                                       domain="[('active','=',True),('state','=','fully_integrated'),
+                                       ('ecommerce_connector','=','woocommerce_connector')]"/>
+                                <field name="parent_id"
+                                       domain="[('multi_ecommerce_connector_id','=',multi_ecommerce_connector_id)]"/>
+                                <field name="woocommerce_category_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="display"/>
+                                <field name="slug"/>
+                                <field name="is_product_category_exported_in_woocommerce" readonly="1"/>
+                                <field name="need_to_update" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="url" invisible="is_woocommerce_product_image_url == False"/>
+                        </group>
+                        <group>
+                            <field name="response_url"
+                                   invisible="is_woocommerce_product_image_url == False"/>
+                        </group>
+                        <group string="Description">
+                            <div style="width:500pt">
+                                <field name="description" nolabel="1"/>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_category_search_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.product.category.search.view</field>
+            <field name="model">setu.woocommerce.product.category</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="WooCommerce Product Category Search">
+                    <field name="name"/>
+                    <field name="woocommerce_category_id"/>
+                    <filter name="is_product_category_exported_in_woocommerce" string="Exported In Woo"
+                            icon="terp-accessories-archiver"
+                            domain="[('is_product_category_exported_in_woocommerce','=','True')]"/>
+                    <filter name="not_is_product_category_exported_in_woocommerce" string="Not Exported In Woo"
+                            icon="terp-accessories-archiver"
+                            domain="[('is_product_category_exported_in_woocommerce','=','False')]"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                                context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                        <filter name="display" string="Display" icon="terp-personal" context="{'group_by':'display'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_product_category_action" model="ir.actions.act_window">
+            <field name="name">Product Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.woocommerce.product.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="setu_woocommerce_product_category_main_menu" name="Product Category"
+                  parent='setu_woocommerce_connector.setu_woocommerce_product_catalog_main_menu'
+                  action="setu_woocommerce_product_category_action" sequence="3"/>
+    </data>
+</odoo>

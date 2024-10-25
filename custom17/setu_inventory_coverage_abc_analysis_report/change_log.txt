@@ -1,0 +1,6 @@
+Date : 16th Jan 2024
+Version : '17.0' (in __manifest__.py)
+Odoo Version : 17
+Done by : Udit Ramani
+Tested by : Udit Ramani
+Description : Created new module for coverage plus abc report and added coverage report module in dependencies

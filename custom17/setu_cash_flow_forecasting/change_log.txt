@@ -1,0 +1,31 @@
+Date         :  12 July 2024
+Version      : '17.0.0.1' (in __manifest__.py)
+Odoo Version : 17
+Done by : Aastha Vora
+Tested by : Aastha Vora
+Module : setu_cash_flow_forecasting
+ - added new forecast type for unbilled purchase and uninvoice sales, also added type for Advance/Down payments.
+
+Date         :  20 Nov 2023
+Version      : '17.0' (in __manifest__.py)
+Odoo Version : 17
+Done by : Richisha Acharya
+Tested by : Richisha Acharya
+Module : setu_cash_flow_forecasting
+ - Migrated from V16 to V17.
+
+Date         :  12th May 2023
+Version      : '16.2.0' (in __manifest__.py)
+Odoo Version : 16
+Done by : Ashish Rangani
+Tested by : Ashish Rangani
+Module : setu_cash_flow_forecasting
+ - Fixed weekly forecast calculation issue.
+
+Date         :  24 Apr 2023
+Version      : '16.1.0' (in __manifest__.py)
+Odoo Version : 16
+Done by : Ashish Rangani
+Tested by : Ashish Rangani
+Module : setu_cash_flow_forecasting
+ - Add a new feature for Daily and Weekly Forecast

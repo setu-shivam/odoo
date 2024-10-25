@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="spreadsheet_edition.PivotView.buttons" t-inherit="web.PivotView.Buttons" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('o_pivot_flip_button')]" position="replace">
+            <t t-if="model.metaData.resModel == 'setu.cash.forecast.report' or model.metaData.resModel == 'setu.cash.forecast'">
+                <button class="btn btn-secondary fa fa-exchange o_pivot_flip_button d-none" t-on-click="onFlipButtonClicked"
+                        data-tooltip="Flip axis" aria-label="Flip axis"
+                        t-attf-disabled="{{noDataDisplayed ? 'disabled' : false}}"/>
+            </t>
+            <t t-else="">
+                <button class="btn btn-secondary fa fa-exchange o_pivot_flip_button" t-on-click="onFlipButtonClicked"
+                        data-tooltip="Flip axis" aria-label="Flip axis"
+                        t-attf-disabled="{{noDataDisplayed ? 'disabled' : false}}"/>
+
+            </t>
+        </xpath>
+    </t>
+</templates>

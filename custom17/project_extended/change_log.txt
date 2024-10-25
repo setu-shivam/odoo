@@ -1,0 +1,7 @@
+Date : 15th February 2024
+Version : 17.0 (in __manifest__.py)
+Odoo Version : 17
+Done by : Mamta Jesadiya
+Tested by : Mamta Jesadiya
+Module : project_extended
+Description : migrate from v16 to v17

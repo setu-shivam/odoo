@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_stock_picking_tree_view_extended" model="ir.ui.view">
+            <field name="name">setu.woocommerce.stock.picking.tree.view.extended</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="is_woocommerce_delivery" invisible="1"/>
+                    <field name="is_delivery_updated_in_woocommerce"
+                           invisible="is_woocommerce_delivery != True" widget="boolean_toggle"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_stock_picking_form_view_extended" model="ir.ui.view">
+            <field name="name">setu.woocommerce.stock.picking.form.view.extended</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="move_type" position="after">
+                    <field name="is_woocommerce_delivery" invisible="1"/>
+                    <field name="is_delivery_updated_in_woocommerce"
+                           invisible="is_woocommerce_delivery != True" widget="boolean_toggle"/>
+                    <field name="multi_ecommerce_connector_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_stock_picking_search_view_extended" model="ir.ui.view">
+            <field name="name">setu.woocommerce.stock.picking.search.view.extended</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="is_delivery_updated_in_woocommerce" string="Updated In WooCommerce"
+                            domain="[('is_delivery_updated_in_woocommerce','=',True)]"/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                            context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_stock_picking_action" model="ir.actions.act_window">
+            <field name="name">Woocommerce Delivery Orders</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_woocommerce_delivery','=','True')]</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_neutral_face">
+                    No Shipment/s found!!
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="setu_woocommerce_shipment_main_menu" name="Shipment"
+                  parent="setu_woocommerce_connector.setu_woocommerce_sale_order_main_menu"
+                  action="setu_woocommerce_stock_picking_action" sequence="5"/>
+    </data>
+</odoo>

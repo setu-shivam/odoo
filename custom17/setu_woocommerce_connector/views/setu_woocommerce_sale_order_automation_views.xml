@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_sale_order_automation_woocommerce_action" model="ir.actions.act_window">
+        <field name="name">WorkFlow Automation</field>
+        <field name="res_model">setu.sale.order.automation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="setu_sale_order_automation_woocommerce_main_menu" name="WorkFlow Automation"
+              parent="setu_woocommerce_configuration_main_menu"
+              action="setu_sale_order_automation_woocommerce_action" sequence="5"/>
+</odoo>

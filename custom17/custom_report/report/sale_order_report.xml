@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_sale_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <style>
+                        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+                        *, *:before, *:after {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                        }
+                        body {
+                        background: #105469;
+                        font-family: 'Open Sans', sans-serif;
+                        }
+                        table {
+                        <!--                        background: #012B39;-->
+                        border-radius: 0.25em;
+                        border-collapse: collapse;
+                        <!--  margin: 1em;-->
+                        }
+                        th {
+                        border-bottom: 1px solid #364043;
+                        color: #000;
+                        font-size: 0.85em;
+                        font-weight: 1000;
+                        <!--  padding: 0.5em 1em;-->
+                        text-align: left;
+                        }
+                        td {
+                        color: #111;
+                        font-weight: 400;
+                        <!--  padding: 0.65em 1em;-->
+                        }
+                    </style>
+
+                    <t t-if="o.partner_shipping_id == o.partner_invoice_id
+                             and o.partner_invoice_id != o.partner_id
+                             or o.partner_shipping_id != o.partner_invoice_id">
+                        <t t-set="information_block">
+                            <strong>
+                                <t t-if="o.partner_shipping_id == o.partner_invoice_id">
+                                    Invoicing and Shipping Address:
+                                </t>
+                                <t t-else="">
+                                    Invoicing Address:
+                                </t>
+                            </strong>
+                            <div t-field="o.partner_invoice_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            <t t-if="o.partner_shipping_id != o.partner_invoice_id">
+                                <strong>Shipping Address:</strong>
+                                <div t-field="o.partner_shipping_id"
+                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            </t>
+                        </t>
+                    </t>
+
+                    <div class="page p-2" style="background-color:#e4f5f7">
+                        <div class="oe_structure"/>
+                        <h2 class="mt-4">Quotation #
+                            <span t-field="o.name"/>
+                        </h2>
+                        <br/>
+                        <p>
+                            <div class="row mt-4 mb-2" id="informations">
+                                <div t-if="o.client_order_ref" class="col-auto col-3 mw-100 mb-2"
+                                     name="informations_reference">
+                                    <strong>Your Reference:</strong>
+                                    <br/>
+                                    <span class="m-0" t-field="o.client_order_ref">SO0000</span>
+                                </div>
+                                <div t-if="o.date_order" class="col-auto col-3 mw-100 mb-2" name="informations_date">
+                                    <strong t-if="o.state in ['draft', 'sent']">Quotation Date:</strong>
+                                    <strong t-else="">Order Date:</strong>
+                                    <br/>
+                                    <span class="m-0" t-field="o.date_order" t-options='{"widget": "date"}'>2023-12-31
+                                    </span>
+                                </div>
+                                <div t-if="o.validity_date and o.state in ['draft', 'sent']"
+                                     class="col-auto col-3 mw-100 mb-2"
+                                     name="expiration_date">
+                                    <strong>Expiration:</strong>
+                                    <br/>
+                                    <span class="m-0" t-field="o.validity_date">2023-12-31</span>
+                                </div>
+                                <div t-if="o.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                                    <strong>Salesperson:</strong>
+                                    <br/>
+                                    <span class="m-0" t-field="o.user_id">Mitchell Admin</span>
+                                </div>
+                            </div>
+                            <t t-set="lines_to_report" t-value="o._get_order_lines_to_report()"/>
+
+                            <!--                            <t t-set="raw_total" t-value="0"/>-->
+                            <table class="table table-border mt-4 text-start">
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Taxes</th>
+                                <th>Subtotal</th>
+                                <t t-set="counter" t-value="0"/>
+
+
+                                <t t-set="raw_total" t-value="0"/>
+                                <t t-foreach="lines_to_report" t-as="line">
+
+                                    <tr>
+                                        <td>
+                                            <span t-field="line.product_template_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <td name="td_taxes" class="text-end">
+                                            <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))">
+                                                Tax 15%
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.price_subtotal"/>
+                                        </td>
+                                        <t t-set="raw_total" t-value="raw_total+line.price_subtotal"/>
+                                        <t t-set="counter" t-value="counter+1"/>
+                                    </tr>
+                                    <t t-if="counter%2 == 0">
+                                        <tr>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                            <td class="text-end ">raw</td>
+                                            <td>
+                                                <!--<t t-set="raw_total" t-value="raw_total+line.price_subtotal"/>-->
+                                                <span t-out="raw_total"/>
+                                                <div style="page-break-after:always;"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </table>
+                            <br/>
+                            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                                <table class="table table-sm table-borderless">
+                                    <!-- Tax totals -->
+                                    <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                    <t t-call="sale.document_tax_totals"/>
+                                </table>
+                            </div>
+                            <table style="display: table-row-group" class="table table-borderless mt-2">
+                                <th>Total</th>
+                                <th>
+                                    <span t-field="o.amount_total"/>
+                                </th>
+                            </table>
+                            <br/>
+                            <br/>
+                            report_saleorder
+                        </p>
+                    </div>
+                    <p>&amp;nbsp;</p>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+        <!--<t t-set="counter" t-value="0"/>-->
+        <!--<t t-set="counter" t-value="0"/>-->
+        <!--<t t-if="counter%2 == 0">-->
+        <!--<p style="page-break-after:always;"/>-->
+        <!--<t t-set="counter" t-value="0"/>-->
+        <!--</t>-->
+        <!--<t t-set="counter" t-value="counter + 1"/>-->

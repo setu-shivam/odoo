@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_process_history_line_search_view" model="ir.ui.view">
+        <field name="name">setu.process.history.line.search.view</field>
+        <field name="model">setu.process.history.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="message"/>
+                <field name="order_ref"/>
+                <field name="default_code"/>
+                <field name="model_id"/>
+                <field name="process_history_id"/>
+                <filter name="filter_write_date" date="write_date" string="Update Date"/>
+                <group expand="0" string="Group By...">
+                    <filter name="groupby_process_history" string="Process History" icon="terp-personal"
+                            context="{'group_by': 'process_history_id'}"/>
+                    <filter name="groupby_model" string="Model" icon="terp-personal"
+                            context="{'group_by': 'model_id'}"/>
+                    <filter name="groupby_write_date" string="Update Date" context="{'group_by': 'write_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_process_history_line_tree_view" model="ir.ui.view">
+        <field name="name">setu.process.history.line.tree.view</field>
+        <field name="model">setu.process.history.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" default_order="write_date desc">
+                <field name="process_history_id"/>
+                <field name="order_ref"/>
+                <field name="default_code"/>
+                <field name="message"/>
+                <field name="model_id"/>
+                <field name="write_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_process_history_line_form_view" model="ir.ui.view">
+        <field name="name">setu.process.history.line.form.view</field>
+        <field name="model">setu.process.history.line</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet>
+                    <group>
+                        <h3>
+                            <field name="message" readonly="1"/>
+                        </h3>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="process_history_id" readonly="1"/>
+                            <field name="model_id" readonly="1"/>
+                            <field name="write_date"/>
+                        </group>
+                        <group>
+                            <field name="order_ref"/>
+                            <field name="default_code"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_process_history_line_action" model="ir.actions.act_window">
+        <field name="name">Process History Lines</field>
+        <field name="res_model">setu.process.history.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,370 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="setu_multi_ecommerce_connector_tree_view" model="ir.ui.view">
+        <field name="name">setu.multi.ecommerce.connector.tree.view</field>
+        <field name="model">setu.multi.ecommerce.connector</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="active"/>
+                <field name="ecommerce_connector"/>
+                <field name="odoo_company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_multi_ecommerce_connector_search_view" model="ir.ui.view">
+        <field name="name">setu.multi.ecommerce.connector.search.view</field>
+        <field name="model">setu.multi.ecommerce.connector</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="e-Commerce Connector">
+                <field name="name"/>
+                <filter name="archive" string="Archived" domain="[('active','=',False)]"/>
+                <group expand="0" string="Group By...">
+                    <filter name="warehouse" string="Warehouse" icon="terp-personal"
+                            context="{'group_by':'odoo_warehouse_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_multi_ecommerce_connector_form_view" model="ir.ui.view">
+        <field name="name">setu.multi.ecommerce.connector.form.view</field>
+        <field name="model">setu.multi.ecommerce.connector</field>
+        <field name="arch" type="xml">
+            <form string="e-Commerce Connector" create="false" duplicate="1">
+                <header>
+                    <button name="test_ecommerce_connection_action" string="Test Connection" class="oe_highlight"
+                            type="object" invisible="state != 'draft'"/>
+                    <button name="reset_ecommerce_connection_action" type="object" string="Reset Connection"
+                            class="oe_stat_button" groups="base.group_system" icon="fa-undo"
+                            invisible="state not in ['fully_integrated','integrated']"/>
+                    <button name="fully_integrate" string="Fully Integrate" class="oe_stat_button" type="object"
+                            invisible="state in ['draft','fully_integrated','error']"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,integrated,fully_integrated,error"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="active" invisible="1"/>
+                        <button invisible="active in ['False']" class="oe_stat_button"
+                                name="toggle_active_value" type="object" icon="fa-play">
+                            <div class="o_stat_info o_form_field">
+                                <span class="text-success">Active</span>
+                            </div>
+                        </button>
+                        <button invisible="active in ['True']" class="oe_stat_button"
+                                name="toggle_active_value" type="object" icon="fa-stop">
+                            <div class="o_stat_info o_form_field">
+                                <span class="o_warning_text">InActive</span>
+                            </div>
+                        </button>
+                        <button type="object" name="cron_configuration_action" class="oe_stat_button"
+                                groups="base.group_system" icon="fa-wrench"
+                                invisible="active in ['False']">
+                            <span class="o_stat_text">Configure Schedulers</span>
+                        </button>
+                    </div>
+                    <field name="image" class="oe_avatar" widget="image"/>
+                    <div class="oe_title">
+                        <b>
+                            <label for="name" string="Connector Name :"/>
+                        </b>
+                        <h1>
+                            <field name="name" placeholder="Connector Name"
+                                   readonly="state in ['integrated','fully_integrated','error']"/>
+                        </h1>
+                        <div name="ecommerce_connector" invisible="1">
+                            <div>
+                                <label for="ecommerce_connector" string="e-Commerce Connector Type:"/>
+                                <field name="ecommerce_connector" class="oe_inline"
+                                       readonly="state in ['integrated','fully_integrated']"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Common Setup" name="common_setup">
+                            <div class="app_settings_block" data-string="common e-Commerce Configuration"
+                                 data-key="common_ecommerce_odoo_configuration">
+                                <h2 style="font-size:20px;text-align:center;color:white;background-color:#875A7B;">
+                                    General Configuration
+                                </h2>
+                                <div name="general_ecommerce_configuration_setup" class="row mt16 o_settings_container">
+                                    <div name="common_general_setup_company" class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="odoo_company_id" string="Company"/>
+                                            <div class="text-muted">
+                                                - Shows the name of the Company
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="odoo_company_id" class="o_light_label"
+                                                           widget="selection"
+                                                           required="state in ['draft']"
+                                                           readonly="state in ['fully_integrated','error']"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_general_setup_warehouse" class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="odoo_warehouse_id" string="Warehouse"/>
+                                            <div class="text-muted">
+                                                - Order warehouse to process transfer stock this warehouse
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="odoo_warehouse_id" class="o_light_label"
+                                                           widget="selection"
+                                                           required="state in ['integrated']"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_general_setup_currency" class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="odoo_currency_id" string="Currency"/>
+                                            <div class="text-muted">
+                                                - Shows the name of the Currency
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="odoo_currency_id" class="o_light_label"
+                                                           widget="selection"
+                                                           required="state in ['draft']"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_general_setup_lang" class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="odoo_lang_id" string="Language"/>
+                                            <div class="text-muted">
+                                                - Shows the name of the Store Lang
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="odoo_lang_id" class="o_light_label" widget="selection"
+                                                           required="state in ['draft']"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 style="font-size:20px;text-align:center;color:white;background-color:#875A7B;">
+                                    Product &amp; Product Stock Configuration
+                                </h2>
+                                <div name="product_ecommerce_configuration_setup" class="row mt16 o_settings_container">
+                                    <div name="common_product_stock_setup_auto_create"
+                                         class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_left_pane">
+                                            <field name="is_auto_create_product"
+                                                   readonly="state in ['fully_integrated','error']"
+                                                   style="text-align: center;" widget="boolean_toggle"/>
+                                        </div>
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="is_auto_create_product"
+                                                   readonly="state in ['fully_integrated','error']"
+                                            />
+                                            <div class="text-muted">
+                                                - The auto create product configuration helps you to create new odoo
+                                                product if not found.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_product_stock_setup_product_description"
+                                         class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_left_pane">
+                                            <field name="is_use_default_product_description"
+                                                   readonly="state in ['fully_integrated','error']"
+                                                   style="text-align: center;" widget="boolean_toggle"/>
+                                        </div>
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="is_use_default_product_description"
+                                                   readonly="state in ['fully_integrated','error']"/>
+                                            <div class="text-muted">
+                                                - If checked, it will be attached with e-Commerce Store's Product's
+                                                description.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_product_stock_setup_odoo_pricelist"
+                                         class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="odoo_pricelist_id" string="Pricelist"/>
+                                            <div class="text-muted">
+                                                - Product Price List
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="odoo_pricelist_id" class="o_light_label"
+                                                           required="state in ['integrated']"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_product_stock_setup_stock_field"
+                                         class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="stock_field_id"/>
+                                            <div class="text-muted">
+                                                - Select inventory field for e-Commerce products.
+                                                <br/>
+                                                Free To Use Quantity = Current quantity of products.
+                                                <br/>
+                                                Forecast Quantity = Quantity On Hand - Outgoing + Incoming
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="stock_field_id" class="o_light_label"
+                                                           widget="selection"
+                                                           domain="[('model_id.model','=','product.product'),
+                                                           ('name','in',['free_qty','virtual_available'])]"
+                                                           required="state in ['integrated']"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_product_stock_setup_auto_validate_inventory"
+                                         class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_left_pane">
+                                            <field name="is_auto_validate_inventory"
+                                                   readonly="state in ['fully_integrated','error']"
+                                                   style="text-align: center;" widget="boolean_toggle"/>
+                                        </div>
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="is_auto_validate_inventory"
+                                                   readonly="state in ['fully_integrated','error']"/>
+                                            <div class="text-muted">
+                                                - If checked, then inventory automatically validate
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 style="font-size:20px;text-align:center;color:white;background-color:#875A7B;">Order
+                                    &amp; Tax Configuration
+                                </h2>
+                                <div name="order_ecommerce_configuration_setup" class="row mt16 o_settings_container">
+                                    <div name="common_order_setup_sale_team" class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="crm_team_id" string="Sales Team"/>
+                                            <div class="text-muted">
+                                                - Set the sales team for e-Commerce orders
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="crm_team_id" class="o_light_label"
+                                                           readonly="state in ['fully_integrated','error']"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_order_setup_odoo_order_prefix"
+                                         class="col-xs-12 col-md-6 o_setting_box">
+                                        <div class="o_setting_left_pane">
+                                            <field name="is_use_odoo_order_prefix"
+                                                   readonly="state in ['fully_integrated','error']"
+                                                   widget="boolean_toggle"/>
+                                        </div>
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="is_use_odoo_order_prefix"
+                                                   readonly="state in ['fully_integrated','error']"
+                                                   string="Use Sale Order Default Sequence"/>
+                                            <div class="text-muted">
+                                                - Sale order default sequence
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div name="common_order_setup_set_odoo_order_prefix"
+                                         class="col-xs-12 col-md-6 o_setting_box"
+                                         invisible="is_use_odoo_order_prefix in [True]">
+                                        <div class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="order_prefix"/>
+                                            <div class="text-muted">
+                                                - Enter order prefix
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="order_prefix"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                           class="o_light_label"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 o_setting_box">
+                                        <div name="common_order_configuration_order_odoo_tax_behavior"
+                                             class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="order_odoo_tax_behavior" string="e-Commerce Apply Tax"/>
+                                            <div class="text-muted">
+                                                - e-CommerceTax Behaviour in Odoo
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="order_odoo_tax_behavior" class="o_light_label"
+                                                           required="state in ['integrated','fully_integrated']"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 o_setting_box"
+                                         invisible="order_odoo_tax_behavior in ['follow_odoo_tax']">
+                                        <div name="common_order_configuration_credit_tax_account"
+                                             class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="default_credit_tax_account_id"
+                                                   string="Credit Note Tax Account"/>
+                                            <div class="text-muted">
+                                                - Credit note tax account which will be used for Credit Note/Refund tax
+                                                default account
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="default_credit_tax_account_id"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                           required="order_odoo_tax_behavior in ['follow_e_commerce_tax_create_odoo']"
+                                                           class="o_light_label"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 o_setting_box"
+                                         invisible="order_odoo_tax_behavior in ['follow_odoo_tax']">
+                                        <div name="common_order_configuration_invoice_tax_account"
+                                             class="o_setting_right_pane" style="margin-left: 35px;">
+                                            <label for="default_invoice_tax_account_id" string="Invoice Tax Account"/>
+                                            <div class="text-muted">
+                                                - Invoice tax account which will be used for invoice tax default
+                                                account.
+                                            </div>
+                                            <div class="content-group">
+                                                <div class="mt16">
+                                                    <field name="default_invoice_tax_account_id"
+                                                           readonly="state in ['fully_integrated','error']"
+                                                           required="order_odoo_tax_behavior in ['follow_e_commerce_tax_create_odoo']"
+                                                           class="o_light_label"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

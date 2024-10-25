@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="setu.woocommerce.order.status" id="setu_woocommerce_order_status_pending">
+            <field name="name">Pending</field>
+            <field name="status">pending</field>
+        </record>
+        <record model="setu.woocommerce.order.status" id="setu_woocommerce_order_status_processing">
+            <field name="name">Processing</field>
+            <field name="status">processing</field>
+        </record>
+        <record model="setu.woocommerce.order.status" id="setu_woocommerce_order_status_onhold">
+            <field name="name">On Hold</field>
+            <field name="status">on-hold</field>
+        </record>
+        <record model="setu.woocommerce.order.status" id="setu_woocommerce_order_status_completed">
+            <field name="name">Completed</field>
+            <field name="status">completed</field>
+        </record>
+    </data>
+</odoo>

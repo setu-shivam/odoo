@@ -1,0 +1,15 @@
+Date : 20th December 2023
+Version : '17.0' (in __manifest__.py)
+Odoo Version : 17
+Done by : Udit Ramani
+Tested by : Udit Ramani
+Module : setu_inventory_coverage_report
+ - New columns and modifications in the report.
+
+Date : 18th December 2023
+Version : '17.0' (in __manifest__.py)
+Odoo Version : 17
+Done by : Kamlesh Singh
+Tested by : Kamlesh Singh
+Module : setu_inventory_coverage_report
+ - Created new module setu inventory coverage analysis report

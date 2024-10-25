@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_woocommerce_coupon_chain_tree_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.coupon.chain.tree.view</field>
+            <field name="model">setu.woocommerce.coupon.chain</field>
+            <field name="arch" type="xml">
+                <tree create="0" default_order="id desc" decoration-primary="is_chain_in_process==True">
+                    <field name="name"/>
+                    <field name="multi_ecommerce_connector_id"/>
+                    <field name="create_date"/>
+                    <field name="state"/>
+                    <field name="is_chain_in_process" invisible="1"/>
+                    <field name="current_status" invisible="is_chain_in_process == False"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_coupon_chain_form_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.coupon.chain.from.view</field>
+            <field name="model">setu.woocommerce.coupon.chain</field>
+            <field name="arch" type="xml">
+                <form string="Coupon Chain" create="0" edit="0" duplicate="0">
+                    <header>
+                        <button name="%(setu_woocommerce_connector.setu_woocommerce_process_chain_coupon_action)d"
+                                string="Process Queue Manually" type="action" class="btn-primary"
+                                invisible="is_chain_in_process == True or state in ('completed')"/>
+                        <button name="%(setu_woocommerce_connector.setu_woocommerce_process_chain_cancel_coupon_action)d"
+                                string="Set To Completed" type="action" class="btn-primary"
+                                invisible="is_chain_in_process == True or state in ('completed')"/>
+                        <field name="state" widget="statusbar"/>
+                        <field name="is_chain_in_process" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:#5EBEC4;" icon="fa-database">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Records</span>
+                                </div>
+                            </button>
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:#9A341E;" icon="fa-info">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_draft_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Draft</span>
+                                </div>
+                            </button>
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:red;" icon="fa-times"
+                                    invisible="state == 'in_progress'">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_fail_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Fail</span>
+                                </div>
+                            </button>
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:red;" icon="fa-times"
+                                    invisible="state != 'in_progress'">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_fail_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Fail</span>
+                                </div>
+                            </button>
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:green;" icon="fa-thumbs-up"
+                                    invisible="state == 'completed'">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_done_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Done</span>
+                                </div>
+                            </button>
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:green;" icon="fa-thumbs-up"
+                                    invisible="state != 'completed'">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_done_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Done</span>
+                                </div>
+                            </button>
+                            <button class="btn-secondary" special="cancel" data-dismiss="modal" data-hotkey="z"
+                                    style="color:#FF6A3D;" icon="fa-ban">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_cancel_coupon_records"/>
+                                    </span>
+                                    <span class="o_stat_text">Cancelled</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_left" style="width: 500px;">
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="name" string="Name"/>
+                                <h1>
+                                    <field name="name" class="oe_inline" readonly="1"/>
+                                </h1>
+                            </div>
+                        </div>
+                        <group name="multi_ecommerce_connector_id">
+                            <group>
+                                <field name="multi_ecommerce_connector_id" readonly="1"/>
+                                <field name="create_date" string="Created On" readonly="1"/>
+                                <field name="is_action_require" invisible="1"/>
+                                <field name="ecommerce_connector" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="process_history_id" string="Process History" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Product Data Line" name="product_data_line">
+                                <field name="setu_woocommerce_coupon_chain_line_ids">
+                                    <tree create="false" delete="false" edit="false" editable="bottom"
+                                          decoration-danger="state=='fail'"
+                                          decoration-success="state=='done'" decoration-info="state=='draft'">
+                                        <field name="setu_woocommerce_coupon_chain_id" string="Product Data ID"/>
+                                        <field name="name"/>
+                                        <field name="write_date" string="Last Updated On"/>
+                                        <field name="coupon_chain_line_data" invisible="1"/>
+                                        <field name="state"/>
+                                    </tree>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="setu_woocommerce_coupon_chain_id"
+                                                           string="Product Data"/>
+                                                    <field name="last_coupon_chain_line_process_date"/>
+                                                    <field name="state"/>
+                                                </group>
+                                                <group>
+                                                    <field name="multi_ecommerce_connector_id"/>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="Coupon Chain Line Data" name="coupon_chain_line_data">
+                                                    <field name="coupon_chain_line_data"/>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_coupon_chain_search_view" model="ir.ui.view">
+            <field name="name">setu.woocommerce.coupon.chain.search.view</field>
+            <field name="model">setu.woocommerce.coupon.chain</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="not_completed" string="Not Completed" domain="[('state','!=','completed')]"/>
+                    <filter name="cancel" string="Cancelled" domain="[('state','=','cancel')]"/>
+                    <filter name="in_progress" string="In Progress" domain="[('state','=','in_progress')]"/>
+                    <filter name="fail" string="Failed" domain="[('state','=','fail')]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <group>
+                        <filter name="multi_ecommerce_connector_id" string="e-Commerce Connector"
+                                context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_woocommerce_coupon_chain_action" model="ir.actions.act_window">
+            <field name="name">Coupon Queue Process</field>
+            <field name="res_model">setu.woocommerce.coupon.chain</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="setu_woocommerce_connector.setu_woocommerce_coupon_chain_tree_view"/>
+            <field name="context">{'search_default_draft': 1,'search_default_in_progress': 2,'search_default_fail':3}
+            </field>
+            <field name="domain">[('ecommerce_connector', '=', 'woocommerce_connector')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_neutral_face">
+                    No Coupon Chain found!!
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="setu_woocommerce_coupon_chain_menu" name="Coupon Queue"
+                  parent="setu_woocommerce_chain_process_main_menu" action="setu_woocommerce_coupon_chain_action"
+                  sequence="4"/>
+    </data>
+</odoo>

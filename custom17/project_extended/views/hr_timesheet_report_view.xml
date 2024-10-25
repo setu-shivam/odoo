@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="timesheets_analysis_report_inherited_hr_timesheet_report_search" model="ir.ui.view">
+            <field name="name">timesheets.analysis.report.inherited.hr.timesheet.report.search</field>
+            <field name="model">timesheets.analysis.report</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_report_search"/>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="less_than_8_hours" string="Less than 8 Hours" domain="[('unit_amount', '&lt;', 8.0)]"/>
+                </search>
+            </field>
+        </record>
+            <record id="hr_timesheet.act_hr_timesheet_report" model="ir.actions.act_window">
+             <field name="context">{'search_default_less_than_8_hours':1 }</field>
+        </record>
+    </data>
+</odoo>

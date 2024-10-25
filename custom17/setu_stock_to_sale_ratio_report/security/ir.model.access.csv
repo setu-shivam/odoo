@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_stock_to_sale_report,setu.stock.to.sale.report,model_setu_stock_to_sale_report,,1,1,1,1
+access_setu_stock_to_sale_bi_report,setu.stock.to.sale.bi.report,model_setu_stock_to_sale_bi_report,,1,1,1,1

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_setu_return_order" model="ir.actions.act_window">
+            <field name="name">Return From Delivery</field>
+            <field name="res_model">setu.return.order</field>
+            <field name="context">{'default_picking_id': context.get('active_id', False)}</field>
+            <field name="domain">[('stock_picking_id','=',context.get('active_id',False))]</field>
+        </record>
+
+        <record id="stock_picking_form_view_extended" model="ir.ui.view">
+            <field name="name">stock.picking.form.view.extended</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                	<field name="is_return_order" invisible="1"/>
+                    <button class="oe_stat_button" groups="setu_rma.group_setu_rma_user" type="action" invisible="is_return_order == False"  name="%(action_setu_return_order)d" icon="fa-comments" >
+                         <field string="Return Order" name="return_picking_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                	<field name="is_return_order" invisible="1"/>
+                </xpath>
+                <field name="backorder_id" position="after">
+                    <field name="return_order_id" groups="setu_rma.group_setu_rma_user" readonly="1" invisible="return_order_id == False"/>
+                </field>
+            </field>
+        </record>
+        <record id="return_order_pickings_search_view" model="ir.ui.view">
+            <field name="name">return.order.pickings.search.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search" />
+            <field name="arch" type="xml">
+                <filter name="picking_type" position="after">
+                    <filter string="Return Order" groups="setu_rma.group_setu_rma_user" name="return_order_picking" domain="[]" context="{'group_by': 'return_order_id'}"/>
+                    <filter string="Return Operation" groups="setu_rma.group_setu_rma_user" name="return_operation" domain="[]" context="{'group_by': 'return_operation_id'}"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>

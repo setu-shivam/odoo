@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_process_history_tree_view" model="ir.ui.view">
+        <field name="name">setu.process.history,tree.view</field>
+        <field name="model">setu.process.history</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Process History" create="false">
+                <field name="name"/>
+                <field name="multi_ecommerce_connector_id"/>
+                <field name="ecommerce_connector"/>
+                <field name="history_perform"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_process_history_search_view" model="ir.ui.view">
+        <field name="name">setu.process.history.search.view</field>
+        <field name="model">setu.process.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="model_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_process_history_form_view" model="ir.ui.view">
+        <field name="name">setu.process.history,form.view</field>
+        <field name="model">setu.process.history</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Process History" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="multi_ecommerce_connector_id"/>
+                            <field name="ecommerce_connector" readonly="1"/>
+                            <field name="history_perform"/>
+                            <field name="model_id"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="record_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="History">
+                            <field name="process_history_line_ids">
+                                <tree create="false" delete="false" edit="false" editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="order_ref"/>
+                                    <field name="default_code"/>
+                                    <field name="message"/>
+                                    <field name="model_id"/>
+                                    <field name="record_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_setu_process_history" model="ir.actions.act_window">
+        <field name="name">Process History</field>
+        <field name="res_model">setu.process.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Not found any process history yet.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="setu_process_history_menu_main" name="Process History" parent="sale.menu_sale_config"/>
+    <menuitem id="setu_process_history_child_menu" name="History Logs" action="action_setu_process_history"
+              parent="setu_process_history_menu_main" sequence="21"/>
+</odoo>

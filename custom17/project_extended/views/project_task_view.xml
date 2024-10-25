@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_task_inherited_view_task_search_form" model="ir.ui.view">
+            <field name="name">project.task.inherited.view.task.search.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+
+                <search>
+                    <filter name="prev_week" string="Prev Week" domain="[
+                        ('date_deadline', '&lt;', (context_today() + relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 00:00:00')),
+                        ('date_deadline', '&gt;', (context_today() + relativedelta(weeks=-2, weekday=6)).strftime('%Y-%m-%d 00:00:00')),]"/>
+                    <filter name="this_week" string="This Week" domain="[
+                        ('date_deadline', '>=', (datetime.datetime.combine(context_today() + relativedelta(weeks=-1,days=1,weekday=0), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S')),
+                        ('date_deadline', '&lt;', (datetime.datetime.combine(context_today() + relativedelta(days=1,weekday=0), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                    <filter name="next_week" string="Next Week" domain="[
+                        ('date_deadline', '&lt;', (context_today() + relativedelta(weeks=1, weekday=6)).strftime('%Y-%m-%d 00:00:00')),
+                        ('date_deadline', '&gt;', (context_today() + relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 00:00:00')),]"/>
+                    <filter name="no_deadline" string="No Deadline" domain="[('date_deadline', '=', False)]"/>
+                    <filter name="timesheet_yes_but_no_deadline" string="No Deadline &amp; Timesheets"
+                            domain="[('date_deadline', '=', False),('timesheet_ids','!=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Deadline" name="date_deadline_day" context="{'group_by':'date_deadline:day'}"/>
+                        <filter string="Deadline" name="date_deadline_month"
+                                context="{'group_by':'date_deadline:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="project_extended_inherited_view_task_form2" model="ir.ui.view">
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div" position="inside">
+                    <button name="action_view_timesheet"
+                            class="oe_stat_button"
+                            type="object"
+                            icon="fa-tasks"
+                            help="List view of detailed timesheets">
+                        <div class="o_form_field o_stat_info">
+                            <span class="oe_highlight">Time sheet</span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//notebook/page[@name='extra_info']//field[@name='date_last_stage_update']"
+                       position="after">
+                    <field name="config_percentage" string="Extra Time Percentage"/>
+                </xpath>
+                <xpath expr="//page[@name='extra_info']" position="attributes">
+                    <attribute name="groups"/>
+                </xpath>
+                <xpath expr="//page[@name='extra_info']//field[@name='date_last_stage_update']" position="after">
+                    <field name="setu_task_reference"/>
+                    <field name="setu_git_branch"/>
+                </xpath>
+                <xpath expr="//div[@id='date_deadline_and_recurring_task']" position="after">
+                    <field name="priority" widget="priority"/>
+                </xpath>
+                <xpath expr="//field[@name='priority']" position="replace"/>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="setu_meeting_hours"
+                           invisible="project_id != %(project_extended.project_project_meeting)d  or not allow_milestones"/>
+                </xpath>
+
+                <xpath expr="//label[@for='date_deadline']" position="before">
+                    <field name="estimated_hours" class="oe_inline o_field_float_time"
+                           widget="timesheet_uom_no_toggle"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='date_deadline']" position="before">
+                    <field name="allocated_hours" invisible="1"/>
+                </xpath>
+                <xpath expr="//label[@for='allocated_hours']" position="attributes">
+                    <attribute name="groups">project.group_project_manager</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('text-nowrap')]" position="attributes">
+                    <attribute name="groups">project.group_project_manager</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="project_extended_inherited_view_task_form2_inherited" model="ir.ui.view">
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='progress']" position="attributes">
+                    <attribute name="groups"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="project_extended_inherited_view_task_kanban_inherit_my_task" model="ir.ui.view">
+            <field name="name">Timesheet Button Kanban View</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban_inherit_my_task"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_kanban_content']//field[@name='date_deadline']" position="after">
+                    <div class="oe_kanban_bottom_right">
+                        <a type="object"
+                           name="action_view_timesheet"
+                           class="oe_stat_button"
+                           title="View Timesheet">
+                            Timesheet
+                        </a>
+                    </div>
+                </xpath>
+                <xpath expr="//div[@class='oe_kanban_bottom_right']" position="attributes">
+                    <attribute name="style">float: right;</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="project.action_view_my_task" model="ir.actions.act_window">
+            <field name="context">{
+                'all_task': 0, 'default_user_ids': [(4, uid)],
+                'search_default_this_week':1 'search_default_date_deadline_day':1
+                'search_default_date_deadline_month':0 }
+            </field>
+        </record>
+
+
+        <record id="project_extended_inherit_action_view_task" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('is_overtime', '=', True)]</field>
+        </record>
+
+        <menuitem
+                name="Extra Time Report"
+                id="extra_time_report"
+                action="project_extended_inherit_action_view_task"
+                parent="project.menu_project_report"
+        />
+    </data>
+</odoo>
+
+
+
+
+

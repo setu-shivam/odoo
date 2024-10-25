@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_return_order,setu.return.order,model_setu_return_order,setu_rma.group_setu_rma_user,1,1,1,0
+access_setu_return_order_manager,setu.return.order.manager,model_setu_return_order,setu_rma.group_setu_rma_manager,1,1,1,1
+access_setu_return_order_line,setu.return.order.line,model_setu_return_order_line,setu_rma.group_setu_rma_user,1,1,1,1
+access_setu_return_order_reason,setu.return.order.reason,model_setu_return_order_reason,setu_rma.group_setu_rma_user,1,1,1,0
+access_setu_return_order_reason_manager,setu.return.order.reason.manager,model_setu_return_order_reason,setu_rma.group_setu_rma_manager,1,1,1,1
+access_setu_return_order_reject,setu.return.order.reject,model_setu_return_order_reject,setu_rma.group_setu_rma_user,1,1,1,0
+access_setu_return_order_reject_manager,setu.return.order.reject.manager,model_setu_return_order_reject,setu_rma.group_setu_rma_manager,1,1,1,1
+access_claim_process_wizard,model_claim_process_wizard,model_claim_process_wizard,setu_rma.group_setu_rma_user,1,1,1,1
+access_mail_mail_rma_user,model_mail_mail_rma_user,mail.model_mail_mail,setu_rma.group_setu_rma_user,1,1,1,0
+access_setu_return_reason_manager,setu.return.reason.manager,model_setu_return_reason,setu_rma.group_setu_rma_manager,1,1,1,1
+access_setu_return_reason_user,setu.return.reason.user,model_setu_return_reason,setu_rma.group_setu_rma_user,1,1,1,0

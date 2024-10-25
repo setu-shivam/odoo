@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="setu_rma.RmaDashboardMain" owl="1">
+        <div class="o_dashboards">
+             <ControlPanel display="controlPanelDisplay">
+            </ControlPanel>
+            <div class="container-fluid o_rma_dashboard">
+                <t t-call="setu_rma.dashboard_content"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="setu_rma.dashboard_content" owl="1">
+        <div class="o_rma_dashboard_content">
+            <div class="row col-12 mt-3 d-flex justify-content-center">
+                <div id="return_reason" class="col-lg-3 col-md-12"/>
+                <div id="return_ratio" class="col-lg-4 col-md-12"/>
+                <div id="return_choice" class="col-lg-3 col-md-12"/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div class="row col-12 mb-3">
+                <div id="shipped_vs_return" class="col-lg-12"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="setu_rma.dashboard_content_qweb">
+        <div class="o_rma_dashboard_content">
+            <div class="row col-12 mt-3 d-flex justify-content-center">
+                <div id="return_reason" class="col-lg-3 col-md-12"/>
+                <div id="return_ratio" class="col-lg-4 col-md-12"/>
+                <div id="return_choice" class="col-lg-3 col-md-12"/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div class="row col-12 mb-3">
+                <div id="shipped_vs_return" class="col-lg-12"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="setu_rma.DateRangeButtons">
+        <!-- TODO: Hide in mobile as it is going to push in control panel and it breaks UI, maybe we will improve it in future -->
+        <div class="btn-group o_date_range_buttons d-none d-md-inline-flex float-right">
+            <button class="btn btn-secondary js_date_range active" data-date="week">Last Week</button>
+            <button class="btn btn-secondary js_date_range" data-date="month">Last Month</button>
+            <button class="btn btn-secondary js_date_range" data-date="year">Last Year</button>
+        </div>
+    </t>
+
+</templates>

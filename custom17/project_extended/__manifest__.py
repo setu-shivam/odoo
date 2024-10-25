@@ -1,0 +1,25 @@
+{
+    'name': 'Project extended',
+    'version': '17.0',
+    'summary': 'project management system',
+    "author": "Setu Consulting Services Pvt. Ltd.",
+    "website": "https://www.setuconsulting.com",
+    'sequence': 1,
+    'license': 'LGPL-3',
+    'description': 'This is Project management systeam in odoov17',
+    'category': 'Project',
+    'depends': ['project', 'hr_timesheet', 'timesheet_grid', 'website', 'sale'],
+    'data': [
+        "security/ir.model.access.csv",
+        "security/access_rights.xml",
+        'data/project_data.xml',
+        "views/hr_timesheet_view.xml",
+        "views/project_timesheet_kanban_view.xml",
+        "views/credential_management_view.xml",
+        "views/project_from_view.xml",
+        "views/svn_url.xml",
+        'views/project_task_view.xml',
+        'views/project_task_type_views.xml',
+        'views/hr_timesheet_report_view.xml',
+    ]
+}

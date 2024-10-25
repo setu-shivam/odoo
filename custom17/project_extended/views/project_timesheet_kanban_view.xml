@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="kanban_project_timesheet" model="ir.ui.view">
+        <field name="name">project timesheet kanban</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="after">
+                <div class="row mt-3 mb-3">
+                     <div class="col-6">
+                        <a style="font-size:11px" class="btn-primary" name="action_timesheet_previous_month" type="object">
+                            Previous month
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a style="font-size:11px" class="btn-primary" name="action_timesheet_current_month" type="object">
+                            Current month
+                        </a>
+                    </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="project_kanban_view">-->
+
+<!--    </record>-->
+
+</odoo>

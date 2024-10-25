@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_woocommerce_product_template_tree_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.template.tree.view</field>
+        <field name="model">setu.woocommerce.product.template</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="name"/>
+                <field name="odoo_product_tmpl_id"/>
+                <field name="setu_woocommerce_product_category_ids" widget="many2many_tags"/>
+                <field name="total_variants_in_woocommerce"/>
+                <field name="total_sync_variants"/>
+                <field name="is_product_template_exported_in_woocommerce" widget="boolean_toggle"/>
+                <field name="is_product_template_published_website" widget="boolean_toggle"/>
+                <field name="multi_ecommerce_connector_id"/>
+                <field name="woocommerce_product_tmpl_id" string="WooCommerce Template ID"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_template_form_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.template.form.view</field>
+        <field name="model">setu.woocommerce.product.template</field>
+        <field name="arch" type="xml">
+            <form string="WooCommerce Product Form View" create="false">
+                <sheet>
+                    <field name="active" class="oe_inline" invisible='1'/>
+                    <div class="ribbon ribbon-top-right" invisible="active == True">
+                        <span class="bg-danger">Archived</span>
+                    </div>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="is_product_template_published_website" invisible="1"/>
+                        <button type="object" name="woocommerce_product_publish" class="oe_stat_button"
+                                icon="fa-angle-double-up"
+                                invisible="is_product_template_exported_in_woocommerce == False or
+                                is_product_template_published_website == True">
+                            <span class="o_stat_text">Publish Product</span>
+                        </button>
+                        <button type="object" name="woocommerce_product_unpublish" class="oe_stat_button"
+                                icon="fa-chain-broken"
+                                invisible="is_product_template_exported_in_woocommerce == False or
+                                is_product_template_published_website == False">
+                            <span class="o_warning_text">Un-Publish Product</span>
+                        </button>
+                    </div>
+                    <div class="oe_title" style="width: 390px;">
+                        <label class="oe_edit_only" for="name" string="Title"/>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="General Information">
+                            <group>
+                                <group>
+                                    <field name="multi_ecommerce_connector_id"
+                                           readonly="is_product_template_exported_in_woocommerce == True"/>
+                                    <field name="odoo_product_tmpl_id" required="1" readonly="1"/>
+                                    <field name="setu_woocommerce_product_category_ids" widget="many2many_tags"/>
+                                </group>
+                                <group>
+                                    <field name="woocommerce_product_tmpl_id" readonly="1"/>
+                                    <field name="total_variants_in_woocommerce" readonly="1"/>
+                                    <field name="total_sync_variants"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="product_tmpl_type" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="setu_woocommerce_product_tag_ids" widget="many2many_tags"/>
+                                </group>
+                            </group>
+                            <group string="Short Description">
+                                <field name="product_short_tmpl_description" nolabel="1"/>
+                            </group>
+                            <group string="Description">
+                                <field name="product_tmpl_description" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Variants" invisible="active == False">
+<!--                            <group>-->
+                                <field name="setu_woocommerce_product_variant_ids"
+                                       options="{'no_create': True,'no_edit':True}" nolabel="1">
+                                    <tree>
+                                        <field name="woocommerce_product_variant_id"/>
+                                        <field name="default_code"/>
+                                        <field name="odoo_product_id"/>
+                                        <field name="multi_ecommerce_connector_id"/>
+                                        <field name="is_product_variant_exported_in_woocommerce"/>
+                                    </tree>
+                                </field>
+<!--                            </group>-->
+                        </page>
+                        <page string="Template Media">
+                            <group string="Images Info" colspan="4">
+                                <field name="setu_woocommerce_product_image_ids"
+                                       context="{'default_setu_woocommerce_product_template_id':id}" mode="kanban"
+                                       options="{'create_text':'Create Image Template','no_create_edit':True}"
+                                       nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Sync">
+                            <group>
+                                <group>
+                                    <field name="product_tmpl_created_at" readonly="1"/>
+                                    <field name="product_tmpl_modified_at" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="is_product_template_published_website" readonly="1"/>
+                                    <field name="is_product_template_exported_in_woocommerce" readonly="1"
+                                           widget="boolean_toggle"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_template_search_view" model="ir.ui.view">
+        <field name="name">setu.woocommerce.product.template.search.view</field>
+        <field name="model">setu.woocommerce.product.template</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="WooCommerce Products">
+                <field name="name" filter_domain="[('name','ilike',self)]"/>
+                <field name="multi_ecommerce_connector_id"/>
+                <field name="odoo_product_tmpl_id"/>
+                <field name="woocommerce_product_tmpl_id" string="WooCommerce Template Id"/>
+                <filter string="Archived" name="archive_products" icon="terp-accessories-archiver"
+                        domain="[('active','=',False)]"/>
+                <filter name="is_product_template_exported_in_woocommerce" string="Not Synced"
+                        domain="[('is_product_template_exported_in_woocommerce','=',False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Exported In WooCommerce" name="Exported In WooCommerce" domain="[]"
+                            context="{'group_by':'is_product_template_exported_in_woocommerce'}"/>
+                    <filter string="e-Commerce Connector" name="multi_ecommerce_connector_id"
+                            context="{'group_by':'multi_ecommerce_connector_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_woocommerce_product_template_main_action" model="ir.actions.act_window">
+        <field name="name">Templates</field>
+        <field name="res_model">setu.woocommerce.product.template</field>
+        <field name="view_id" ref="setu_woocommerce_product_template_tree_view"/>
+    </record>
+
+    <record id="setu_woocommerce_multi_ecommerce_connector_product_template_action" model="ir.actions.act_window">
+        <field name="name">WooCommerce Templates</field>
+        <field name="res_model">setu.woocommerce.product.template</field>
+        <field name="view_id" ref="setu_woocommerce_product_template_tree_view"/>
+        <field name="domain">[('multi_ecommerce_connector_id','=',active_id)]</field>
+    </record>
+
+    <menuitem id="setu_woocommerce_product_template_main_menu" name="WooCommerce Template"
+              parent='setu_woocommerce_connector.setu_woocommerce_product_catalog_main_menu'
+              action="setu_woocommerce_product_template_main_action" sequence="1"/>
+</odoo>
